@@ -3,7 +3,7 @@ import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi'
 import { mainnet, arbitrum } from '@wagmi/core/chains'
 
 // 1. Define constants
-const projectId = 'YOUR_PROJECT_ID'
+const projectId = '987a98f5b177b9da5611b4ba45b89dd7'
 
 // 2. Create wagmiConfig
 const metadata = {
