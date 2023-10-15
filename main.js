@@ -1,6 +1,6 @@
-import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi'
+import { createWeb3Modal, defaultWagmiConfig } from './node_modules/@web3modal/wagmi'
 
-import { mainnet, arbitrum } from '@wagmi/core/chains'
+import { mainnet, arbitrum } from './node_modules/@wagmi/core/chains'
 
 // 1. Define constants
 const projectId = 'YOUR_PROJECT_ID'
