@@ -1,0 +1,36 @@
+export const environment = {
+	production: true,
+	baseURL: 'https://api.tdx.biz/',
+	clientUrl: 'https://app.tdx.biz/',
+	headerName: 'authorization',
+	authScheme: 'Bearer ',
+	bitcoinBlockIO: 'BTC',
+	litecoinBlockIO: 'LTC',
+	etheriumBlockIO: 'ETH',
+	saleStarted: true,
+	showPaymentMethod: true,
+	SITE_KEY: "6LdJLxAaAAAAACGsDDrAFzfIfkOXWIrqDFkPKit6",
+	depositPayModes: [
+		{ name: 'USDT', subName: 'USDT.BEP20', value: 'USDT.BEP20', image: '../../../assets/images/usdt.png' },
+		{ name: 'USDT', subName: 'USDT.ERC20', value: 'USDT.ERC20', image: '../../../assets/images/usdt.png' },
+		{ name: 'USDT', subName: 'USDT.TRC20', value: 'USDT.TRC20', image: '../../../assets/images/usdt.png' },
+		{ name: 'USDC', subName: 'USDC.BEP20', value: 'USDC.BEP20', image: '../../../assets/images/usdc.png' },
+		{ name: 'USDC', subName: 'USDC.ERC20', value: 'USDC', image: '../../../assets/images/usdc.png' },
+		{ name: 'BUSD', subName: 'BUSD.BEP20', value: 'BUSD.BEP20', image: '../../../assets/images/busd.png' },
+	],
+	withdrawPayModes:[
+		{ name: 'USDC', subName: 'USDC.ERC20', value: 'USDC', image: '../../../assets/images/usdc.png' },
+		{ name: 'USDT', subName: 'USDT.TRC20', value: 'USDT.TRC20', image: '../../../assets/images/usdt.png' },
+		{ name: 'BUSD', subName: 'BUSD.BEP20', value: 'BUSD.BEP20', image: '../../../assets/images/busd.png' },
+	],
+	tetherBlockIO: 'USDT.BEP20',
+	etherBlockIOERC: 'USDT.ERC20',
+	tetherBlockIOTRC: 'USDT.TRC20',
+	etherBlockIODC: 'USDC',
+
+	BUSD: 'BUSD.BEP20',
+	USDC: 'USDC.BEP20',
+	whitelistedDomains: [],
+	blacklistedRoutes: [],
+
+};

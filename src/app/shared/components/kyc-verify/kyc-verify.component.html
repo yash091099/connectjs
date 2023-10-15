@@ -1,0 +1,20 @@
+<div class="text-center p-4 verify-screen">
+    <div class="very-box">
+        <img src="../../../../assets/images/succ-kyc.png"  *ngIf="kycStatus == 'ACCEPTED'" />
+        <!-- <p *ngIf="kycStatus">verification status : {{ kycStatus }}</p> -->
+        <img src="../../../../assets/images/try-agin.png"  *ngIf="kycStatus != 'ACCEPTED' ||!kycStatus" />
+       
+    <p *ngIf="kycStatus == 'ACCEPTED'"><span style="font-size: 30px;">Congratulations </span> <br> <br> Your KYC verification has been approved.</p>
+        <p *ngIf="kycStatus != 'ACCEPTED' || !kycStatus" >Oopps, your KYC got rejected. <br> Please go back, and try again. </p>
+       
+        <div *ngIf="kycReason?.length && kycStatus != 'ACCEPTED'" class="statu-lenth" style="text-align: left !important">
+		     	<p *ngIf="kycReason?.length" >Possible Reason: </p>	
+        <ul >
+          <li  *ngFor="let reason of kycReason">
+            {{reason}}
+          </li>
+        </ul>
+    </div>
+    </div>
+   
+</div>

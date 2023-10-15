@@ -1,0 +1,114 @@
+<div class="container ipad-pd-left mg-t-20">
+  <div class="row screen-center">
+    <div class="col-md-12">
+      <div class="table-br" style="padding: 0px 0px 15px 0px;">
+        <div>
+          <div class="table-responsive ">
+            <div *ngIf="withdrawalsArray.length">
+              <div class="padding-box">
+                <div class="table-row">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Token</th>
+                        <th>Wallet Address</th>
+                        <th>Txn Hash</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let temp of withdrawalsArray;let i = index">
+                        <td class="date-time">
+                          {{temp.createdAt | date:'medium'}}
+                        </td>
+                        <td *ngIf="temp.withdrawalType != 'USD'">  {{((temp.amount?.$numberDecimal  |  decimal:8) ||
+                          (temp.amount |  decimal:8))||
+                                    '--'}} </td>
+                        <td *ngIf="temp.withdrawalType == 'USD'">$ {{((temp.amount?.$numberDecimal |  decimal:2) ||
+                        (temp.amount |  decimal:2))||
+                        '--'}} </td>
+                        <td> {{temp.token}} </td>
+                        <td>
+                          <span class="text-mannge"> {{temp.walletAddress|| '--'}} </span>
+                          <i (click)="cpyToClipboard(temp?.walletAddress)" class="fa fa-copy cpy-icon"
+                            title="copy to clipboard" aria-hidden="true"></i>
+                        </td>
+                        <td>
+                          <span class="text-mannge">{{temp.txnHash|| '--'}} </span>
+                          <i (click)="cpyToClipboard(temp?.txnHash)" *ngIf="temp.txnHash" class="fa fa-copy cpy-icon"
+                            title="copy to clipboard" aria-hidden="true"></i>
+                        </td>
+                        <td>
+                          <span
+                            [ngClass]="{'rejected':temp.status == walletStatus.REJECTED, 'accepted': temp.status != walletStatus.REJECTED }">
+                            {{temp.status|| '--'}}
+                          </span>
+
+                          <a placement="left" (click)="showRejectionReason(rejectionReason,temp.message)"
+                            container="body">
+                            <img src="../../../../assets/images/rejectted.png" ngbTooltip="View reason"
+                              *ngIf="temp.status == walletStatus.REJECTED">
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="overflow-no-deposit text-center" *ngIf="!withdrawalsArray.length">
+              <p class="no-found">No withdrawal request found</p>
+            </div>
+            <div *ngIf=" totalCount > rowsPerPage" class="peg-middle" style="display: table;">
+              <ngb-pagination *ngIf="withdrawalsArray.length !== 0" [ellipses]="false" [(page)]="currentPage"
+                [maxSize]="3" [boundaryLinks]="false" [pageSize]="rowsPerPage" [collectionSize]="totalCount"
+                (pageChange)="pageChanged($event)">
+              </ngb-pagination>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<ng-template #purchasePopupSecond let-modal>
+
+
+  <button (click)="closeAllPopup()" type="button" aria-label="Close" class="close"><span
+      aria-hidden="true">×</span></button>
+
+  <div class="modal-body seminor-login-modal-body">
+
+    <div class="create-new-fau">
+      <div class="col col-sm-12 col-xs-12 col-md-12 text-center">
+        <p style="color: #000 !important;">Have deposit <span
+            style="font-weight: bold !important;font-size:15px;">{{gatewayData?.cryptoCoins}}
+            {{gatewayData?.token}}</span> to the below address.</p>
+        <p style="color:#000 !important; font-weight: bold !important;font-size: 15px; margin-bottom: 0px;">
+          {{gatewayData?.address}} </p>
+        <img [src]="gatewayData?.qrcodeUrl">
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #rejectionReason let-modal>
+
+
+  <button (click)="closeAllPopup()" type="button" aria-label="Close" class="close"><span
+      aria-hidden="true">×</span></button>
+  <div class="modal-header">
+    Message
+  </div>
+  <div class="modal-body seminor-login-modal-body">
+    <div class="create-new-fau">
+      {{rejectionMessage}}
+
+    </div>
+  </div>
+</ng-template>

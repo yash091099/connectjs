@@ -1,0 +1,36 @@
+<div class="card-top">
+    <img class="card-top-img" *ngIf="projectdata?.cardImage" [src]="projectdata?.cardImage" />
+    <div class="sale-card">
+        <div class="row">
+            <div class="col-8 col-sm-8 col-xs-10  heading_name">
+                <div class="d-flex align-items-center">
+                    <h4 class="text-truncate"><span *ngIf="projectdata?.name?.length>10" [ngbTooltip]="projectdata?.name">{{projectdata?.name|truncate:10}} </span><span *ngIf="projectdata?.name?.length<=10" >{{projectdata?.name}} </span><small>|</small> <span class="p-symbol" [ngbTooltip]="projectdata?.symbol?.length > 3 ? projectdata?.symbol : ''"> {{projectdata?.symbol}}</span> 
+                    </h4>
+                </div>
+                <div class="row lh-100-mob">
+                    <div class="col-5 col-sm-7 col-xs-7 pr-0"><span class="card-price-text">Listing Price</span></div>
+                    <div class="col col-sm-5 col-xs-5 px-0 d-flex align-items-end"><span class="card-price-value text-truncate" [ngbTooltip]="projectdata?.currentPrice?.$numberDecimal?.length > 9 ? projectdata?.currentPrice?.$numberDecimal : ''">{{projectdata?.currentPrice?.$numberDecimal}}$</span></div>                             
+                </div>
+                <div class="row lh-100-mob">
+                    <div class="col-5 col-sm-7 col-xs-7 pr-0"><span class="card-price-text">Token Supply</span></div>
+                    <div class="col col-sm-5 col-xs-5 px-0 d-flex align-items-end"><span class="card-price-value text-truncate" [ngbTooltip]="projectdata?.totalSupply?.length > 9 ? (projectdata?.totalSupply + ' ' + projectdata?.symbol) : ''">{{projectdata?.totalSupply}} {{projectdata?.symbol}}</span></div>
+                </div>
+            </div>
+            <div class="col-4 col-sm-4 col-xs-2 px-sm-0 mob-center">
+                <div class="social-font">
+                <a *ngIf="projectdata?.twitterLink" target="_blank" href="{{projectdata?.twitterLink}}">
+                    <img src="../../../../assets/images/pro-tw.png" width="14">
+                </a> 
+                <a  target="_blank" class="ml-2"  href="{{projectdata?.telegramLink}}">
+                    <img src="../../../../assets/images/telegram.png"  width="14"> 
+                </a> 
+                <a *ngIf="projectdata?.websiteLink" class="ml-2"  target="_blank"  href="{{projectdata?.websiteLink}}">
+                    <img src="../../../../assets/images/links.svg"  width="14"> 
+                </a>  
+            </div>
+                <button class=" btn btn-outline-secondary moreDetails" (click)="redirectToStartup(projectdata?._id,projectdata?.rounds?._id)">More Details</button>
+            </div>
+        
+        </div>
+    </div>
+</div>

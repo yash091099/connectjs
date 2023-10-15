@@ -1,0 +1,16 @@
+<input type="checkbox"
+    [id]="name"
+    [(ngModel)]="checked"
+    (ngModelChange)="onValueChange()"
+    [ngClass]="{'switch': switch, 'c': checked}"
+    [name]="name"
+    (keydown.enter)="onValueChange()"
+    (blur)="onBlurred($event)"
+    (focus)="onFocus($event)"
+    [disabled]="disabled"
+    [attr.aria-label]="label"
+    tabindex="0">
+
+<label *ngIf="name || label" [for]="name">
+    {{label}}
+</label>

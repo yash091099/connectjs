@@ -1,0 +1,69 @@
+<div class="header">
+	<div class="row top-card" *ngIf="!isImageExpand">
+		<div class="col-md-12">
+			<div class="card alloc-card">
+				<h4> 
+          <a href="javascript:void(0)" class="back-icon" (click)="getSelectedTab()">
+           <img src="../../../../assets/images/back-icon.png">
+        </a> 
+        {{ selectedReferralData?.bannerName }} </h4>
+			</div>
+		</div>
+        <div class="col-sm-6 pl-30">
+          <h6 class="banner-name">{{ selectedReferralData?.promotion?.name }}</h6>
+          <div class="banner_Box_card">
+           <img [src]="selectedReferralData?.promotion?.bannerImage" class="banner-image-border">
+           <img (click)="onExpandImageClick()" src="../../../../assets/images/banner_expand.png" class="expen-icon">
+          </div>
+        </div>
+        <div class="col-sm-6 mob-pa">
+          <div class="borline"></div>
+           <div class="banner-code">
+            <h6>
+              Banner Code
+              <a class="info-banner" #ref="ngbTooltip" [ngbTooltip]="hintTooltip"
+                tooltipClass="create-campaign" placement="right" container="body">
+                <img src="../../../../assets/images/Info-icon.svg">
+              </a>
+            </h6>
+            <ng-template #hintTooltip class="create-info">
+              <h6> Banner Code </h6>
+              Copy the banner HTML code and paste it into your website’s customizable page.
+              <a href="https://medium.com/@TDx_Launchpad" target="_blank" class="know-more">
+                Know More
+              </a>
+            </ng-template>
+           
+            <div class="banner-url">
+              <p>
+                {{ bannerCode }}
+              </p> 
+            </div>
+
+            <button [ngClass]="isCopied==true ? 'copied' : ''" class="btn-waalet" (click)="copyToClipboard(bannerCode,selectedReferralData?.memberId)">
+							{{ selectedBannerLink == selectedReferralData?.memberId ? copiedReferLink : copy_link }}
+               
+            <img *ngIf="isCopied" src="../../../../assets/images/task-complet.png" >
+            
+            <img *ngIf="!isCopied"
+            src="../../../../assets/images/copy-banner.png">
+						</button>
+           </div>
+        </div>
+	</div>
+  <div class="row top-card" *ngIf="isImageExpand">
+    <div class="col-sm-12">
+     
+      <div class="card alloc-card">
+				<h4> 
+          <a href="javascript:void(0)" class="back-icon" (click)="goBackToBanner()">
+           <img src="../../../../assets/images/back-icon.png">
+        </a> 
+        {{ selectedReferralData?.bannerName }} </h4>
+			</div>
+    </div>
+    <div class="col-sm-12 text-center mob-view">
+      <img [src]="selectedReferralData?.promotion?.bannerImage" class="banner-image-border">
+    </div>
+  </div>
+</div>

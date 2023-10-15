@@ -1,0 +1,35 @@
+<!-- <button (click)="connectToMetaMask()">Connect to MetaMask</button>
+<div *ngIf="isConnected">
+  <p>Connected Account: {{ account }}</p>
+  <p>Connected ChainId: {{ chainId }}</p>
+  <p>Connected Chain Name: {{ chainName }}</p>
+</div> -->
+
+
+<button id="metamask-model" (click)="openWalletModel(walletConnectPopup)" [hidden]="true"></button>
+
+<ng-template #walletConnectPopup let-modal>
+	<div class="modal-header">
+		<h6 class="modal-title"></h6>
+		<button type="button" class="btn-close" aria-label="Close" (click)="closePopup()">X</button>
+	</div>
+	<div class="modal-body pt-0">
+		<h6 class="modal-title">Connect your wallet</h6>
+       <div class="connectWallet-type">
+          <a href="javascript:void(0)" (click)="connectToMetaMask()"> 
+			<div class="icon-wallet-meta">
+				<img src="../../../../assets/images/wallet-icon-1.png" />
+			</div>
+			<h5>MetaMask</h5>
+		  </a>
+		  <a href="javascript:void(0)" (click)="connect()" class="mr-0"> 
+			<div class="icon-wallet-meta">
+				<img src="../../../../assets/images/WalletConnect.png" />
+			</div>
+			<h5>WalletConnect</h5>
+		  </a>
+	   </div>
+
+	</div>
+	
+</ng-template>

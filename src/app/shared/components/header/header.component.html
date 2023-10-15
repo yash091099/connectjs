@@ -1,0 +1,278 @@
+<nav id="scrollspy" class="navbar page-navbar navbar-dark navbar-expand-md fixed-top" data-spy="affix"
+	data-offset-top="20">
+	<div class="menu-btn hide-m" style="cursor: pointer;">
+		<i class="fas fa-bars"></i>
+	  </div>
+	<div class="mob-logo">
+		<img src="../../../../assets/images/TDXPAD-Logo.png" alt="mobile logo"> 
+	</div>
+		
+	<div class="container-fluid">
+		
+		<a class="navbar-brand mr-auto">				
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+			*ngIf="!isLoggedIn">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="wal-box" id="app-wallet">
+
+			<p *ngIf="isLoggedIn && walletConnected" style="cursor:pointer;">
+				<span *ngIf="isSideBarProjects">
+					<img src="../../../../assets/images/new-wallet.svg"  style="margin-right: 5px;" />
+				</span>
+				<span *ngIf="isSideBarProjects" (click)="goToWallet()" class="balnce-text">
+					: </span>
+				<b *ngIf="isSideBarProjects" (click)="goToWallet()" class="fund-text"> $ {{amount||0}}</b>
+				<a *ngIf="isSideBarProjects" (click)="openPopupOne(purchasePopupSecond)" class="mob-walletbtn"
+					id="add-fund">
+					<i>
+						<img src="../../../../assets/images/mob-plus.svg" />
+					</i> 
+				</a>
+				<a *ngIf="isSideBarProjects" (click)="openPopupOne(purchasePopupSecond)" class="walletbtn"
+					id="add-fund">
+					<i>
+						<img src="../../../assets/images/plus.pn	g" height="13" />
+					</i> Add Fund
+				</a>
+
+			</p>
+			<p *ngIf="isLoggedIn && !walletConnected">
+				<button class="btn-waalet" *ngIf="!walletConnected" (click)="creatUserWallet()">
+					<img src="../../../../assets/images/wallet.svg" width="15">
+					Enable Wallet
+				</button>
+			</p>
+		</div>
+		<div class="menu-btn" style="cursor: pointer;">
+			<i class="fas fa-bars"></i>
+		  </div>
+		<div class="nav-item profile" *ngIf="isLoggedIn" ngbDropdown #myDrop="ngbDropdown">
+			<button id="getProfileImageId" (click)="getProfileDetails()" [hidden]="true"></button>
+			<a style="padding: 0px !important;" id="dropdownManual" ngbDropdownAnchor (click)="myDrop.toggle()"
+				class="nav-link btn btn-nav ml-4 user-profile">
+				<img  [src]="profilePictureSrc ? profilePictureSrc : '../../assets/images/user.png'">
+				<img [ngbTooltip]="'Please verify your account'" container="body" placement="left" *ngIf="!showProfileVerify" src="../../../../assets/images/exclamation.svg" class="exclamation-icon" id="blinking-text">
+			</a>
+			<div ngbDropdownMenu aria-labelledby="dropdownManual">
+				<p class="pero-setting">Profile settings</p>
+				<button ngbDropdownItem  class="mb-2 connect-wallet" (click)="connectWallet()"><a [ngbTooltip]="(walletAddress?.length ? walletAddress[0] : 'Connect Wallet')"> <img src="../../../../assets/images/wal.png" /> {{(walletAddress?.length ? walletAddress[0] : 'Connect Wallet')|truncate:13}}</a></button>
+				
+				<button ngbDropdownItem [routerLink]="['/settings/profile']" class="mb-4"><a>View profile</a></button>
+				<hr class="mb-3">
+				<button [routerLink]="['/settings/profile']" ngbDropdownItem  class="mb-3" style="color: #FFFFFF !important;
+				opacity: 0.7;
+				font-size: 12px;
+				font-weight: 300;">
+					<a> <i class="fa" aria-hidden="true"
+						style="cursor: pointer;">
+						<img src="../../../../assets/images/sidebar-icons/web-drop.png" />
+					</i> Social Connections</a>
+				</button>
+				<button [routerLink]="['/refer']" ngbDropdownItem  class="mb-3" style="color: #FFFFFF !important; 
+				opacity: 0.7;
+				font-size: 12px;
+				font-weight: 300;">
+					<a> <i class="fa" aria-hidden="true"
+						style="cursor: pointer;">
+						<img src="../../../../assets/images/sidebar-icons/web-send.png" />
+					</i> Invite to Launchpad</a>
+				</button>
+                <hr class="mb-3">
+                 <a  [routerLink]="['/settings/kyc']" ngbDropdownItem  [ngClass]="[kycApproved ? 'verifed' : 'get-verifed']"> <img *ngIf="kycApproved" src="../../../../assets/images/icon_verified.png" /> {{ kycApproved ? 'Verified' : 'Get Verified' }}
+					<i *ngIf="!kycApproved" class="fa fa-long-arrow-right pull-right" aria-hidden="true"></i></a>
+				
+			</div>
+		</div>
+	</div>
+</nav>
+
+
+<ng-template #purchasePopupSecond let-modal>
+	<div class="modal-body seminor-login-modal-body" *ngIf="!gateResponse && !isCashCouponScreen">
+		<div  class="modal-header"><h6 >Add Fund</h6>
+			<button  type="button" aria-label="Close" class="close" (click)="closePopup()">
+				<span  aria-hidden="true">×</span>
+			</button>
+		</div>
+		<div class="create-new-fau">
+			<div class="form-group">
+				<label>Amount to add (in USD)</label>
+				<input type="number" (keydown)="checkInputValue($event)" name="Amount" min="25"
+					(input)="checkFundAmount()" maxlength="10" [(ngModel)]="amountToAdd" placeholder="$00.00"
+					class="form-control" required>
+
+			</div>
+			<div class="form-group mt-3">
+				<label>Select payment method</label>
+				<ul (click)="handleDropDown()" class="select" [ngClass]="{'open':showDropDown}" id="my-select">
+					<span style="color: #696CA4" class="view-data-input"><img *ngIf="coinName || coinName==0" [src]="paymentModes[coinName].image"/> {{selectedPaymentMethod}}</span>
+
+                  <div class="view-poption">
+					<li *ngFor="let paymode of paymentModes;let i =index " (click)="resetErrorMessage(i)"> 
+					<div class="radio">
+						<input type="radio"  [value]="i" [(ngModel)]="coinName" name="litecoin">
+						<label for="radio-1" class="radio-label"> 
+							<img [src]="paymode.image"/> {{paymode.name}} ({{paymode.subName}})</label>
+						</div>	
+						
+					</li>				
+				  </div>					
+					<span></span>
+				  </ul>
+				  <p *ngIf="errorMessage" style="color:red">{{errorMessage}} </p>
+				  <p *ngIf="successMessage" style="color:green">{{successMessage}} </p>
+					<p> <span style="color: #000; font-size:10px;">Note : </span>Due to humongous interest,
+						it might take longer than
+						usual for the funds to reflect in your wallet.</p>
+			</div>
+			<div class="button-widthrawl">
+				<a href="javascript:void(0)" (click)="closePopup()" class="btn btn-outline-secondary" style="margin-right: 10px;">Cancel</a>
+				<button [disabled]="disableAddAmountButton" (click)="createTransaction()" class="btn btn-warning">Add Amount</button>
+			 </div>
+		</div>
+	</div>
+	<div class="modal-body seminor-login-modal-body" *ngIf="gateResponse">
+		<div class="modal-header">
+			<h6 style="font-weight: 400;font-size: 16px; line-height: 22px;">Please deposit <b>{{gatewayData?.cryptoCoins}}</b> {{paymentModes[coinName].value}} to the below address.</h6>
+			<button type="button" class="close" aria-label="Close" (click)="closePopup()">
+				<span aria-hidden="true">×</span>
+			</button>
+		</div>
+		<div class="create-new-fau">
+			
+				<p class="gatway-address"> {{gatewayData?.address}}
+				</p>
+				<div class="col col-sm-12 text-center qr-code">
+					<img [src]="gatewayData?.qrcodeUrl" class="mt-2">
+				</div>
+				
+			
+			<div class="col col-sm-12 text-center costom-qr-button">
+				<p *ngIf="errorMessage" style="color:red">{{errorMessage}} </p>
+				<p *ngIf="successMessage" style="color:green">{{successMessage}} </p>
+				<button type="button" class="btn btn-success" [disabled]="buttonClicked"
+					(click)="closePopupPayment(1)">I've paid</button> &nbsp;
+				
+				&nbsp;
+				<button type="button" class="btn btn-outline-secondary" [disabled]="buttonClicked"
+					(click)="closePopupPayment(3)">Cancel</button>
+					<button type="button" class="btn" [disabled]="buttonClicked"
+					(click)="closePopupPayment(2)">I'll pay later</button>
+			</div>
+		</div>
+	</div>
+	<div *ngIf="isCashCouponScreen">
+		<div>
+			<div>
+				<!-- Modal body -->
+				<div>
+					<div class="modal-header">
+						<h6 style="display: inline-block;">Apply Cash Coupon </h6>
+						<button type="button" class="close" aria-label="Close" (click)="closePopup()">
+							<span aria-hidden="true">×</span>
+						</button>
+
+					</div>
+					<div class="create-new-fau">
+
+						<div class="col col-sm-12 col-xs-12 col-md-12">
+							<div class="input-group cupon-box mb-3">
+								<input type="text" class="form-control text-center"
+									style="border-bottom: 1px #ccc solid;" placeholder="Enter Coupon Code"
+									[(ngModel)]="couponData">
+								<div class="input-group-append ">
+									<span class="input-group-text btn-cupon" style="cursor: pointer;"
+										(click)="redeemCashCoupon()"><i class="fa fa-arrow-right"
+											aria-hidden="true"></i></span>
+								</div>
+
+							</div>
+							<p *ngIf="errorMessage" style="color:red;text-align: center;">{{errorMessage}} </p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</ng-template>
+
+<ng-template #content1 let-modal>
+	<div class="modal-body seminor-login-modal-body">
+		<div class="modal-header">
+			<h6>Claim your BRDG token Airdrop</h6>
+			<button type="button" class="close" aria-label="Close" (click)="closePopup()">
+				<span aria-hidden="true">×</span>
+			</button>
+		</div>
+		<div class="create-new-fau" style="padding-bottom:30px;">
+			<p>Paste your wallet address to check eligibility</p>
+			<div class="form-group claim-form">
+				<input type="number" placeholder="Paste your wallet address" class="form-control" required>
+				<button type="button" class="btn btn-warning">Claim</button>
+
+				<div class="col col-sm-12" style="padding-top:10px;">
+					<p style="color:red">Sorry, your address is not eligible</p>
+					<p style="color:green"> Congratulations! Very soon you will received BRDG token</p>
+					<p style="color:red">Please Complete your KYC to receive BRDG airdrop tokens</p>
+
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+</ng-template>
+<ng-template #logOutModal let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title"></h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="closeLogOutModal()">X</button>
+	</div>
+	<div class="modal-body delete-release-popup ">
+		<div class="btn-group-custom mb-5">
+			<button type="submit" class="btn btn-danger mr-2" (click)="logout(true)">
+				Logout from this device
+			</button>
+			<button type="submit" class="btn btn-danger" (click)="logout(false)" style="margin-right:0px;">
+				Logout from all devices
+			</button>
+
+		</div>
+
+
+
+	</div>
+
+</ng-template>
+
+
+<!-- <ng-template #walletConnectPopup let-modal>
+	<div class="modal-header">
+		<h6 class="modal-title"></h6>
+		<button type="button" class="btn-close" aria-label="Close" (click)="closePopup()">X</button>
+	</div>
+	<div class="modal-body pt-0">
+		<h6 class="modal-title">Connect your wallet</h6>
+       <div class="connectWallet-type">
+          <a href="javascript:void(0)"> 
+			<div class="icon-wallet-meta">
+				<img src="../../../../assets/images/wallet-icon-1.png" />
+			</div>
+			<h5>MetaMask</h5>
+		  </a>
+		  <a href="javascript:void(0)" class="mr-0"> 
+			<div class="icon-wallet-meta">
+				<img src="../../../../assets/images/WalletConnect.png" />
+			</div>
+			<h5>WalletConnect</h5>
+		  </a>
+	   </div>
+
+	</div>
+	
+</ng-template> -->

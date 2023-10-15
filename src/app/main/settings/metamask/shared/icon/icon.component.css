@@ -1,0 +1,18 @@
+:host {
+    fill: inherit;
+    align-self: center;
+    justify-content: center;
+    position: relative;
+    min-width: 15px;
+    min-height: 16px;
+    max-height: 25px;
+  
+    svg {
+      display: inline-block;
+      all: inherit;
+      margin: 0; 
+      position: static;
+      z-index: 2;
+    }
+  }
+  

@@ -1,0 +1,95 @@
+<div class="container p-0">
+    <section class="top-details-project">
+        <div class="row">
+            <div class="col-sm-5">            
+    
+                <div class="borler-top-socail-content">
+                    <h6> <a class="back-icon" (click)="goBackToHome()">
+                        <img src="../../../../assets/images/back-icon.png">
+                     </a> 
+                      <b *ngIf="projectDetails?.name?.length>20" [ngbTooltip]="projectDetails?.name" >{{projectDetails?.name|truncate:20}}</b>
+                     <b *ngIf="projectDetails?.name?.length<=20"  >{{projectDetails?.name}}</b>  
+                     </h6>
+                     <div class="d-sm-block d-none">
+                    <p *ngIf="projectDetails?.description?.length>320" [ngbTooltip]="projectDetails?.description"> {{projectDetails?.description||'--'|truncate:320}}</p>           
+                        <p  *ngIf="projectDetails?.description?.length<=320"> {{projectDetails?.description||'--'}}</p>    
+                    </div> 
+                 </div>
+                <div class="boller-details-button d-sm-block d-none">
+                            
+                    <button class="btn btn-outline-warning" *ngIf="projectDetails?.rounds?.status=== startupRoundStatus.ONGOING" [ngbTooltip]="'Sale Live'" (click)="onClickOfParticipate(projectDetails?._id,projectDetails?.rounds?._id)" >Participate</button>
+                <button class="btn btn-outline-warning" *ngIf="projectDetails?.rounds?.status=== startupRoundStatus.UPCOMING" [ngbTooltip]="'Sale Upcoming'" [disabled]="true" style="cursor:not-allowed">Participate</button>
+                <button class="btn btn-outline-warning" *ngIf="projectDetails?.rounds?.status=== startupRoundStatus.CLOSED" [ngbTooltip]="'Sale Closed'" [disabled]="true" style="cursor:not-allowed">Participate</button>
+          
+                </div>
+    
+    
+            </div>
+            <div class="col-sm-7">
+                <div class="card-top">
+
+                    <div class="youtub-card">
+                        <iframe *ngIf="showIframe" id="hiddenSpan" width="100%" height="330px" [src]="safeURL" frameborder="0" allowfullscreen autoplay> 
+                        </iframe>
+                        <img *ngIf="!showIframe && projectDetails?.cardImage" [src]="projectDetails?.cardImage" />
+                        <img *ngIf="!showIframe" (click)="onClickOfPlayButton()" style="cursor:pointer !important" src="../../../../assets/images/play-youtube.png" class="play-icon">
+                    </div>
+                    
+                </div>
+
+            </div>
+            <div class="col-12 d-sm-none d-block">
+                <div class="borler-top-socail-content">                   
+                    <p *ngIf="projectDetails?.description?.length>320" [ngbTooltip]="projectDetails?.description"> {{projectDetails?.description||'--'|truncate:320}}</p>           
+                        <p  *ngIf="projectDetails?.description?.length<=320"> {{projectDetails?.description||'--'}}</p>     
+                 </div>
+                <div class="boller-details-button">                            
+                <button class="btn btn-outline-warning" *ngIf="projectDetails?.rounds?.status=== startupRoundStatus.ONGOING" [ngbTooltip]="'Sale Live'" (click)="onClickOfParticipate(projectDetails?._id,projectDetails?.rounds?._id)" >Participate</button>
+                <button class="btn btn-outline-warning" *ngIf="projectDetails?.rounds?.status=== startupRoundStatus.UPCOMING" [ngbTooltip]="'Sale Upcoming'" [disabled]="true" style="cursor:not-allowed">Participate</button>
+                <button class="btn btn-outline-warning" *ngIf="projectDetails?.rounds?.status=== startupRoundStatus.CLOSED" [ngbTooltip]="'Sale Closed'" [disabled]="true" style="cursor:not-allowed">Participate</button>
+          
+                </div>
+
+            </div>
+           
+           
+        </div>
+    </section>
+    <section class="top-details-project" style="background:#000000;">
+    <div class="row">
+      
+        <div class="col-sm-5 project-head">
+            <h1>
+                <b *ngIf="projectDetails?.name?.length>10" [ngbTooltip]="projectDetails?.name" placement="top">{{projectDetails?.name|truncate:10}} ({{projectDetails?.symbol||'--'}})</b>
+                <b *ngIf="projectDetails?.name?.length<=10"  >{{projectDetails?.name}}</b>
+                </h1>
+            <div class="baller-table">
+                <div>
+                <p>Listing Price</p>
+                <h3>${{projectDetails?.currentPrice?.$numberDecimal}}</h3>
+                </div>
+                <div>
+                <p>Token Supply</p>
+                <h3><span *ngIf="convert(projectDetails?.totalSupply)?.length>12" [ngbTooltip]="convert(projectDetails?.totalSupply)">{{convert(projectDetails?.totalSupply)|truncate:12||0}}</span>
+                    <span *ngIf="convert(projectDetails?.totalSupply)?.length<=12">{{convert(projectDetails?.totalSupply)}}</span>
+                </h3>
+               
+
+                </div>
+                </div>
+  
+        
+        </div>
+        <div class="col-sm-7 pro-detail">
+            <strong>Release Schedule</strong>
+            <p [ngbTooltip]="projectDetails?.releaseSchedule?.length > 150 ? projectDetails?.releaseSchedule : ''"> <b>{{projectDetails?.releaseSchedule |truncate:150}}</b></p>
+          
+            <span class="hr-line"></span>
+            <p class="mt-4" [ngbTooltip]="projectDetails?.moreDetails?.length > 255 ? projectDetails?.moreDetails : ''">
+               {{projectDetails?.moreDetails||'--' |truncate:255}}
+            </p>
+        </div>
+    </div>
+    </section>
+
+</div>

@@ -1,0 +1,175 @@
+<div class="container mt-3">
+	<a [routerLink]="['/']" class="back-dashboard"> <i class="fa fa-arrow-left" aria-hidden="true"></i> Back </a>
+
+
+
+	<div class="marquee">
+		<div class="marquee__item">
+			<span *ngFor="let data of marqueeData">
+				<a [href]="data.href" target="_blank"> {{data.text}} </a>
+				<span class="marquee__seperator">»</span>
+			</span>
+
+		</div>
+	</div>
+	<div class="py-md-5">
+		<h4>About us </h4>
+		<p>
+			TDX is a launchpad with highly vetted projects where users can invest $100-$500 without the need to stake
+			like in other launchpads. This level of access along with the focus on highly vetting projects that launch
+			positions TDX as one of the year's most highly anticipated platforms for retail investors looking for the
+			same access as VCs.
+		</p>
+	</div>
+
+	<h4 class="text-center text-sm-left pb-4">Frequently Asked Questions</h4>
+	<ngb-accordion [closeOthers]="true" #acc="ngbAccordion">
+		<ngb-panel id="static-1">
+			<ng-template ngbPanelTitle>
+				<div class="arrow-down">
+					<span>How do I participate in Deals?</span>
+				</div>
+
+			</ng-template>
+
+			<ng-template ngbPanelContent>
+				<ol>
+					<li>
+						Sign up with your email address.
+					</li>
+					<li>
+						Complete the KYC
+					</li>
+					<li>
+						Go to the project page in which you want to invest
+
+					</li>
+					<li>
+						Click on apply now button
+
+					</li>
+					<li>
+						Complete the payment
+					</li>
+				</ol>
+
+			</ng-template>
+		</ngb-panel>
+		<ngb-panel id="static-2">
+			<ng-template ngbPanelTitle class="accordion-button">
+				<div class="arrow-down">
+					<span>Through which cryptocurrencies can I invest on TDX?</span>
+				</div>
+
+			</ng-template>
+			<ng-template ngbPanelContent>
+				<p>You can invest using USDT, USDC and BUSD.</p>
+			</ng-template>
+		</ngb-panel>
+
+		<ngb-panel id="static-3">
+			<ng-template ngbPanelTitle>
+				<div class="arrow-down">
+					<span>What is the minimum investment amount required to invest in Deals?
+					</span>
+				</div>
+
+			</ng-template>
+			<ng-template ngbPanelContent>
+				<p>
+					The minimum investment is $100 to participate in TDX projects.
+
+				</p>
+			</ng-template>
+		</ngb-panel>
+		<ngb-panel id="static-4">
+			<ng-template ngbPanelTitle>
+				<div class="arrow-down">
+					<span>What if my wallet transfer doesn’t clear before the token sale closes?</span>
+				</div>
+
+			</ng-template>
+			<ng-template ngbPanelContent>
+				<p>
+					If the transfer doesn’t arrive before the sale deadline, we cannot guarantee your allocation. As our
+					token allocation will be provided on a first-come-first-serve basis.
+
+				</p>
+			</ng-template>
+		</ngb-panel>
+		<ngb-panel id="static-5">
+			<ng-template ngbPanelTitle>
+				<div class="arrow-down">
+					<span>How is the conversion price determined?</span>
+				</div>
+
+			</ng-template>
+			<ng-template ngbPanelContent>
+				We display an estimated price on the Deals sale board. If you deposit crypto into your TDX wallet
+				immediately after completing this step, it should be close to the actual conversion rate.
+
+			</ng-template>
+		</ngb-panel>
+
+		<ngb-panel id="static-6">
+			<ng-template ngbPanelTitle>
+				<div class="arrow-down">
+					<span>When will I find out whether I got the tokens?</span>
+				</div>
+
+			</ng-template>
+			<ng-template ngbPanelContent>
+				<p>
+					The allocations will only be calculated and released shortly after the registration period ends.
+				</p>
+			</ng-template>
+		</ngb-panel>
+
+		<ngb-panel id="static-7">
+			<ng-template ngbPanelTitle>
+				<div class="arrow-down">
+					<span>How can I perform the KYC on TDX?</span>
+				</div>
+
+			</ng-template>
+			<ng-template ngbPanelContent>
+
+				<p>The user has to click on the KYC button, which shows in the user profile.
+				<p>
+
+				<p>Then the user is processed through the KYC journey, which includes face matching and ID doc
+					verification.</p>
+
+				<p> Afterwards, a team of specialized operators will verify the documents in any given language. If
+					there are no additional documents required, the user receives an approval email and the status of a
+					verified user.
+				</p>
+			</ng-template>
+		</ngb-panel>
+		<ngb-panel id="static-8">
+			<ng-template ngbPanelTitle>
+				<div class="arrow-down">
+					<span>How soon will the fund reflect on my TDX wallet?</span>
+				</div>
+
+			</ng-template>
+			<ng-template ngbPanelContent>
+
+				<p>The funds will reflect as soon as you deposit them on the TDX wallet.<br>
+
+					It may at times take longer due to network congestion among other reasons. <br>
+
+					Please ensure you have entered the correct wallet address.<br>
+
+
+
+				</p>
+				<p>For any queries don't hesitate to reach out to <a href="mailto:ask@tdx.biz" style="    color: #ffaa28;
+                    margin-left: 6px;
+                    text-decoration: underline;">ask@tdx.biz</a></p>
+			</ng-template>
+		</ngb-panel>
+	</ngb-accordion>
+
+
+</div>

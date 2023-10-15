@@ -1,0 +1,24 @@
+
+.sub-menu.collapsed {
+    display: none; /* hide the collapsed sub-menu */
+  }
+  
+  .sub-menu.collapsed + .sub-btn .dropdown {
+    transform: rotate(-90deg); /* rotate the dropdown icon */
+  }
+
+.hideMobileClick.connect-wallet{
+    border: 1px solid #FFC107;
+      text-align: left;
+      border-radius: 9px;
+      padding: 5px 10px !important;
+   }
+  
+ .hideMobileClick.connect-wallet:hover{background:#FFC107 !important; border-radius: 9px !important;}
+ .hideMobileClick.connect-wallet img {
+      width: 20px;
+      height: 20px;
+    
+  }
+
+

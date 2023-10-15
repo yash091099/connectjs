@@ -1,0 +1,525 @@
+<div class="header">
+	<div  class="mob-crete">
+		<button class="btn-waalet create-campaign" (click)="openAddCampaignPopup(addCampaign)">
+		
+			Create New Campaign
+			<img src="../../../../assets/images/add-icon.png" width="20px" class="hide-icon">
+			<img src="../../../../assets/images/add-icon-yellow.png" width="20px" class="show-icon">
+		</button>
+	</div>
+	<div class="row top-card">
+		<div class="col-md-12">
+			<div class="card alloc-card">
+				<div class="row">
+					<div  class="col-sm-8 left-btn">
+						<button [disabled]="disableHandleTabs" class="btn-waalet" [ngClass]="{'active': selectedTab == selectCampaignType.PAGE}"
+							(click)="handleTabChage('PAGE')">
+							Referral Campaign
+						</button>
+						<button [disabled]="disableHandleTabs" class="btn-waalet" [ngClass]="{'active': selectedTab == selectCampaignType.BANNER}"
+							(click)="handleTabChage('BANNER')">
+							Banner Campaign
+						</button>
+					</div>
+					<div class="col-sm-4 d-none d-md-block" *ngIf="referralArray?.length">
+						<button class="btn-waalet create-campaign" (click)="openAddCampaignPopup(addCampaign)"
+							style="float:right;">
+							<img src="../../../../assets/images/add-icon.png" width="20px" class="hide-icon">
+							<img src="../../../../assets/images/add-icon-yellow.png" width="20px" class="show-icon">
+							Create New Campaign
+						</button>
+					</div>
+				</div>
+				<div class="row" *ngIf="!referralArray?.length && !loadingRefferalTableData">
+					<div class="refer-banner">
+						<div class="banner-images">
+							<img src="../../../../assets/images/referBanner.png" />
+							<button class="btn-waalet btn-startNewCampaign" style="margin-top: 10px; float: none; color: #fdaf2f; "
+								(click)="openAddCampaignPopup(addCampaign)">
+								Start New Campaign
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="row" >
+
+
+					<div class="col-sm-12">
+						
+									<div class="table-new-referl table-responsive">
+
+										<table class="fold-table" *ngIf="referralArray?.length"
+											[ngClass]="{'banner-cam': selectedTab == selectCampaignType.BANNER}">
+											<thead>
+												<tr>
+													<th style="text-align:left;" >Campaign Name</th>
+													<th>Created On</th>
+													<th class="d-mob">Link</th>
+													<th style="text-align:left;" class="banner-action">Action</th>
+												</tr>
+											</thead>
+											<tbody *ngFor="let referral of referralArray; let i = index">
+												<tr *ngIf="!loadingRefferalTableData" class="view" [ngClass]="{'bg-change': hideme[i]}">
+													<td >
+														<span *ngIf="referral?.campdata[0]?.name.length>=30"
+															style="cursor: pointer;" container="body"
+															[ngbTooltip]="referral?.campdata[0]?.name | titlecase"
+															class="campain-details" tooltipClass="my-campin-class">
+															{{referral?.campdata[0]?.name| titlecase |truncate:30 }}
+														</span>
+			
+														<span *ngIf="referral?.campdata[0]?.name.length<30"
+															[ngbTooltip]="referral?.campdata[0]?.name | titlecase"
+															style="cursor: pointer;" container="body" placement="right" class="campain-details">
+															{{referral?.campdata[0]?.name| titlecase }}
+														</span>
+														<a class="expand-row" *ngIf="!hideme[i]"
+															(click)="getReferralArrayDetails(referral?._id,i)">
+															<i class="fa fa-chevron-down"></i>
+														</a>
+			
+														<a class="expand-row" *ngIf="hideme[i]"
+															(click)="hideme[i] = !hideme[i]; selectedIndex == null">
+															<i class="fa fa-chevron-up"></i>
+														</a>
+														<a (click)="getReferralArrayDetails(referral?._id,i,content1, referral)" class="table-popup-res">
+															<i class="fa fa-plus-circle" aria-hidden="true"></i>
+														</a>
+													</td>
+													<td style="color:#9c9c9c;">
+														<span [hidden]="hideme[i]">
+															{{referral?.campdata[0]?.createdAt|date}}
+														</span>
+														<span [hidden]="!hideme[i]">
+															&nbsp;
+														</span>
+			
+													</td>
+													<td class="d-none d-md-block">
+														&nbsp;
+													</td>
+													<td style="text-align:left" class="banner-action">
+			
+														<a (click)="getSelectedTab('analytics',referral)" class="more-details mr-2">
+														 Show stats
+														</a>
+								
+														<div ngbDropdown class="d-inline-block ellipses-icon">
+															<button type="button" class="my-eplipps" id="dropdownBasic1" ngbDropdownToggle>
+																<i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+															</button>
+															<div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="ellipses-drop">
+																<a ngbDropdownItem (click)="deleteCampaign(delete,referral?._id)">Delete <i class="fa fa-trash" aria-hidden="true"></i> </a>
+													
+																
+															</div>
+														</div>
+														<a class="mob-res" (click)="deleteCampaign(delete,referral?._id)"> 
+														 <img src="../../../../assets/images/delete-res.png" />	
+														</a>
+													</td>
+												</tr>
+												<tr  *ngIf="!loadingRefferalTableData" [hidden]="!hideme[i]">
+													<td colspan="7" class="fold">
+														<div *ngFor=" let referralDetail of referral.details;"
+															[ngClass]="{'dark': i%2!=0, 'light': i%2==0}">
+															<table class="small-friendly">
+																<tbody>
+																	<tr style="cursor: pointer;">
+																		<td [ngbTooltip]="referralDetail?.promotion?.name"
+																			class="camaign-table-data"
+																			container="body" placement="right">
+			
+																			{{ referralDetail?.promotion?.name | truncate : 30 }}
+																		</td>
+																		<td data-th="createdOn">
+																			{{referral?.campdata[0]?.createdAt|date}}
+																		</td>
+												
+																		<td data-th="link">
+																			<span class="refer-link" *ngIf="selectedTab == selectCampaignType.PAGE" [ngbTooltip]="referralDetail?.promotion?.linkUrl?.length > 15 ? clientUrlForLandingPage+referralDetail?.promotion?.linkUrl : ''">
+																				{{ clientUrlForLandingPage+referralDetail?.
+																				promotion?.linkUrl }}
+																			</span>
+																			<a (click)="handleMainTab('banner_image',referralDetail,referral?.campdata[0]?.name)"
+																			*ngIf="selectedTab == selectCampaignType.BANNER"
+																			class="open-banner banner-action-open"
+																			>
+																			Open Banner <i class="fa fa-long-arrow-right ml-2" aria-hidden="true"></i>
+																		</a>
+																		</td>
+			
+																		<td style="text-align:left">
+																			<a *ngIf="selectedTab == selectCampaignType.PAGE && seletedReferralLink == referralDetail?._id" class="copy-ref" ><img src="../../../../assets/images/copy-link.png">Copied</a>
+																			<a [ngClass]="{'copiedLink':copy_link=='Copied!'}"
+																				
+																				*ngIf="selectedTab == selectCampaignType.PAGE && seletedReferralLink != referralDetail?._id"
+																				class="open-banner ml-4"
+																				(click)="copyRefralLink(referralDetail?.memberId, referralDetail?._id, referralDetail?.promotion?.linkUrl)">
+																				Copy link <img src="../../../../assets/images/copy-banner.png" style="    width: 10px;
+																				margin-left: 5px;" />
+																			</a>
+																		</td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</td>
+												</tr>
+			
+											</tbody>
+										</table>
+										
+										  <table class="tg" *ngIf="loadingRefferalTableData">
+											<tr>
+											  <th class="tg-cly1">  
+												  <div class="line"></div>
+											  </th>
+											  <th class="tg-cly1">
+												<div class="line"></div>
+											  </th>
+											  <th class="tg-cly1">
+												<div class="line"></div>
+											  </th>
+											  <th class="tg-cly1">
+												<div class="line"></div>
+											  </th>
+											  <th class="tg-cly1">
+												<div class="line"></div>
+											  </th>
+											
+											</tr>
+											<tr>
+											  <td class="tg-cly1">
+												<div class="line"></div>
+											  </td>
+											  <td class="tg-cly1">
+												<div class="line"></div>
+											  </td>
+											  <td class="tg-cly1">
+												<div class="line"></div>
+											  </td>
+											  <td class="tg-cly1">
+												<div class="line"></div>
+											  </td>
+											  <td class="tg-cly1">
+												<div class="line"></div>
+											  </td>
+											 
+											</tr>
+											<tr>
+												<td class="tg-cly1">
+												  <div class="line"></div>
+												</td>
+												<td class="tg-cly1">
+												  <div class="line"></div>
+												</td>
+												<td class="tg-cly1">
+												  <div class="line"></div>
+												</td>
+												<td class="tg-cly1">
+												  <div class="line"></div>
+												</td>
+												<td class="tg-cly1">
+												  <div class="line"></div>
+												</td>
+											   
+											</tr>
+											<tr>
+												<td class="tg-cly1">
+												  <div class="line"></div>
+												</td>
+												<td class="tg-cly1">
+												  <div class="line"></div>
+												</td>
+												<td class="tg-cly1">
+												  <div class="line"></div>
+												</td>
+												<td class="tg-cly1">
+												  <div class="line"></div>
+												</td>
+												<td class="tg-cly1">
+												  <div class="line"></div>
+												</td>
+											   
+											</tr>
+											<tr>
+												<td class="tg-cly1">
+												  <div class="line"></div>
+												</td>
+												<td class="tg-cly1">
+												  <div class="line"></div>
+												</td>
+												<td class="tg-cly1">
+												  <div class="line"></div>
+												</td>
+												<td class="tg-cly1">
+												  <div class="line"></div>
+												</td>
+												<td class="tg-cly1">
+												  <div class="line"></div>
+												</td>
+											   
+											</tr>
+											<tr>
+												<td class="tg-cly1">
+												  <div class="line"></div>
+												</td>
+												<td class="tg-cly1">
+												  <div class="line"></div>
+												</td>
+												<td class="tg-cly1">
+												  <div class="line"></div>
+												</td>
+												<td class="tg-cly1">
+												  <div class="line"></div>
+												</td>
+												<td class="tg-cly1">
+												  <div class="line"></div>
+												</td>
+											   
+											</tr>
+									 
+										  </table>
+			
+										<div class="col-sm-12"
+											[ngClass]="{'light-pagination': referralArray?.length%2!==0, 'dark-pagination': referralArray?.length%2==0}">
+											<div class="pagination-clume">
+												<div class="pagination-clume">
+													<ngb-pagination *ngIf="referralArray.length !== 0 && totalCount > rowsPerPage"
+														[(page)]="currentPage" [pageSize]="rowsPerPage"
+														[collectionSize]="totalCount" [ellipses]="false" [maxSize]="3"
+														(pageChange)="pageChanged($event)">
+														<ng-template ngbPaginationPrevious>Previous</ng-template>
+														<ng-template ngbPaginationNext>Next</ng-template>
+													</ngb-pagination>
+												</div>
+											</div>
+			
+										</div>
+									</div>
+									
+                               
+						
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<ng-template #content1 let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title"></h4>
+		<button  type="button" aria-label="Close" class="btn-close" (click)="modal.dismiss('Cross click')">X</button>
+	</div>
+	<div class="modal-body resposive-popup">
+		<div class="table-responsive">
+			<table class="table table-bordered">
+				<thead>
+				  <tr>
+					<th>Campaign Name</th>
+					<th>Created On</th>
+					<th *ngIf="selectedTab == selectCampaignType.PAGE">Link</th>
+					<th>Action</th>
+													
+				  </tr>
+				</thead>
+				<tbody>
+				  <tr *ngFor="let campaign of campaignDetails">
+					<td [ngbTooltip]="campaign?.promotion?.name"
+					container="body">
+
+					{{campaign?.promotion?.name }}
+				</td>
+				<td >
+					{{selectedCampaign?.campdata[0]?.createdAt|date}}
+				</td>
+
+				<td *ngIf="selectedTab == selectCampaignType.PAGE">
+					<span class="refer-link" >
+						{{ clientUrlForLandingPage+campaign?.
+						promotion?.linkUrl }}
+					</span>
+					
+				</td>
+
+				<td style="text-align:center">
+					<a *ngIf="selectedTab == selectCampaignType.PAGE && seletedReferralLink == campaign?._id" class="copy-ref" ><img src="../../../../assets/images/copy-link.png">Copied</a>
+					<a [ngClass]="{'copiedLink':copy_link=='Copied!'}"
+						
+						*ngIf="selectedTab == selectCampaignType.PAGE && seletedReferralLink != campaign?._id"
+						class="open-banner ml-4"
+						(click)="copyRefralLink(campaign?.memberId, campaign?._id, campaign?.promotion?.linkUrl)">
+						Copy link <img src="../../../../assets/images/copy-banner.png" style="    width: 10px;
+						margin-left: 5px;" />
+					</a>
+					<a (click)="handleMainTab('banner_image',campaign,selectedCampaign?.campdata[0]?.name)"
+					*ngIf="selectedTab == selectCampaignType.BANNER"
+					class="open-banner-mobile open-banner banner-action-open"
+					>
+					Open Banner <i class="fa fa-long-arrow-right ml-2" aria-hidden="true"></i>
+				</a>
+				</td>
+					
+			
+				  </tr>
+				 
+				</tbody>
+			  </table>
+		</div>	
+	</div>
+	
+</ng-template>
+
+	<ng-template #addCampaign let-modal>
+		<div class="modal-header">
+			<h4 class="modal-title">
+				<a class="info" #ref="ngbTooltip" tooltip-trigger="focus manual" [closeDelay]="5000"
+				[ngbTooltip]="hintTooltip" tooltipClass="my-custom-class" placement="right"
+				container="body">
+				<img src="../../../../assets/images/Info-icon.svg">
+				</a>
+			</h4>
+			<ng-template #hintTooltip class="create-info">
+				<h6> Campaign creation </h6>
+				A referral campaign is an incentivisation campaign wherein the referrers promote a unique referral link.
+				A banner campaign is a type of banner ad incentivisation campaign wherein users can use advertisement
+				banners for promotion.
+				<a href="https://medium.com/@TDx_Launchpad" target="_blank" class="know-more">Know More </a>
+			</ng-template>
+			<button type="button" class="btn-close" aria-label="Close" (click)="closePopup()">X</button>
+		</div>
+		<div class="modal-body toke-release-popup">
+			<h3 style="text-align:center;">{{selectedCampaignType ? 'Name' : 'Choose'}} Campaign</h3>
+			<p class="text-center">Choose what type of campaign you want to create</p>
+
+			<div class="choose-container">
+				<div class="form-group">
+					<div class="grid-wrapper grid-col-auto">
+						<label for="radio-card-1" class="radio-card">
+						  <input  type="radio" name="radio-card" id="radio-card-1" (click)="handleCampaignType('PAGE')" [checked]="selectedCampaignType == selectCampaignType.PAGE" />
+						  <div class="card-content-wrapper" [ngClass]="{'campaign-card-active' : selectedCampaignType == selectCampaignType.PAGE}">
+							<span class="check-icon"></span>
+							<div class="card-content">
+							  <img
+								src="../../../../assets/images/referral-campaign.png" alt="referral-campaign" />
+
+								<h5>Referral Campaign</h5>
+							 
+							</div>
+						  </div>
+						</label>
+				
+			  
+						<label for="radio-card-2" class="radio-card">
+						  <input type="radio" name="radio-card" (click)="handleCampaignType('BANNER')" id="radio-card-2" [checked]="selectedCampaignType == selectCampaignType.BANNER" />
+						  <div class="card-content-wrapper" [ngClass]="{'campaign-card-active' : selectedCampaignType == selectCampaignType.BANNER}">
+							<span class="check-icon"></span>
+							<div class="card-content">
+							  <img
+								src="../../../../assets/images/referral-banner.png" alt="" />
+								<h5>Banner Campaign</h5>
+							  
+							</div>
+						  </div>
+						</label>
+					  </div>
+					  <div class="mb-4" *ngIf="selectedCampaignType">
+						<input (keyup)="checkCampaignName()" [(ngModel)]="campaignName" type="text"
+						class="form-control inputCampaign" placeholder="Add campaign name">
+						<p class="text-danger-error" *ngIf="referralErrorMessage">
+							{{referralErrorMessage}}
+						</p>
+					  </div>
+					
+				
+				</div>
+			</div>
+
+			<div class="col-sm-12 text-center-button">
+				<button *ngIf="selectedCampaignType" [disabled]="disableCreateButton" (click)="addReferralCampaign()" type="submit" class="btn btn-success">
+					Create
+				</button>
+				<button *ngIf="selectedCampaignType"  type="submit" class="btn btn-outline-cencel" (click)="closePopup()">
+					Cancel
+				</button>
+			</div>
+		</div>
+	</ng-template>
+	<ng-template #delete let-modal>
+		<div class="modal-header">
+			<h4 class="modal-title"></h4>
+			<button type="button" class="btn-close" aria-label="Close" (click)="closePopup()">X</button>
+		</div>
+		<div class="modal-body delete-release-popup">
+			<img src="../../../../assets/images/delet-popup.png">
+			<h3>Are you sure want to delete <br>
+				the campaign ? </h3>
+			<div class="btn-group-custom">
+				<button type="submit" class="btn btn-success" (click)="deletePopUP()">
+			     Delete it
+				</button>
+				<button type="submit" class="btn btn-outline-secondary" (click)="closePopup()" style="margin-right:0px;">
+					Cancel
+				</button>
+			</div>
+		</div>
+	</ng-template>
+	<ng-template #campaignCreated let-modal>
+		<div class="modal-header">
+			<h4 class="modal-title"></h4>
+			<button type="button" class="btn-close" aria-label="Close" (click)="closePopup()">X</button>
+		</div>
+		<div class="modal-body success-release-popup">
+			<div class="icon-box">
+				<img src="../../../../assets/images/popUp.png">
+			</div>
+			<h3>Successfully Added</h3>
+			<p>Your new campaign has been created !</p>
+		</div>
+	</ng-template>
+	<ng-template #content let-modal>
+		<div class="modal-header">
+			<h4 class="modal-title banner-tittle">{{bannerName}}</h4>
+			<button type="button" class="btn-close" aria-label="Close" (click)="closePopup()">X</button>
+		</div>
+		<div class="modal-body banner-view-popup">
+			<div class="row banner-preview">
+				<div class="col-sm-4">
+					<div class="banner-img">
+						<img style="cursor: pointer;" [src]="bannerImage" alt="banner image">
+					</div>
+					<a target="_blank" [href]="bannerImage">
+						<img src="../../../../assets/images/banner-privew.png" class="privew-icon">
+					</a>
+				</div>
+				<div class="col-sm-8 banner-area">
+					<h6>Banner Code
+						<a class="info-banner" #ref="ngbTooltip" [ngbTooltip]="hintTooltip"
+							tooltipClass="create-campaign" placement="right" container="body">
+							<img src="../../../../assets/images/Info-icon.svg">
+						</a>
+					</h6>
+					<ng-template #hintTooltip class="create-info">
+						<h6> Banner Code </h6>
+						Copy the banner HTML code and paste it into your website’s customizable page.
+						<a href="https://medium.com/@TDx_Launchpad" target="_blank" class="know-more">
+							Know More
+						</a>
+					</ng-template>
+					<div class="preview-content">
+						<p>
+							{{bannerCode}}
+						</p>
+					</div>
+					<div [ngClass]="{'copied':copy_link=='Copied!'}" class="banner-link">
+						<button (click)="copyToClipboard(bannerCode,selectedMemberId )" class="btn-waalet">
+							{{selectedBannerLink == selectedMemberId ? copiedReferLink:copy_link}}
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ng-template>

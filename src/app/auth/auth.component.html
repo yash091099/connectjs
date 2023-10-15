@@ -1,0 +1,21 @@
+<div class="col-sm-12 h-100vh">
+	<div class="row " [ngClass]="{'m-scroll' : !cookieBox }">
+		<div class="col-sm-6 logo">
+			<a [routerLink]="['/auth/login']">
+				<!-- <img src="../../assets/images/auth-bg-ipad.png"> -->
+				<picture aria-hidden="true">
+					<source media="(min-width: 900px)" srcset="../../assets/images/auth-bg-ipad.png" />
+					<source media="(max-width: 500px)" srcset="../../assets/images/auth-bg-mob.png" />
+					<img src="../../assets/images/auth-bg-ipad.png">
+				</picture>
+			</a>
+			<a class="logo-icon" [routerLink]="['/auth/login']" style="cursor:pointer;">
+			
+				<img alt="TDX Launchpad" src="../../assets/images/TDXPAD-Logo.png">
+			</a>
+		</div>
+		<div class="col-sm-6 pd-mobile" style="background-color: #fff !important;">
+			<router-outlet></router-outlet>
+		</div>
+	</div>
+</div>

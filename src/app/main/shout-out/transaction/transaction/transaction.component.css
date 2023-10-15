@@ -1,0 +1,81 @@
+.refeal-active-user a.active {
+	/* background: linear-gradient(111deg, #ff9800 27%, #ffad2f 100%) !important; */
+	color: #fff !important;
+	opacity: 100%;
+}
+span.badge.badge-pill.badge-success {
+    font-size: 100% !important;
+}
+ 
+.d-none-lg{
+	display: none;
+}
+.refeal-active-user a {
+	padding: 9px 20px 0px 0px !important;
+	color: #fff;
+	border-radius: 10px;
+	cursor: pointer !important;
+	font-size: 16px;
+	opacity: 70%;
+}
+
+.mt-3 {
+	margin-top: 1.5rem !important;
+}
+
+/* .toogle-active-button {
+	position: absolute;
+	top: 15px;
+	width: 100%;
+	z-index: 99;
+	left: 25px;
+} */
+.back-heading img{  margin-right: 20px;}
+
+.back-heading p{ font-size: 24px; font-weight: 500;  margin-top: 15px;}
+.refeal-active-user {
+    width: 100%;
+    background: #161616 !important;
+    align-items: center;
+    justify-content: center;
+	border-radius: 22px 22px 0px 0px !important;
+	border: 1px #3E3E3E solid;
+	border-bottom: 0px;
+	padding: 20px;
+}
+
+@media only screen and (min-width: 1950px) and (max-width: 2560px) {
+	.cardHieght {
+		height: 60vh;
+	}
+}
+@media only screen and (min-width: 300px) and (max-width: 667px) {
+.d-none-sm {
+    display: none;
+}
+.d-none-lg {
+    display: inline-block;
+    width: 100%;
+    text-align: right;
+    float: left;
+}
+.refeal-active-user {
+    width: 100%;
+    background: #161616 !important;
+    align-items: center;
+    justify-content: center;
+	border-radius: 22px 22px 0px 0px !important;
+}
+.back-heading p{ font-size: 16px;}
+.back-heading img{width: 20px; margin-right: 10px;}
+.refeal-active-user{ padding: 10px !important;}
+.refeal-active-user a{ font-size: 11px !important;}
+}
+.my-earning {
+    background: none;
+    border: 1px solid #FDAF2F;
+    box-sizing: border-box;
+    border-radius: 6px;
+    color: #ffffff;
+    padding: 5px 15px;
+}

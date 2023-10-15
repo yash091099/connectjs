@@ -1,0 +1,245 @@
+<div class="container ipad-pd-left  p-0">
+	<div class="row screen-center">
+		<div class="col-md-12 ">
+			<div class="card custom_card">
+				<div id="top" class="table-responsive fixTableHead myrestable">
+					<div class="outer">
+						<div  class="inner" (scroll)="onScroll($event)">
+					<table class="table">
+						<thead>
+							<tr class="bg-gradiants">
+								<th class="fixed-pos-mobile">Title</th>
+								<!-- <th>Description</th> -->
+								<th>Reward</th>
+								<th>Type</th>
+								<th>Status</th>
+								<th>Action</th>
+								<th>Transactions</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let item of activityLogs; let i = index">
+								<td style="width:200px;" class="fixed-pos-mobile">
+									<span [ngbTooltip]="item?.title |titlecase" position="top">
+
+										{{item?.shoutoutCampaignId?.title|| '--'| truncate: '40' | titlecase}}
+									</span>
+								</td>
+								<!-- <td>
+									<div style="cursor: pointer;"
+										(click)="openDesctiption(description_pop_up,item?.shoutoutCampaignId?.description)">
+										<p class="desc ">
+											{{item?.shoutoutCampaignId?.description | truncate: '50'}}
+										</p>
+										<div class="time">
+											{{item?.shoutoutCampaignId?.createdAt | date}}
+										</div>
+
+									</div>
+								</td> -->
+								<td>
+									<span
+										class="badge badge-pill badge-success">
+										<ng-container *ngIf="item?.shoutoutprojects?.symbol == 'USD'">$ {{item?.shoutoutCampaignId?.reward?.$numberDecimal}}</ng-container>
+							<ng-container *ngIf="item?.shoutoutprojects?.symbol != 'USD'">{{item?.shoutoutCampaignId?.reward?.$numberDecimal}} {{item?.shoutoutprojects?.symbol}}</ng-container>
+										</span>
+								</td>
+								<td>
+									{{item?.shoutoutCampaignId?.type?.category || '--'}}
+									{{item?.shoutoutCampaignId?.type?.type || '--'}}
+								</td>
+								<td>
+
+									{{item?.actionTimestamps?.actionPerformed ? 'Task Performed': 'Task Not Performed'}}
+								</td>
+
+								<td>
+									<a *ngIf="item?.raiseComplaint"
+										(click)="redirectToRaiseIssuePage(item,reportIssues)"
+										[ngbTooltip]="'Report issue'" class="icon-raise">
+										<img class="raise-issue" src="../../../../assets/images/raise_issue.png"
+											alt="raise-issue icon">
+									</a>
+									<a *ngIf="!item?.raiseComplaint" (click)="redirectToViewIssuePage(item,viewIssues)"
+										[ngbTooltip]="'View Raised issue'" class="icon-raise">
+										<i class="fa fa-eye"></i>
+									</a>
+
+								</td>
+								<td>
+									<a *ngIf="item?.transactionDetails?.length && item?.actionTimestamps?.actionPerformed"
+										(click)="openTransactionModal(item,viewTransactionDetails)"
+										[ngbTooltip]="'View Transaction Details'" class="icon-raise ml-4">
+										<img src="../../../../assets/images/viewtra.png" width="20px" />
+									</a>
+									<span *ngIf="!item?.transactionDetails?.length"
+										class="text-danger">{{item?.actionTimestamps?.actionPerformed ? 'Transaction
+										Initiated' : 'Transaction Not Initiated'}}
+									</span>
+								</td>
+							</tr>
+							<tr *ngIf="!activityLogs?.length">
+								<td colspan="7" style="text-align: center;">{{message.CONST_MSG.NO_DATA_FOUND}}</td>
+							</tr>
+						</tbody>
+					</table>
+					</div>
+					</div>
+
+				</div>
+				<div class="myrestable arow-fiex" >
+					<button (click)="handleLeftClick()" *ngIf="activityLogs?.length && !showRightSlider" id="left-button"><img src="../../../../assets/images/prev.png" /></button>
+				  <button (click)="handleRightClick()" *ngIf="activityLogs?.length && showRightSlider" id="right-button"><img src="../../../../assets/images/next.png" /></button>
+				</div>
+				<ngb-pagination *ngIf="activityLogs?.length && totalCount > rowsPerPage"
+					class="d-flex justify-content-end" [(page)]="currentPage" [pageSize]="rowsPerPage"
+					[ellipses]="false" [maxSize]="3" [collectionSize]="totalCount" (pageChange)="pageChanged($event)">
+				</ngb-pagination>
+			</div>
+
+		</div>
+
+	</div>
+</div>
+
+
+
+<ng-template #reportIssues let-modal>
+	<div class="modal-header">
+		<h5>Report {{camapignType}} issue </h5>
+		<button type="button" class="btn-close" aria-label="Close" (click)="closeModal()">x</button>
+	</div>
+	<div *ngIf="raisedIssueDetails?.length" class="ml-3" style="color: black;">
+		<label>Reported issue list</label>
+		<button (click)="toggleCampaignTitle()" type="button" class="btn button-tab btn-outline-primary coll-btn ml-2">
+			<span *ngIf="viewIssue"> <i class="fa fa-minus"></i> </span>
+			<span *ngIf="!viewIssue"><i class="fa fa-plus"></i> </span>
+		</button>
+	</div>
+	<table *ngIf="viewIssue && raisedIssueDetails?.length" class="table">
+		<thead>
+			<tr class="bg-white">
+				<th>Description</th>
+				<th>Status</th>
+				<th>Image</th>
+				<th>Comment</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let item of raisedIssueDetails" style="color: black !important;">
+				<td container="body"> {{(item?.description | truncate: '300'|titlecase)||
+					'--'}}
+				</td>
+				<td>{{item?.isResolved ? 'Resolved': 'Not Resolved'}}</td>
+				<td><img *ngIf="item?.attachments?.length && item?.attachments[0]" src="{{item?.attachments[0]}}"
+						style="width:100px;" /><span *ngIf="!item?.attachments[0]">--</span>
+				</td>
+				<td>{{item?.comments || '--'|titlecase}}</td>
+
+			</tr>
+		</tbody>
+	</table>
+	<div class="modal-body">
+		<app-raise-issue (getActivityList)="getLogs($event)" [taskLogId]="reportCampaignId"
+			[actionTimestampsId]="actionTimestampsId"></app-raise-issue>
+	</div>
+</ng-template>
+
+<ng-template #viewIssues let-modal>
+	<div class="modal-header">
+		<h6>Reported issue for {{camapignType}}:</h6>
+		<button type="button" class="btn-close" aria-label="Close" (click)="closeModal()">x</button>
+	</div>
+	<div class="modal-body pt-0 resposive-popup">
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr class="bg-white">
+						<th>Description</th>
+						<th>Status</th>
+						<th>Image</th>
+						<th>Comment</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let item of raisedIssueDetails" style="color: black !important;">
+						<td container="body"> {{(item?.description | truncate: '300'|titlecase)||
+							'--'}}
+						</td>
+						<td>{{item?.isResolved ? 'Resolved': 'Not Resolved'}}</td>
+						<td><img *ngIf="item?.attachments?.length && item?.attachments[0]" src="{{item?.attachments[0]}}"
+								style="    width: 100px;
+								height: 50px;
+								object-fit: contain;" /><span *ngIf="!item?.attachments[0]">--</span>
+						</td>
+						<td>{{item?.comments || '--'|titlecase}}</td>
+	
+					</tr>
+					<tr *ngIf="!raisedIssueDetails?.length" class="no-data">
+						<td colspan="4" style="text-align:center;">No activity logs!</td>
+					</tr>
+	
+				</tbody>
+			</table>
+		</div>
+		
+
+	</div>
+</ng-template>
+<ng-template #description_pop_up let-modal>
+	<div class="modal-header">
+		<h6>Description</h6>
+		<button type="button" class="btn-close" aria-label="Close" (click)="closeModal()">x</button>
+	</div>
+	<div class="modal-body">
+		<p class="word-break">{{description |titlecase}}</p>
+	</div>
+
+</ng-template>
+<ng-template #viewTransactionDetails let-modal>
+	<div class="modal-header">
+		<h6>Transaction Details </h6>
+		<button type="button" class="btn-close" aria-label="Close" (click)="closeModal()">x</button>
+	</div>
+	<div class="modal-body pt-0 resposive-popup">
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr class="bg-white">
+						<th>Transaction Id</th>
+						<th>Reward</th>
+						<th class="w-responsive">Performed At</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let item of transactionDetails" style="color: black !important;">
+						<td>{{item?._id ||
+							'--'}}</td>
+						<td>{{item?.token?.$numberDecimal || '--'}}</td>
+						<td>{{item?.createdAt | date:'MMM d, y, h:mm:ss a'}}</td>
+						<td> <span>{{item?.status}}</span>
+							<a class="fa fa-eye ml-2" container="body" *ngIf="item?.reason" [ngbTooltip]="'View Reason'"
+								(click)="openReasonModal(rejectReason,item?.reason)">
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+
+	</div>
+</ng-template>
+<ng-template #rejectReason let-modal>
+	<div class="modal-header">
+		<h6>Reason</h6>
+		<button type="button" class="btn-close" aria-label="Close" (click)="closeReasonModal()">x</button>
+	</div>
+	<div class="modal-body">
+		<p class="word-break">{{cancelReason}}</p>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-danger" (click)="closeReasonModal()">Close</button>
+	</div>
+</ng-template>

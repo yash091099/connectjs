@@ -1,0 +1,100 @@
+<div class="col-md-12 col-sm-12 col-lg-12 no-margin h-100vh">
+    <div class="row" style="margin: 0;">
+        <div class="loginform">
+            <h3 class="login-heading">Welcome, back</h3>
+            <p class="d-none d-sm-block">Login to your account</p>
+            
+            <form [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm.value)">
+                <div class="form-group" style="margin-bottom:1.5rem;">
+                    <div class="form-group">
+                        <label for="uname">Email</label>
+                        <input type="email" name="email" formControlName="email" placeholder="abc@gmail.com"
+                            class="form-control">
+                        <app-show-errors [control]="email" [fname]="'Email'"></app-show-errors>
+                    </div>
+                   
+                    <label for="psw">Password</label>
+                    <input type="{{showPassword ? 'text' : 'password'}}" name="password" formControlName="password"
+                        placeholder="************ (minimum 8 characters)" class="form-control">
+                    <div class="eye" (click)="handleShowPassword()">
+                        <img *ngIf="!showPassword"
+                            src="../../../assets/images/eye.png">
+                        <i *ngIf="showPassword" class="fa fa-eye" aria-hidden="true" style="color: #b0b0b0;"></i>
+                    </div>
+                    <app-show-errors [control]="password" [fname]="'Password'"></app-show-errors>
+                    <!-- <input type="checkbox" value="lsRememberMe" id="rememberMe"> <label for="rememberMe" class="remember-text">Remember me</label> -->
+                    <label style="font-size: 13px; float: right;">
+                        <button [routerLink]="['/auth/forget-password']" type="button" class="btnforgot">Forgot
+                            Password?</button>
+
+                    </label>
+                </div>
+                <!-- <div class="g-recaptcha">
+					<input type="checkbox"  (click)="openSlider(sliderCaptcha)" id="slider" name="slider" value="captcha">
+					<label for="captcha"> I am not a robot</label><br>
+              
+                </div> -->
+              
+                <!-- Update your HTML template with these changes -->
+<div class="captcha">
+    <div class="spinner">
+        <label class="mb-0">
+            <input type="checkbox" #captchaCheckbox (click)="openSlider(sliderCaptcha)">
+            <span class="checkmark"><span>&nbsp;</span></span>
+        </label>
+    </div>
+    <div class="text">
+        I'm not a robot
+    </div>
+    <div class="logo">
+        <img src="../../../assets/images/recaptcha-project.png"/>
+        <p>reCAPTCHA</p>
+        <small>Privacy - Terms</small>
+    </div>
+</div>
+
+
+                    <app-messages ></app-messages>
+                
+                <button type="submit"  class="btn-block login-button">Login</button>
+            </form>
+            <div class="form-group">
+                <div class="col-md-12 control">
+                    <div style=" padding-top:15px; color: #888;" class="ft-login">
+                        Not Registered Yet?
+                        <a (click)="redirectToSignup()" style="color: #265B97;
+                        text-decoration: none;
+                        background-color: transparent;
+                        font-size: 13px;
+                        font-weight: 500;
+                        font-weight: 500;">
+                            Create an account
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center or"> Or </p>
+            <div class="googlebtn" (click)="socialLogin(1)">
+                <div class="google-icon-wrapper">
+                    <img class="google-icon" src="../../../assets/images/Google__G__Logo.svg" />
+                </div>
+                <p class="btn-text">Continue with Google</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <ng-template #sliderCaptcha let-modal>
+        <div class="slidercaptcha">
+            <div class="card-header-slider">
+                <span>Please complete security verification! 
+                    <!-- <span style="float: right !important;"><button type="button" aria-label="Close" class="btn-close" (click)="closeAllPopup()">X</button></span> -->
+                </span>
+            </div>
+            <div class="card-body-slider">
+                <div id="sliderCap"></div>
+            </div>
+        </div>
+    </ng-template>

@@ -1,0 +1,484 @@
+.captcha {
+	background-color: #f9f9f9;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+    color: #4c4a4b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 315px;
+}
+
+@media screen and (max-width: 500px) {
+	.captcha {
+		width: 100%;
+		margin-bottom: 15px !important;
+		margin-top: 0px !important;
+	}
+	.captcha .text {
+		margin:.5em!important;
+		text-align:center;
+		font-size: 10px !important;
+	}
+	.captcha .logo {
+		align-self: center!important;
+		width: auto !important;
+	}
+	.captcha .spinner {
+		margin:0px 10px !important;
+	}
+}
+
+.captcha .text {
+	font-size: 15px;
+    font-weight: 500;
+    margin-right: 1em;
+}
+.captcha .spinner {
+    position: relative;
+    width: 2em;
+    height: 2em;
+    display: flex;
+    margin: 1em 1em;
+    align-items: center;
+    justify-content: center;
+}
+.captcha input[type="checkbox"] { position: absolute; opacity: 0; z-index: -1; }
+.captcha input[type="checkbox"]+.checkmark {
+	display:inline-block;
+	width:30px;
+	height:30px;
+	background-color:#fcfcfc;
+	border:2.5px solid #c3c3c3;
+	border-radius:3px;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	cursor: pointer;
+}
+.captcha input[type="checkbox"]+.checkmark span {
+	content:'';
+	position:relative;/*
+	position:absolute;
+	border-bottom:3px solid;
+	border-right:3px solid;
+	border-color:#029f56;*/
+	margin-top:-3px;
+	transform:rotate(45deg);
+	width:.75em;
+	height:1.2em;
+	opacity:0;
+}
+.captcha input[type="checkbox"]+.checkmark>span:after {
+	content:'';
+	position:absolute;
+	display:block;
+	height:3px;
+	bottom:0;left:0;
+	background-color:#029f56;
+}
+.captcha input[type="checkbox"]+.checkmark>span:before {
+	content:'';
+	position:absolute;
+	display:block;
+	width:3px;
+	bottom:0;right:0;
+	background-color:#029f56;
+}
+.captcha input[type="checkbox"]:checked+.checkmark { 
+	animation:2s spin forwards;
+}
+.captcha input[type="checkbox"]:checked+.checkmark>span { 
+	animation:1s fadein 1.9s forwards;
+}
+.captcha input[type="checkbox"]:checked+.checkmark>span:after {animation:.3s bottomslide 2s forwards;}
+.captcha input[type="checkbox"]:checked+.checkmark>span:before {animation:.5s rightslide 2.2s forwards;}
+@keyframes fadein {
+	0% {opacity:0;}
+	100% {opacity:1;}
+}
+@keyframes bottomslide {
+	0% {width:0;}
+	100% {width:100%;}
+}
+@keyframes rightslide {
+	0% {height:0;}
+	100% {height:100%;}
+}
+.captcha .logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    align-self: flex-end;
+    margin: 5px
+}
+.captcha .logo img {
+	height:2em;
+	width:2em;
+}
+.captcha .logo p {
+    color: #9d9ba7;
+    margin: 0 !important;
+    font-size: 12px;
+    font-weight: 700;
+}
+.captcha .logo small {
+	color:#9d9ba7;
+	margin:0;
+	font-size:.8em;
+}
+@keyframes spin {
+	10% {
+		width:0;
+		height:0;
+		border-width:6px;
+	}
+	30% {
+		width:0;
+		height:0;
+		border-radius:50%;
+		border-width:1em;
+		transform: rotate(0deg);
+		border-color:rgb(199,218,245);
+	}
+	50% {
+		width:2em;
+		height:2em;
+		border-radius:50%;
+		border-width:4px;
+		border-color:rgb(199,218,245);
+		border-right-color:rgb(89,152,239);
+	}
+	70% {
+		border-width:4px;
+		border-color:rgb(199,218,245);
+		border-right-color:rgb(89,152,239);
+	}
+	90% {
+		border-width:4px;
+	}
+	100% {
+		width:2em;
+		height:2em;
+		border-radius:50%;
+		transform: rotate(720deg);
+		border-color:transparent;
+	}
+}
+::selection {
+	background-color:transparent;
+	color:teal;
+}
+::-moz-selection {
+	background-color:transparent;
+	color:teal;
+}
+
+
+.login-heading {
+    font-size: 26px !important;
+    margin-bottom: 5px;
+}
+.text-mustbe {
+    color: #000000;
+    opacity: 0.4;
+    font-size: 8px;
+    margin-bottom: 0;
+    font-weight: 500;
+}
+.or {
+	margin-bottom: 0px !important;
+}
+.ckbox {
+    margin-top: 3px;
+    margin-bottom: 5px !important;
+	display: flex;
+	align-items: center;
+}
+.iagree{
+	margin-top: -23px;
+	display: inline-block;
+}
+p.text-center.or::after {
+    width: 200px;
+    height: 1px;
+    background: #b7b7b7;
+    content: "";
+    display: block;
+    float: right;
+    position: relative;
+    top: 6px;
+}
+p.text-center.or::before {
+    width: 200px;
+    height: 1px;
+    background: #b7b7b7;
+    content: "";
+    display: block;
+    float: left;
+    position: relative;
+    top: 6px;
+}
+.googlebtn {
+	width: 100%;
+    height: 40px;
+    border-radius: 8px;
+    margin-top: 10px;
+    cursor: pointer;
+    line-height: 40px;
+    border: 1px solid #4c4c4c;
+	margin-bottom: 15px;
+
+}
+.ft-login {
+    text-align: center;
+    font-size: 12px;
+}
+.eye {
+    position: relative;
+    width: 100%;
+}
+.remember-text {
+    margin-left: 6px;
+    position: relative;
+    top: -2px;
+    font-size: 12px;
+}
+.eye img{
+	cursor: pointer;
+	position: absolute;
+    right: 17px;
+    top: -31px;
+    width: 17px;
+}
+.eye i{
+	position: absolute;
+	right: 17px;
+	top: -31px;
+	width: 17px;
+	cursor: pointer;
+	}
+.reminder{
+	position: relative;
+    top: 3px;
+    width: 17px;
+    height: 17px;
+}
+.h-100vh{
+    height: 100%;
+	display: flex;
+    align-items: center;
+    background: #fff;
+    justify-items: center;
+    justify-content: center;
+
+}
+.googlebtn .google-icon-wrapper {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    left: 27%;
+}
+.googlebtn .google-icon {
+	position: absolute;
+	margin-top: 11px;
+	margin-left: 11px;
+	width: 18px;
+	height: 18px;
+}
+.googlebtn .google-icon1 {
+	position: absolute;
+	width: 40px;
+	height: 40px;
+}
+.googlebtn .btn-text {
+    font-weight: 500;
+    font-size: 18px;
+    text-align: center;
+    color: #000000 !important;
+    opacity: 0.7 !important;
+	margin-bottom: 0px !important;
+}
+
+.login-links a {
+	margin: 2px 0px;
+	letter-spacing: 1px;
+	font-weight: 400;
+}
+
+.signup-title span {
+	color: #ffaa00;
+	cursor: pointer;font-weight: bold;
+}
+.signup-title{
+	 
+    float: right;
+     
+	color: #607D8B;
+	font-weight: bold;
+    font-size: 12px;
+}
+.signup-title a:hover{color: #ffaa00; text-decoration: underline;}
+.help-block {
+	text-decoration: underline;
+    float: right;
+    width: 100%;
+    color: #607D8B;
+    font-size: 12px;
+
+}
+.facebookcolor {
+	background: #355089
+}
+.form-group .form-control::placeholder{
+    font-size: 14px !important;
+    line-height: 16px !important;
+    color: #E0E0E0 !important;
+}
+
+@media (min-width: 2560px) and (max-width: 4000px){
+	
+	.googlebtn .google-icon-wrapper {
+
+	left: 35%;
+	}
+}
+@media (min-width: 1200px) and (max-width: 1400px){
+	.form-input-height .googlebtn {
+		width: 100%;
+		height: 30px;
+		border-radius: 8px;
+		margin-top: 5px;
+		cursor: pointer;
+		line-height: 30px;
+		border: 1px solid #4c4c4c;
+		margin-bottom: 5px;
+	}
+	.form-input-height .googlebtn .google-icon-wrapper{
+		height: 30px;
+	}
+	.form-input-height .googlebtn .google-icon {
+		position: absolute;
+		margin-top: 8px;
+		margin-left: 11px;
+		width: 15px;
+		height: 15px;
+	}
+	.form-input-height .googlebtn .btn-text{
+		font-size: 14px;
+		font-weight: 400;
+	}
+	.eye img{
+		top: -28px;
+	}
+	.eye i{
+		top: -28px;
+	}
+   }
+@media only screen and (max-width:1024px) and (min-width:768px) {
+	.captcha{
+		margin-bottom: 15px !important;
+		margin-top: 0px !important;
+	}
+	.googlebtn .btn-text {
+		font-size: 14px;
+	}
+
+	.loginform {
+		width: 100%;
+	}
+	.ft-login {
+		font-size: 12px;
+	}
+	.googlebtn .google-icon-wrapper{
+		left: 10%;
+
+	}
+	p.text-center.or::after {
+		width: 40%;
+	}
+	p.text-center.or::before {
+		width: 40%;
+	}
+}
+
+
+@media (max-width:667px) and (min-width: 320px) {
+	.googlebtn .btn-text {
+		font-weight: 500;
+		font-size: 14px;
+	}
+	.g-recaptcha {
+		margin-top: 0px;
+		margin-bottom: 20px;
+	}
+	.eye img{ 
+		top: -35px; 
+	}
+	.googlebtn{
+		border-radius: 5px;
+		margin-top: 25px;
+	}
+	.text-mustbe{ 
+		font-size: 10px; 
+		font-weight: 300;
+	}
+	.mar-mob{
+		margin-top: 18px;
+	}
+	.login-heading { 
+		margin-bottom: 20px;
+		font-size: 15px !important;
+	}
+	/* .googlebtn{
+		margin-bottom:20px;
+	} */
+	p.text-center.or::before {
+		width: 40%;
+	}
+	p.text-center.or::after {
+		width: 40%;
+	}
+	.googlebtn .google-icon-wrapper{
+		left: 6%;
+
+	}
+	.login-leftbg {
+		margin: 0;
+	}
+	.h-100vh{
+		display: block;
+		padding: 0;
+	}
+	.loginform {
+		width: 100%;
+		padding-top: 30px;
+		box-sizing: border-box;
+		background: #fff;
+		margin-top: 0px;
+		margin: auto;
+	}
+	.login-links p {
+		color: #607D8B;
+		font-size: 13px;
+		margin: 10px 0px;
+		 
+	}
+	.width-full {
+		width: 50% !important;
+    flex: initial;
+	max-width: initial;
+	margin: auto;
+	}
+	.logo {
+		width: 150px;
+		margin: 20px auto;
+		display: block;
+	}
+	.form-group .form-control {
+		color: #000000 !important;
+	}
+	 
+}

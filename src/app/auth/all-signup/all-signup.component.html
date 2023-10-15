@@ -1,0 +1,154 @@
+<div class="col-md-12 col-sm-12 col-lg-12 no-margin h-100vh">
+  <div class="row" style="margin: 0;">
+    <div class="loginform">
+      <p class="login-heading">Create a new account</p>
+      <form class="mg-top-30" [ngClass]="{'form-input-height':InvalidForm}" [formGroup]="signupForm" (ngSubmit)="sendOtp(signupForm.value)">
+        <div class="form-group mb-1">
+          <div class="row">
+            <div class="col-md-6">
+              <label for="uname">Full Name</label>
+              <input type="text" placeholder="First Name" (input)="onBlur('firstName')" formControlName="firstname"
+                name="firstName" class="form-control" required id="firstName">
+              <ng-template #first>
+                <app-show-errors [control]="firstname" [fname]="'First Name'"></app-show-errors>
+              </ng-template>
+              <div *ngIf="checkFirstName; else first">
+                <p class="errro_font">No numbers are allowed</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="uname"></label>
+              <input type="text" placeholder="Last Name" (input)="onBlur('lastName')" formControlName="lastname"
+                name="lastName" class="form-control" id="lastName">
+              <ng-template #second>
+                <app-show-errors [control]="lastname" [fname]="'Lastname'"></app-show-errors>
+              </ng-template>
+              <div *ngIf="checkLastName; else second">
+                <p class="errro_font">No numbers are allowed</p>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 mar-mob">
+              <label for="uname">Email Address</label>
+              <input type="email" placeholder="abc@gmail.com" formControlName="email" name="email" class="form-control">
+              <app-show-errors [control]="email" [fname]="'Email'"></app-show-errors>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 mar-mob">
+              <label for="uname">Password</label>
+              <input type="{{showPassword ? 'text' : 'password'}}" placeholder="************ (minimum 8 characters)" formControlName="password"
+                name="Password" class="form-control" id="password" (input)="checkConfirmPassword()">
+              <div class="eye" (click)="handleShowPassword()"><img *ngIf="!showPassword"
+                  src="../../../assets/images/eye.png">
+                <i *ngIf="showPassword" class="fa fa-eye" aria-hidden="true" style="color: #b0b0b0;"></i>
+              </div>
+              <p class="text-mustbe">Must be atleast 8 characters</p>
+              <app-show-errors [control]="password" [fname]="'Password'"></app-show-errors>
+            </div>
+            <div class="col-md-12 mar-mob">
+              <label for="uname">Retype Password</label>
+              <input type="{{showConPassword ? 'text' : 'password'}}" placeholder="************"
+                formControlName="confirm" name="cnfPassword" class="form-control" id="cnfPassword"
+                (input)="checkConfirmPassword()">
+              <div class="eye" (click)="handleShowConPassword()"><img *ngIf="!showConPassword"
+                  src="../../../assets/images/eye.png">
+                <i *ngIf="showConPassword" class="fa fa-eye" aria-hidden="true" style="color: #b0b0b0;"></i>
+              </div>
+              <p class="text-mustbe">Both passwords must match</p>
+              <app-show-errors [control]="confirm" [fname]="'Confirm Password'"></app-show-errors>
+			  <div *ngIf="confirm?.value && confirm?.value != password?.value">
+                <p class="errro_font">Confirm Password do not match</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="g-recaptcha">
+           <re-captcha (resolved)="resolved($event)" siteKey="{{YOUR_SITE_KEY}}" style="margin-top:5px;">
+          </re-captcha> 
+		  <input type="checkbox"  (click)="openSlider(sliderCaptcha)" id="slider" name="slider" value="captcha">
+<label for="captcha"> I am not a robot</label><br>
+		  
+        </div> -->
+        <div class="captcha">
+          <div class="spinner">
+            <label class="mb-0">
+              <input type="checkbox" #captchaCheckbox (click)="openSlider(sliderCaptcha)">
+              <span class="checkmark"><span>&nbsp;</span></span>
+          </label>
+            
+          </div>
+          <div class="text">
+              I'm not a robot
+          </div>
+          <div class="logo">
+              <img src="../../../assets/images/recaptcha-project.png"/>
+              <p>reCAPTCHA</p>
+              <small>Privacy - Terms</small>
+          </div>
+      </div>
+        <div class="iagree">
+          <div class="">
+            <label class="ckbox">
+              <input type="checkbox" (click)="handleTNCCheck($event)" formControlName="agreeTNC" name="accept_terms">
+              <span style="color:#828282; font-size:13px;" class="cursor_pointer ml-1 mr-2"> I agree to </span>
+              <a [routerLink]="['/terms-and-conditions']" target="_blank" style="padding-bottom: 1px;"> <b style="color:#265B97; font-size:12px;">Terms &
+                  Conditions</b></a>
+
+            </label>
+          </div>
+        </div>
+		<div *ngIf="(!captchaVerify || !tncChecked) && !formValid">
+			<p class="errro_font">{{!captchaVerify ?   'Please verify captcha' : 'Please accept Terms & Conditions'}}</p>
+		  </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-12">
+              <p style="display:none;">
+                <app-messages></app-messages>
+              </p>
+              <button class="btn-block signup-login-button" 
+                 type="submit">Create
+                Account</button>
+            </div>
+          </div>
+        </div>
+        <p class="text-center or"> Or </p>
+        <div class="googlebtn" (click)="socialLogin(1)">
+          <div class="google-icon-wrapper">
+            <img class="google-icon" src="../../../assets/images/Google__G__Logo.svg" />
+          </div>
+          <p class="btn-text">Continue with Google</p>
+        </div>
+      </form>
+      <div class="form-group">
+        <div class="col-md-12 control">
+          <div style="color: #828282; text-align: center;" class="ft-login">
+            Already have an account?
+            <a [routerLink]="['/auth/login']" style="color: #265B97; font-weight: 500;
+            font-size: 14px;">
+              Login
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #sliderCaptcha let-modal>
+  <div class="slidercaptcha">
+      <div class="card-header-slider">
+          <span>Please complete security verification!
+            <!-- <span style="float: right !important;">
+            <button type="button" aria-label="Close" class="btn-close" (click)="closeAllPopup()">X</button></span>-->
+          </span> 
+      </div>
+      <div class="card-body-slider">
+          <div id="sliderCap"></div>
+      </div>
+  </div>
+</ng-template>

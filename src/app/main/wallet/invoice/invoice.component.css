@@ -1,0 +1,31 @@
+.card{    background: none !important;}
+.table-br{border: 1px #f18221  solid;}
+ 
+
+    .table{font-size: 10px; color: #ffffff;}
+   
+    .table th { text-align: center;
+        padding: 6px 10px;
+        color: #ffad2f;
+        vertical-align: top;
+        border-top: 1px solid #f18221 !important;
+        border-left: 1px #f18221 solid !important;
+    }
+    .table thead th{border-bottom: 1px #f18221 solid;}
+    .table td{text-align: center;padding: 5px;
+        vertical-align: middle;
+        border-top: 1px solid #0a0a0a;
+        font-size: 11px;
+    }
+
+    .table-header td{text-align: left; padding: 0px;}
+    .table-right td{text-align: right;padding: 0px;}
+    .table img{width: 15px;margin-right: 10px;}
+    .table a{color: green; font-size: 14px;} 
+    .thanks{text-align: center; color: green;    margin: 10px 0px;} 
+    footer{text-align: center; font-size: 12px; padding-bottom: 15px; color: #ffad2f;position: fixed;
+        bottom: 0;
+         
+        width: 100%;} 
+        footer a{color: #ffad2f; font-size: 10px;}
+

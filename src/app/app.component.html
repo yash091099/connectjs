@@ -1,0 +1,11 @@
+<app-loader></app-loader>
+<router-outlet></router-outlet>
+
+<div id="stop" class="scrollTop">
+	<i class="fa fa-angle-double-up"></i>
+</div>
+
+<div id="js-cookie-box" *ngIf="cookieBox" class="cookie-box ">
+	This website uses cookies 🍪 to improve your experience. We'll assume you're ok with this
+	<span id="js-cookie-button" class="cookie-button" (click)="acceptCookies()">Accept All Cookies</span>
+</div>

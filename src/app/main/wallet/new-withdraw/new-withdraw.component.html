@@ -1,0 +1,1667 @@
+<div class="header d-flex justify-content-center screen-center">
+	<div class="container ipad-pd-left">
+		<div class="new-wallet-section">
+			<div class="toogle-active-button">
+
+				<div class="refeal-active-user">
+
+					<a [ngClass]="selectedTab == tabs.WALLET?'active':''" (click)=" selectTab(tabs.WALLET)">Main
+						Wallet</a>
+
+					<a [ngClass]="selectedTab == tabs.COMMISSION?'active':''" (click)=" selectTab(tabs.COMMISSION)"
+						class="">Earning Wallet</a>
+
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="card crad-height-fiexd pt-0 d-desktop-device" *ngIf="selectedTab === tabs.COMMISSION">
+						<div class="text-wapper">
+							Please be aware that deleting tweets or any related social shoutout activities may result in the forfeiture of your reward entitlement.  <br>
+							We value your participation and honesty throughout this campaign.
+						</div>
+					   </div>
+					<div class="card crad-height-fiexd pt-0">
+						<div class="table-responsive">
+							<table *ngIf="selectedTab == tabs.WALLET" class="table">
+								<thead>
+									<tr>
+										<th class="text-left">Assets</th>
+										<th class="">Token name</th>
+										<th class="">No of tokens</th>
+										<th class="d-none d-md-block">Action</th>
+									</tr>
+								</thead>
+								<tbody *ngIf="!walletDetailsLoading">
+									<tr>
+										<td class="text-left">
+											<img src="../../../../assets/images/usdc.png">
+											USD
+										</td>
+										<td style="text-align: center !important;">USD</td>
+										<td style="text-align: center !important;"> {{walletAmount | decimal}}</td>
+										<td class="w-200 hid-sm">
+											<a class="add-fund mr-3" style="background:#fff; color: #000; "
+												(click)="openPopupOne(purchasePopupSecond)">Add funds</a>
+											<a class="add-fund"
+												(click)="withdrawRequest(content1,walletAmount)">Withdraw</a>
+										</td>
+									</tr>
+
+								</tbody>
+								
+
+							</table>
+							<table class="tg" *ngIf="walletDetailsLoading && selectedTab == tabs.WALLET">
+								<tr>
+								  <th class="tg-cly1">  
+									  <div class="line"></div>
+								  </th>
+								  <th class="tg-cly1">
+									<div class="line"></div>
+								  </th>
+								  <th class="tg-cly1">
+									<div class="line"></div>
+								  </th>
+								  <th class="tg-cly1">
+									<div class="line"></div>
+								  </th>
+								  <th class="tg-cly1">
+									<div class="line"></div>
+								  </th>
+								
+								</tr>
+								<tr>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								 
+								</tr>
+								<tr>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+								   
+								</tr>
+								
+							  </table> 
+							<div *ngIf="selectedTab === tabs.WALLET" class="add-fund-box">
+								<a class="add-fund mr-3" style="background:#fff; color: #000; "
+									(click)="openPopupOne(purchasePopupSecond)">Add funds</a>
+								<a class="add-fund" (click)="withdrawRequest(content1,walletAmount)">Withdraw</a>
+							</div>
+
+							<details [open]="showDetails" *ngIf="selectedTab === tabs.WALLET"
+								(click)="handleArrowChange()">
+								<summary class="allocation">
+									<span>Allocated tokens</span>
+									<span class="icon arrow">
+										<img id="image" src="../../../../assets/images/down-arrow.svg">
+									</span>
+								</summary>
+
+								<div *ngIf="selectedTab === tabs.WALLET" class="table-responsive height-fiexd">
+									<table class="table mt-2">
+										<thead class="row-hidd">
+											<tr>
+												<th class="text-left">Assets</th>
+												<th class="">Token name</th>
+												<th class="">No of tokens</th>
+												<th class="">Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr *ngFor="let item of tokenArray;">
+												<td class="text-left">
+													<img *ngIf="item?.tokenLogo" [src]="item?.tokenLogo"
+														class="boll-icon">
+													<img *ngIf="!item?.tokenLogo"
+														src="../../../../assets/images/wallet.png" class="boll-icon">
+													{{ isMobileScreen ? '' : item?.symbol}}
+												</td>
+												<td style="text-align: center !important;">{{item?.symbol}}</td>
+												<td style="text-align: center !important;">
+													{{item?.allocatedQuantity?.$numberDecimal ||
+													item?.allocatedQuantity | decimal}}</td>
+												<td style="text-align: center !important;">
+													<button [disabled]="disableClaimButton" (click)="getVestingSchedule(item?.symbol,item?.tokenLogo,content)"
+														class="add-fund">Claim</button>
+
+												</td>
+											</tr>
+											<tr *ngIf="!tokenArray?.length">
+												<td class="textCenter" colspan="4">No Data</td>
+											</tr>
+
+										</tbody>
+										
+
+									</table>
+									 
+								</div>
+
+
+
+							</details>
+							<div *ngIf="selectedTab === tabs.COMMISSION" class="table-responsive height-fiexd">
+								<div class="text-wapper d-mob-device">
+									Please be aware that deleting tweets or any related social shoutout activities may result in the forfeiture of your reward entitlement. <br>
+									 We value your participation and honesty throughout this campaign.
+								</div>
+								<table class="table transaction-com">
+									<thead>
+										<tr>
+											<th class="text-left">Token name</th>
+											<th class="">Reward</th>
+											<th class="">Reward From</th>
+											<th class="">Actions</th>
+
+										</tr>
+									</thead>
+									<tbody *ngIf="!walletDetailsLoading">
+										<tr>
+											<td class="text-left">
+												<img src="../../../../assets/images/usdc.png">
+												USD
+											</td>
+											<td style="text-align: center !important;"> {{walletAmount | decimal}}</td>
+											<td
+												style="color: #FFFFFF;opacity: 0.7; font-size:12px !important; text-align: center !important;">
+												Social</td>
+
+										</tr>
+										<tr *ngFor="let item of tokenArray;">
+											<td class="text-left">
+												<img *ngIf="item?.tokenLogo" [src]="item?.tokenLogo" class="boll-icon">
+												<img *ngIf="!item?.tokenLogo "
+													src="../../../../assets/images/wallet.png" class="boll-icon">
+												{{item?.symbol}}
+											</td>
+											<td style="text-align: center !important;">{{item?.quantity|decimal}}</td>
+											<td
+												style="color: #FFFFFF;opacity: 0.7; font-size:12px !important; text-align: center !important;">
+												Social</td>
+											<td style="text-align: center !important;">
+												<a  class="add-fund" *ngIf="item?.symbol == 'USDT'" (click)="withdrawRequest(commissionWithdrawalModal,item)"  >Withdraw</a>
+                                                    <a  class="add-fund" *ngIf="item?.symbol != 'USDT'" style="cursor: not-allowed !important;" triggers='hover click' [ngbTooltip]="'Withdrawal will be available only after Q4 2023'" container="body" >Withdraw</a>
+
+											</td>
+
+										</tr>
+									</tbody>
+								
+
+								</table>
+								<table class="tg" *ngIf="walletDetailsLoading">
+									<tr>
+									  <th class="tg-cly1">  
+										  <div class="line"></div>
+									  </th>
+									  <th class="tg-cly1">
+										<div class="line"></div>
+									  </th>
+									  <th class="tg-cly1">
+										<div class="line"></div>
+									  </th>
+									  <th class="tg-cly1">
+										<div class="line"></div>
+									  </th>
+									  <th class="tg-cly1">
+										<div class="line"></div>
+									  </th>
+									
+									</tr>
+									<tr>
+									  <td class="tg-cly1">
+										<div class="line"></div>
+									  </td>
+									  <td class="tg-cly1">
+										<div class="line"></div>
+									  </td>
+									  <td class="tg-cly1">
+										<div class="line"></div>
+									  </td>
+									  <td class="tg-cly1">
+										<div class="line"></div>
+									  </td>
+									  <td class="tg-cly1">
+										<div class="line"></div>
+									  </td>
+									 
+									</tr>
+									<tr>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+									   
+									</tr>
+									
+								
+							 
+								  </table> 
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+		<div class="new-wallet-tranction">
+
+			<div class="card card-transactions">
+				<h4>Transactions
+					<small *ngIf="selectedTab == tabs.WALLET" class="d-none d-md-block">Main Wallet</small>
+					<small *ngIf="selectedTab == tabs.COMMISSION" class="d-none d-md-block">Earning Wallet</small>
+					<div *ngIf="selectedLog!== walletLogType.CREDIT && selectedLog!== walletLogType.DEBIT && selectedLog!== walletLogType.EARNING_DEBIT && selectedLog!== walletLogType.EARNING_CREDIT"
+						class="col-md-4 mobile-select">
+						<form [formGroup]="transactionsFilterForm">
+							<div class="select-ui">
+								<select (change)="onFilterChange()" class="form-control mb-3"
+									formControlName="filterToken"
+									style="line-height:0px; height: auto; width: 120px; float: right;">
+									<option value="null" disabled>Select Token</option>
+									<option *ngFor="let token of tokensArray" [value]="token">{{token ||'--'}}</option>
+								</select>
+							</div>
+						</form>
+					</div>
+				</h4>
+				<div class="row">
+					<div class="col-md-8 tab-responsive-ui">
+						<ul *ngIf="selectedTab == tabs.WALLET" class="tab-main-wallet">
+							<!-- <li><a (click)="selectLog('ALL')" [ngClass]="{'active': selectedLog == 'ALL'}" >All</a></li> -->
+							<li><a (click)="selectLog('DEBIT')"
+									[ngClass]="{'active': selectedLog == walletLogType.DEBIT }">Debit</a></li>
+							<li><a (click)="selectLog('CREDIT')"
+									[ngClass]="{'active': selectedLog == walletLogType.CREDIT }">Credit</a></li>
+							<li><a (click)="selectLog('PURCHASE')"
+									[ngClass]="{'active': selectedLog == walletLogType.PURCHASE }">Withdraw</a></li>
+						</ul>
+						<ul *ngIf="selectedTab == tabs.COMMISSION" class="tab-main-wallet">
+							<!-- <li><a (click)="selectCommissionLog('ALL')" [ngClass]="{'active': selectedLog == 'ALL'}" >All</a></li> -->
+							<li><a (click)="selectLog('EARNINGDEBIT')"
+									[ngClass]="{'active': selectedLog == walletLogType.EARNING_DEBIT }">Debit</a></li>
+							<li><a (click)="selectLog('EARNINGCREDIT')"
+									[ngClass]="{'active': selectedLog == walletLogType.EARNING_CREDIT }">Credit</a></li>
+							<li><a (click)="selectLog	('COMMISSION_WALLET')"
+									[ngClass]="{'active': selectedLog == walletLogType.COMMISSION_WALLET }">Withdraw</a>
+							</li>
+						</ul>
+					</div>
+					<div *ngIf="selectedLog!== walletLogType.CREDIT && selectedLog!== walletLogType.DEBIT && selectedLog!== walletLogType.EARNING_DEBIT && selectedLog!== walletLogType.EARNING_CREDIT"
+						class="col-md-4 d-none d-md-block">
+						<form [formGroup]="transactionsFilterForm">
+							<div class="select-ui">
+								<select (change)="onFilterChange()" class="form-control mb-3"
+									formControlName="filterToken"
+									style="line-height:0px; height: auto; width: 120px; float: right;">
+									<option value="null" disabled>Select Token</option>
+									<option *ngFor="let token of tokensArray" [value]="token">{{token ||'--'}}</option>
+								</select>
+							</div>
+						</form>
+					</div>
+				</div>
+
+
+				<div *ngIf="selectedLog=== walletLogType.DEBIT" class="table-responsive tb-column-5 myrestable">
+					<div class="outer">
+
+						<div class="inner" (scroll)="onScroll($event)">
+							<table class="table transaction-t scroller" style="position: relative;" cellspacing="0"
+								callpadding="0">
+								<thead>
+									<tr>
+										<th class="text-left fixed-pos-mobile">Date</th>
+
+										<th class="text-left">Amount</th>
+										<th class="text-left">Transaction hash</th>
+										<th class="text-left">Transaction Type</th>
+										<th class="text-left">Wallet Type</th>
+
+									</tr>
+								</thead>
+								<tbody *ngIf="!loadingDepositeData">
+									<tr *ngFor="let temp of depositArray;let i = index">
+										<td class="text-left fixed-pos-mobile">{{temp.createdAt | date:'short'}}</td>
+
+
+										<td>${{temp?.amount?.$numberDecimal | decimal:8}} </td>
+										<td>
+											<span class="text-trunket">
+												{{temp?.parentTransactionId}}
+
+											</span>
+											<i *ngIf="temp?.parentTransactionId"
+												(click)="cpyToClipboard(temp?.parentTransactionId)"
+												class="fa fa-copy cpy-icon" title="copy to clipboard"
+												aria-hidden="true"></i>
+										</td>
+										<td class="text-left purchec-td">
+											{{temp?.type|| '--'}}
+										</td>
+										<td class="text-left">
+											{{temp?.walletType|| '--'}}
+										</td>
+
+									</tr>
+
+								</tbody>
+								
+
+							</table>
+							<table class="tg" *ngIf="loadingDepositeData">
+								<tr>
+								  <th class="tg-cly1">  
+									  <div class="line"></div>
+								  </th>
+								  <th class="tg-cly1">
+									<div class="line"></div>
+								  </th>
+								  <th class="tg-cly1">
+									<div class="line"></div>
+								  </th>
+								  <th class="tg-cly1">
+									<div class="line"></div>
+								  </th>
+								  <th class="tg-cly1">
+									<div class="line"></div>
+								  </th>
+								
+								</tr>
+								<tr>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								 
+								</tr>
+								<tr>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+								   
+								</tr>
+								
+						 
+							  </table> 
+						</div>
+
+					</div>
+
+
+				</div>
+				<div *ngIf="selectedLog=== walletLogType.CREDIT" class="table-responsive tb-column-5 myrestable">
+					<div class="outer">
+						<div class="inner" (scroll)="onScroll($event)">
+							<table class="table transaction-t scroller" style="position: relative;">
+								<thead>
+									<tr>
+										<th class="text-left fixed-pos-mobile">Date</th>
+										<th class="text-left">Amount</th>
+										<th class="text-left">Transacton hash</th>
+										<th class="text-left">PayMode</th>
+										<th class="text-left">Status</th>
+									</tr>
+								</thead>
+								<tbody *ngIf="!loadingCreditData">
+									<tr *ngFor="let temp of creditsArray;let i = index">
+										<td class="text-left fixed-pos-mobile">{{temp.createdAt | date:'short'}}</td>
+
+										<td class="text-left">
+											<span
+												*ngIf="temp.paymode == paymode.WALLET || temp.paymode == paymode.COUPONS">
+												$ {{temp.walletAmount?.$numberDecimal || '--'}}
+											</span>
+											<span
+												*ngIf="!(temp.paymode == paymode.WALLET || temp.paymode == paymode.COUPONS)">
+												${{temp.tokenAmount?.$numberDecimal || '--'}}
+											</span>
+										</td>
+										<td class="text-left">
+											<span class="text-trunket">{{temp?.gatewaydata?.txnId || '--'}} </span>
+
+											<i *ngIf="temp?.gatewaydata?.txnId"
+												(click)="cpyToClipboard(temp?.gatewaydata?.txnId)"
+												class="fa fa-copy cpy-icon" title="copy to clipboard"
+												aria-hidden="true"></i>
+
+
+										</td>
+										<td class="text-left purchec-td">
+											<span *ngIf="temp.paymode == paymode.LTC || temp.paymode == paymode.LTCT">
+												LTC
+											</span>
+											<span *ngIf="temp.paymode == paymode.BTC">
+												BTC
+											</span>
+											<span *ngIf="temp.paymode == paymode.ETH">
+												ETH
+											</span>
+											<span
+												*ngIf="temp.paymode == paymode.TETHER_BLOCK_IO || temp.paymode == paymode.USDT_ERC20 || temp.paymode == paymode.USDT || temp.paymode == paymode.USDT_TRC20 || temp.paymode == paymode.USDT_USDT_ERC20 || temp.paymode == paymode.USDT_USDT_TRC20 || temp.paymode == paymode.USDT_BEP20 || temp.paymode == paymode.USDT_USDT_BEP20">
+												USDT
+											</span>
+											<span
+												*ngIf="temp.paymode == paymode.BUSD || temp.paymode == paymode.BUSD_BEP20">
+												BUSD
+											</span>
+											<span
+												*ngIf="temp.paymode == paymode.USDC || temp.paymode == paymode.USDC_USDC_ERC20 || temp.paymode == paymode.USDC_BEP20">
+												USDC
+											</span>
+											<span *ngIf="temp.paymode == paymode.COUPONS">
+												Coupon
+											</span>
+										</td>
+
+										<td class="text-left">
+											<a href="javascript:void(0)"
+												*ngIf="temp.status== usdWalletLogStatus.PENDING"
+												(click)="showInvoicePopup(purchasePopupSecond,temp?.gatewaydata)"
+												style="color: #ffcd2e;">
+												{{temp.status}}
+											</a>
+											<a href="javascript:void(0)"
+												*ngIf="temp.status== usdWalletLogStatus.CANCELLED"
+												style="color: #DF0606">
+												{{temp.status}}
+											</a>
+											<a href="javascript:void(0)"
+												*ngIf="temp.status== usdWalletLogStatus.PROCESSING"
+												style="color: #ffcd2e;">
+												{{temp.status}}
+											</a>
+											<a href="javascript:void(0)"
+												*ngIf="temp.status== usdWalletLogStatus.ONHOLD">
+												{{temp.status}}
+											</a>
+											<a href="javascript:void(0)" *ngIf="temp.status== usdWalletLogStatus.FAILED"
+												style="color: #DF0606">
+												{{temp.status}}
+											</a>
+											<a *ngIf="temp.status== usdWalletLogStatus.COMPLETED"
+												style="color: #37B953">
+												{{temp.status}}
+											</a>
+											<a *ngIf="temp.status== usdWalletLogStatus.SETTLED" style="color: #37B953">
+												{{temp.status}}
+											</a>
+											<a href="javascript:void(0)"
+												*ngIf="temp.status== usdWalletLogStatus.REJECTED"
+												style="color: #DF0606">
+												{{temp.status}}
+											</a>
+										</td>
+									</tr>
+
+								</tbody>
+								
+							</table>
+                            <table class="tg" *ngIf="loadingCreditData">
+								<tr>
+								  <th class="tg-cly1">  
+									  <div class="line"></div>
+								  </th>
+								  <th class="tg-cly1">
+									<div class="line"></div>
+								  </th>
+								  <th class="tg-cly1">
+									<div class="line"></div>
+								  </th>
+								  <th class="tg-cly1">
+									<div class="line"></div>
+								  </th>
+								  <th class="tg-cly1">
+									<div class="line"></div>
+								  </th>
+								
+								</tr>
+								<tr>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								 
+								</tr>
+								<tr>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+								   
+								</tr>
+								
+						 
+							  </table>  
+
+						</div>
+					</div>
+
+
+				</div>
+				<div *ngIf="selectedLog=== walletLogType.PURCHASE" class="table-responsive tb-column-6 myrestable">
+					<div class="outer">
+						<div class="inner" (scroll)="onScroll($event)">
+
+							<table class="table transaction-t">
+								<thead>
+									<tr>
+										<th class="text-left fixed-pos-mobile">Date</th>
+										<th class="text-left">Amount</th>
+										<th class="text-left">Token</th>
+										<th class="text-left">Wallet Address</th>
+										<th class="text-left">Txn Hash</th>
+										<th class="text-left">Status</th>
+									</tr>
+								</thead>
+								<tbody *ngIf="!loadingPurchaseTransactionData">
+									<tr *ngFor="let temp of withdrawalsArray;let i = index">
+										<td class="text-left fixed-pos-mobile">
+											{{temp.createdAt | date:'short'}}
+										</td>
+
+										<td class="text-left" *ngIf="temp.withdrawalType !== 'USD'">
+											{{((temp.amount?.$numberDecimal | decimal:8) ||
+											(temp.amount | decimal:8))||
+											'--'}} </td>
+										<td *ngIf="temp.withdrawalType === 'USD'">$ {{((temp.amount?.$numberDecimal |
+											decimal:2) ||
+											(temp.amount | decimal:2))||
+											'--'}} </td>
+										<td class="text-left purchec-td"> {{temp.token}} </td>
+										<td class="text-left">
+											<span class="text-mannge text-trunket"> {{temp.walletAddress|| '--' |
+												truncate: '12'}} </span>
+											<i *ngIf="temp?.walletAddress" (click)="cpyToClipboard(temp?.walletAddress)"
+												class="fa fa-copy cpy-icon" title="copy to clipboard"
+												aria-hidden="true"></i>
+										</td>
+										<td class="text-left">
+											<span class="text-mannge text-trunket">{{temp.txnHash|| '--' | truncate:
+												'12'}} </span>
+											<i (click)="cpyToClipboard(temp?.txnHash)" *ngIf="temp.txnHash"
+												class="fa fa-copy cpy-icon" title="copy to clipboard"
+												aria-hidden="true"></i>
+										</td>
+										<td class="text-left">
+											<span
+												[ngClass]="{'rejected':temp.status == usdWalletLogStatus.REJECTED, 'accepted': temp.status != usdWalletLogStatus.REJECTED }">
+												{{temp.status|| '--'}}
+											</span>
+
+											<a placement="left"
+												(click)="showRejectionReason(rejectionReason,temp.message)"
+												container="body">
+												<img src="../../../../assets/images/rejectted.png" width="18"
+													ngbTooltip="View reason"
+													*ngIf="temp.status == usdWalletLogStatus.REJECTED">
+											</a>
+										</td>
+									</tr>
+
+								</tbody>
+					
+
+							</table>
+
+							<table class="tg" *ngIf="loadingPurchaseTransactionData">
+								<tr>
+								  <th class="tg-cly1">  
+									  <div class="line"></div>
+								  </th>
+								  <th class="tg-cly1">
+									<div class="line"></div>
+								  </th>
+								  <th class="tg-cly1">
+									<div class="line"></div>
+								  </th>
+								  <th class="tg-cly1">
+									<div class="line"></div>
+								  </th>
+								  <th class="tg-cly1">
+									<div class="line"></div>
+								  </th>
+								
+								</tr>
+								<tr>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								 
+								</tr>
+								<tr>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+								   
+								</tr>
+								
+						 
+							  </table> 
+
+						</div>
+					</div>
+
+				</div>
+
+				<div *ngIf="selectedLog === walletLogType.EARNING_DEBIT"
+					class="table-responsive tb-column-5 myrestable">
+					<div class="outer">
+						<div class="inner" (scroll)="onScroll($event)">
+							<table class="table transaction-t">
+								<thead>
+									<tr>
+										<th class="text-left fixed-pos-mobile">Date</th>
+										<th class="text-left">Amount</th>
+										<th class="text-left">Transacton hash</th>
+										<th class="text-left">Token</th>
+										<th class="text-left">Transaction Type</th>
+									</tr>
+								</thead>
+								<tbody *ngIf="!loadingEarningDebitData">
+									<tr *ngFor="let temp of earningDebitTransactionsArray;let i = index">
+										<td class="text-left fixed-pos-mobile">{{temp.createdAt | date:'short'}}</td>
+
+
+										<td>${{temp?.amount?.$numberDecimal | decimal:8}} </td>
+										<td>
+											<span class="text-trunket">
+												{{temp?.parentTransactionId||'--'}}
+
+											</span>
+											<i (click)="cpyToClipboard(temp?.parentTransactionId)"
+												*ngIf="temp?.parentTransactionId" class="fa fa-copy cpy-icon"
+												title="copy to clipboard" aria-hidden="true"></i>
+										</td>
+										<td class="text-left purchec-td">
+											{{temp?.token|| '--'}}
+										</td>
+										<td class="text-left">
+											{{temp?.transactionType|| '--'}}
+
+
+
+
+										</td>
+
+									</tr>
+
+								</tbody>
+
+								
+							</table>
+							<table class="tg" *ngIf="loadingEarningDebitData">
+								<tr>
+								  <th class="tg-cly1">  
+									  <div class="line"></div>
+								  </th>
+								  <th class="tg-cly1">
+									<div class="line"></div>
+								  </th>
+								  <th class="tg-cly1">
+									<div class="line"></div>
+								  </th>
+								  <th class="tg-cly1">
+									<div class="line"></div>
+								  </th>
+								  <th class="tg-cly1">
+									<div class="line"></div>
+								  </th>
+								
+								</tr>
+								<tr>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								 
+								</tr>
+								<tr>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+								   
+								</tr>
+								
+						 
+							  </table> 
+						</div>
+					</div>
+
+				</div>
+				<div *ngIf="selectedLog === walletLogType.EARNING_CREDIT"
+					class="table-responsive tb-column-5 myrestable">
+					<div class="outer">
+						<div class="inner" (scroll)="onScroll($event)">
+							<table class="table transaction-t">
+								<thead>
+									<tr>
+										<th class="text-left fixed-pos-mobile">Date</th>
+										<th class="text-left">Amount</th>
+										<th class="text-left">Transacton hash</th>
+										<th class="text-left">Token</th>
+										<th class="text-left">Transaction Type</th>
+									</tr>
+								</thead>
+								<tbody *ngIf="!loadingearningCreditData">
+									<tr *ngFor="let temp of earningCreditTransactionsArray;let i = index">
+										<td class="text-left fixed-pos-mobile creTable">{{temp.createdAt |
+											date:'short'}}</td>
+
+										<td class="text-left">
+											<span *ngIf="temp?.token==='USD'">$</span>{{temp.walletAmount?.$numberDecimal || '--'}}
+
+										</td>
+										<td>
+											<span class="text-trunket">
+												{{temp?.txnId || temp?.parentTransactionId || '--'}}
+
+											</span>
+											<i (click)="cpyToClipboard(temp?.parentTransactionId)"
+												*ngIf="temp?.parentTransactionId" class="fa fa-copy cpy-icon"
+												title="copy to clipboard" aria-hidden="true"></i>
+										</td>
+
+										<td class="text-left purchec-td">
+											{{temp?.token|| '--'}}
+										</td>
+										<td class="text-left">
+											<span *ngIf="temp?.type">{{ temp?.type == 'TASK_PERFORM' ? 'SHOUTOUT' : temp?.type }}</span>
+											<span *ngIf="!temp?.type">--</span>
+										</td>
+									</tr>
+
+								</tbody>
+								
+							</table>
+							<table class="tg" *ngIf="loadingearningCreditData">
+								<tr>
+								  <th class="tg-cly1">  
+									  <div class="line"></div>
+								  </th>
+								  <th class="tg-cly1">
+									<div class="line"></div>
+								  </th>
+								  <th class="tg-cly1">
+									<div class="line"></div>
+								  </th>
+								  <th class="tg-cly1">
+									<div class="line"></div>
+								  </th>
+								  <th class="tg-cly1">
+									<div class="line"></div>
+								  </th>
+								
+								</tr>
+								<tr>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								 
+								</tr>
+								<tr>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+								   
+								</tr>
+								
+						 
+							  </table> 
+
+						</div>
+					</div>
+
+				</div>
+				<div *ngIf="selectedLog === walletLogType.COMMISSION_WALLET"
+					class="table-responsive tb-column-6 myrestable">
+					<div class="outer">
+						<div class="inner" (scroll)="onScroll($event)">
+							<table class="table transaction-t">
+								<thead>
+									<tr>
+										<th class="text-left fixed-pos-mobile">Date</th>
+										<th class="text-left">Amount</th>
+										<th class="text-left">Token</th>
+										<th class="text-left">Wallet Address</th>
+										<th class="text-left">Txn Hash</th>
+										<th class="text-left">Status</th>
+									</tr>
+								</thead>
+								<tbody *ngIf="!loadingearningWithdrawalData">
+									<tr *ngFor="let temp of earningWithdrawalTransactionsArray;let i = index">
+										<td class="text-left fixed-pos-mobile">
+											{{temp.createdAt | date:'short'}}
+										</td>
+
+										<td class="text-left" *ngIf="temp.withdrawalType !== 'USD'">
+											{{((temp.amount?.$numberDecimal | decimal:8) ||
+											(temp.amount | decimal:8))||
+											'--'}} </td>
+										<td *ngIf="temp.withdrawalType === 'USD'">$ {{((temp.amount?.$numberDecimal |
+											decimal:2) ||
+											(temp.amount | decimal:2))||
+											'--'}} </td>
+										<td class="text-left purchec-td"> {{temp.token}} </td>
+										<td class="text-left">
+											<span class="text-mannge text-trunket"> {{temp.walletAddress|| '--' |
+												truncate: '12'}} </span>
+											<i (click)="cpyToClipboard(temp?.walletAddress)" *ngIf="temp?.walletAddress"
+												class="fa fa-copy cpy-icon" title="copy to clipboard"
+												aria-hidden="true"></i>
+										</td>
+										<td class="text-left">
+											<span class="text-mannge text-trunket">{{temp.txnHash|| '--' | truncate:
+												'12'}} </span>
+											<i (click)="cpyToClipboard(temp?.txnHash)" *ngIf="temp.txnHash"
+												class="fa fa-copy cpy-icon" title="copy to clipboard"
+												aria-hidden="true"></i>
+										</td>
+										<td class="text-left">
+											<span
+												[ngClass]="{'rejected':temp.status == usdWalletLogStatus.REJECTED, 'accepted': temp.status != usdWalletLogStatus.REJECTED }">
+												{{temp.status|| '--'}}
+											</span>
+
+											<a placement="left"
+												(click)="showRejectionReason(rejectionReason,temp.message)"
+												container="body">
+												<img src="../../../../assets/images/rejectted.png" width="18"
+													ngbTooltip="View reason"
+													*ngIf="temp.status == usdWalletLogStatus.REJECTED">
+											</a>
+										</td>
+									</tr>
+
+								</tbody>
+								
+
+							</table>
+							<table class="tg" *ngIf="loadingearningWithdrawalData">
+								<tr>
+								  <th class="tg-cly1">  
+									  <div class="line"></div>
+								  </th>
+								  <th class="tg-cly1">
+									<div class="line"></div>
+								  </th>
+								  <th class="tg-cly1">
+									<div class="line"></div>
+								  </th>
+								  <th class="tg-cly1">
+									<div class="line"></div>
+								  </th>
+								  <th class="tg-cly1">
+									<div class="line"></div>
+								  </th>
+								
+								</tr>
+								<tr>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								  <td class="tg-cly1">
+									<div class="line"></div>
+								  </td>
+								 
+								</tr>
+								<tr>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+									<td class="tg-cly1">
+									  <div class="line"></div>
+									</td>
+								   
+								</tr>
+								
+						 
+							  </table> 
+						</div>
+					</div>
+
+				</div>
+				<div class="myrestable arow-fiex">
+					<button (click)="handleLeftClick()"
+						*ngIf="selectedLog=== walletLogType.DEBIT && depositArray?.length && !showRightSlider"
+						id="left-button"><img src="../../../../assets/images/prev.png" /></button>
+					<button (click)="handleRightClick()"
+						*ngIf="selectedLog=== walletLogType.DEBIT && depositArray?.length && showRightSlider"
+						id="right-button"><img src="../../../../assets/images/next.png" /></button>
+
+
+					<button (click)="handleLeftClick()"
+						*ngIf="selectedLog=== walletLogType.CREDIT && creditsArray?.length && !showRightSlider"
+						id="left-button"><img src="../../../../assets/images/prev.png" /></button>
+					<button (click)="handleRightClick()"
+						*ngIf="selectedLog=== walletLogType.CREDIT && creditsArray?.length && showRightSlider"
+						id="right-button"><img src="../../../../assets/images/next.png" /></button>
+
+
+					<button (click)="handleLeftClick()"
+						*ngIf="selectedLog=== walletLogType.PURCHASE && withdrawalsArray?.length && !showRightSlider"
+						id="left-button"><img src="../../../../assets/images/prev.png" /></button>
+					<button (click)="handleRightClick()"
+						*ngIf="selectedLog=== walletLogType.PURCHASE && withdrawalsArray?.length && showRightSlider"
+						id="right-button"><img src="../../../../assets/images/next.png" /></button>
+
+
+					<button (click)="handleLeftClick()"
+						*ngIf="selectedLog === walletLogType.EARNING_DEBIT && earningDebitTransactionsArray?.length && !showRightSlider"
+						id="left-button"><img src="../../../../assets/images/prev.png" /></button>
+					<button (click)="handleRightClick()"
+						*ngIf="selectedLog === walletLogType.EARNING_DEBIT && earningDebitTransactionsArray?.length && showRightSlider"
+						id="right-button"><img src="../../../../assets/images/next.png" /></button>
+
+
+					<button (click)="handleLeftClick()"
+						*ngIf="selectedLog === walletLogType.EARNING_CREDIT && earningCreditTransactionsArray?.length && !showRightSlider"
+						id="left-button"><img src="../../../../assets/images/prev.png" /></button>
+					<button (click)="handleRightClick()"
+						*ngIf="selectedLog === walletLogType.EARNING_CREDIT && earningCreditTransactionsArray?.length && showRightSlider"
+						id="right-button"><img src="../../../../assets/images/next.png" /></button>
+
+					<button (click)="handleLeftClick()"
+						*ngIf="selectedLog === walletLogType.COMMISSION_WALLET &&  earningWithdrawalTransactionsArray?.length && !showRightSlider"
+						id="left-button"><img src="../../../../assets/images/prev.png" /></button>
+					<button (click)="handleRightClick()"
+						*ngIf="selectedLog === walletLogType.COMMISSION_WALLET &&  earningWithdrawalTransactionsArray?.length && showRightSlider"
+						id="right-button"><img src="../../../../assets/images/next.png" /></button>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+</div>
+
+
+<ng-template #content let-modal>
+
+	<div class="modal-body">
+		<div class="modal-header">
+			<h4>Token release schedule for the <span style="opacity: 9 !important;
+				font-weight: 800;">{{coinName}}</span> token</h4>
+			<button type="button" class="close" aria-label="Close" (click)="closePopup()">
+				<span _ngcontent-mhw-c138="" aria-hidden="true">×</span>
+			</button>
+			<p>You can claim your allocated token according to token release schedulee</p>
+		</div>
+		<div class="table-responsive">
+
+			<table class="table token-release-table">
+				<thead>
+					<tr>
+						<th>Month</th>
+						<th style="text-align:center !important;">Release Percentage</th>
+						<th>No. of Token</th>
+						<th style="text-align:right !important; padding-right:10px !important;">Claim</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr *ngFor="let schedule of vestingScheduleDetails[0]?.details; let j=index">
+
+						<td>
+							<div [ngClass]="[(vestingScheduleDetails[0]?.details[j+1] && vestingScheduleDetails[0]?.details[j+1]?.isClaimed) ? 'navigation_menu_active' : 'navigation_menu_inactive'  ]"
+								class="navigation_menu" id="navigation_menu">
+								<ul [ngClass]="[j != vestingScheduleDetails[0]?.details?.length - 1 ? 'navigation_tabs' : 'navigation_tabs_blank'  ]"
+									id="navigation_tabs">
+									<li [ngClass]="[schedule?.isClaimed ? 'tab_inactive' : 'tab_active']">
+										<a>{{ordinal_suffix_of(j+1)}}</a>
+										<span style="font-size: 6px;
+								  color: #000 !important;
+								  font-weight: 700;">{{convertUTCtoCustomFormat(schedule?.startDate)  }}</span>
+								 
+									</li>
+
+
+								</ul>
+							</div>
+						</td>
+						<td style="text-align:center !important;">
+							{{schedule?.vestingScheduleData[0]?.schedules?.claimValue?.$numberDecimal ||
+							schedule?.vestingScheduleData[0]?.schedules?.claimValue}}%</td>
+						<td style="text-align:center !important;">{{(schedule?.claimToken?.$numberDecimal ||
+							schedule?.claimToken) | decimal:4}}</td>
+						<td style="text-align:right !important; padding-right:10px !important;">
+							<a class="text-success" *ngIf="schedule?.isClaimed && schedule?.transactionDetails?.length"
+								(click)="goToTransactions('usd-wallet',schedule)">
+								<img src="../../../../assets/images/copy-link.png" /> Claimed</a>
+							<a class="text-pending" *ngIf="!schedule?.isClaimed && schedule?.transactionDetails?.length"
+								(click)="goToTransactions('usd-wallet',schedule)">
+								Pending</a>
+
+							<a class="btn btn-outline-secondary"
+								*ngIf="!schedule?.isClaimed && claimStarted(schedule?.startDate) && !schedule?.transactionDetails?.length"
+								(click)="openWithdrawToken(content1, schedule?._id, schedule?.symbol, schedule?.chain)">
+								Withdraw</a>
+							<a class="btn btn-outline-secondary" style="cursor: not-allowed;"
+								*ngIf="!schedule?.isClaimed && !claimStarted(schedule?.startDate) && !schedule?.transactionDetails?.length">
+								Withdraw</a>
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+
+</ng-template>
+
+<ng-template #content1 let-modal>
+
+	<div class="modal-body toke-release-popup">
+		<div class="modal-header">
+			<h6 class="modal-title">{{contentHeader}}</h6>
+			<button type="button" class="close" aria-label="Close" (click)="closePopupWithdraw()">
+				<span aria-hidden="true">×</span>
+			</button>
+		</div>
+		<form *ngIf="kycApproved" [formGroup]="withdrawForm" (ngSubmit)="openConfirmPopUp()">
+
+			<div class="create-new-fau mg-t-20">
+				<div *ngIf="!tokenWithdrawModal" class="form-group">
+					<label>Amount to add (in USD)</label>
+					<input type="number" placeholder="$00.00" (input)="checkWithdrawAmount()" formControlName="amount"
+						class="form-control" id="withdrawAmount" (keydown)="checkInputValue($event)">
+					<app-show-errors [control]="amount" [fname]="'Amount'"></app-show-errors>
+				</div>
+				<div *ngIf="contentHeader==='Fund Withdraw Request'" class="form-group">
+					<label>Select Token</label>
+					<ul (click)="handleDropDown()" class="select" [ngClass]="{'open':showDropDown}" id="my-select">
+						<span style="color: #696CA4" class="view-data-input"><img *ngIf="coinName" [src]="coinLogo" />
+							{{selectedPaymentMethod}}</span>
+						<div class="view-poption">
+							<li *ngFor="let paymode of withdrawPaymentModes;let i =index "
+								(click)="resetErrorMessage(paymode?.value,paymode)">
+								<div class="radio">
+									<input type="radio" [value]="paymode?.value" name="litecoin">
+									<label for="radio-1" class="radio-label">
+										<img [src]="paymode.image" /> {{paymode.name}}
+										({{paymode.subName||'--'}})</label>
+								</div>
+
+							</li>
+						</div>
+					</ul>
+					<p *ngIf="errorMessage" style="color:red">{{errorMessage}} </p>
+					<p *ngIf="successMessage" style="color:green">{{successMessage}} </p>
+				</div>
+				<div class="form-group wallet-boder-left" style="position: relative;">
+					<label>Your wallet address</label>
+					<div class="from-input form-control">
+						<input type="text" class="" formControlName="walletAddress" id="walletAddress"
+							placeholder="Enter or paste your wallet address ">
+						<div class="wallt-icon" (click)="pasteWalletAddress()">
+							<img src="../../../../assets/images/copy-cr.png" ngbTooltip="paste" />
+						</div>
+
+					</div>
+					<app-show-errors [control]="walletAddress" [fname]="'Wallet Address'"></app-show-errors>
+
+
+
+					<p *ngIf="!tokenWithdrawModal" class="text-danger" style="font-size:8px;">
+						<span style="color:#000; font-weight: 600;">Note:</span> Gas & one time KYC fees will be
+						deducted from the final amount.
+					</p>
+					<p *ngIf="tokenWithdrawModal" class="note text-danger">(NOTE: The compatible wallet address provided
+						will
+						become.
+						<b>default address</b> for upcoming release schedules.)
+					</p>
+				</div>
+
+
+				<div class="button-widthrawl">
+					<button type="submit" class="btn btn-outline-secondary" (click)="closePopupWithdraw()">
+						Cancel</button>
+
+					<button type="submit"  class="btn btn-warning">
+						Proceed </button>
+				</div>
+
+			</div>
+
+
+
+
+		</form>
+		<div *ngIf="!kycApproved">
+			<p class="head-pop">Please complete your KYC to proceed. </p>
+			<div class="btn-group-custom">
+				<button type="submit" class="btn btn-danger" (click)="closePopup()">
+					Cancel</button>
+
+				<button type="button" routerLink="/settings/kyc" (click)="closePopup()" class="btn btn-success">
+					Ok </button>
+			</div>
+		</div>
+	</div>
+
+</ng-template>
+
+<ng-template #content2 let-modal>
+
+	<div class="modal-body toke-release-popup">
+		<div class="modal-header">
+			<h6 class="modal-title">{{contentHeader}}</h6>
+			<button type="button" class="close" aria-label="Close" (click)="closePopup()">
+				<span aria-hidden="true">×</span>
+			</button>
+		</div>
+		<div class="create-new-fau mg-t-20">
+			<h3>Are you sure that you have filled {{technology||commissionChainName}} Address? </h3>
+			<p class="note text-danger">(NOTE : In case of loss of amount due to incorrect network address, TDX will not
+				be
+				held
+				responsible.)</p>
+			<div class="checkbox" style="display: contents;">
+				<input (change)="handleConfirmation()" type="checkbox" [value]="confirmWithdraw">
+				<label style="font-size: 12px;">Yes, I Wish To
+					Proceed
+					Further</label>
+			</div>
+
+			<div class="button-widthrawl">
+				<button type="submit" class="btn btn-outline-secondary" (click)="closePopup()">
+					Go back
+				</button>
+
+				<button *ngIf="!tokenWithdrawModal" type="button" style="margin-top: 0;" [disabled]="!confirmWithdraw ||disableWithdrawProceedButton"
+					(click)="submitWithdrawAmount()" class="btn btn-success">
+					Submit </button>
+				<button *ngIf="tokenWithdrawModal" type="button" style="margin-top: 0;" [disabled]="!confirmWithdraw||disableWithdrawProceedButton"
+					(click)="submitWithdrawAmount()" class="btn btn-success">
+					Done </button>
+			</div>
+		</div>
+
+
+
+
+	</div>
+
+</ng-template>
+
+<ng-template #commissionWithdrawalConfirmationModal let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title"></h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="closePopup()">X</button>
+	</div>
+	<div class="modal-body toke-release-popup">
+		<h3 class="text-left ft-size">Are you sure that you have filled {{commissionChainName}} Address? </h3>
+
+
+		<p class="note text-danger">(NOTE : In case of loss of amount due to incorrect network address, TDX will not be
+			held
+			responsible.)</p>
+		<div class="checkbox">
+			<input (change)="handleConfirmation('item')" type="checkbox" [value]="confirmWithdraw">
+			<label style="font-size: 12px;">Yes, I Wish To
+				Proceed
+				Further</label>
+		</div>
+		<div class="btn-group-custom">
+			<button type="submit" class="btn btn-danger" (click)="closePopup()">
+				Cancel</button>
+
+			<button type="button" style="margin-top: 0;" [disabled]="!confirmCommissionWithdrawal || disablesubmitCommissionWithdrawAmount"
+				(click)="submitCommissionWithdrawAmount()" class="btn btn-success">
+				Submit </button>
+		</div>
+
+
+	</div>
+
+</ng-template>
+
+
+<ng-template #content3 let-modal>
+
+	<div class="modal-body toke-success-popup d-flex align-items-center">
+
+		<div class="circle-wrapper">
+			<div class="success circle"></div>
+			<div class="success-icon">
+				<i class="fa fa-check"></i>
+			</div>
+		</div>
+		<div class="success-masagess">
+			<h1>Success</h1>
+			<p style="font-size: 12px;">Transaction Complete.</p>
+		</div>
+
+	</div>
+
+</ng-template>
+
+<ng-template #content4 let-modal>
+
+	<div class="modal-body toke-error-popup d-flex align-items-center">
+
+		<div class="error-circle-wrapper">
+			<div class="error-circle"></div>
+			<div class="error-icon">
+				<i class="fa fa-close"></i>
+			</div>
+		</div>
+		<div class="success-masagess">
+			<h1>Error</h1>
+			<p style="font-size: 12px;">Transaction Unsuccessful.</p>
+		</div>
+
+	</div>
+
+</ng-template>
+
+<ng-template #withdrawDetails let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title">Withdrawal Details</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="closePopupWithdraw()">X</button>
+	</div>
+	<div class="modal-body toke-release-popup">
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Token</th>
+						<th>Wallet Address</th>
+						<th>Txn Hash</th>
+						<th>Token Quantity</th>
+						<th>Withdrawal Type</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let data of selectedWithdraw?.transactionDetails">
+						<td>{{data?.token|| '--'}}</td>
+						<td>{{data?.walletAddress|| '--'}}</td>
+						<td>{{data?.txnHash|| '--'}}</td>
+						<td>{{(data?.amount?.$numberDecimal | decimal:8) || (data?.amount | decimal:8) || '--'}}</td>
+						<td>{{data?.withdrawalType|| '--'}}</td>
+						<td>{{data?.status|| '--'}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</ng-template>
+
+
+<ng-template #commissionWithdrawalModal let-modal>
+
+	<div class="modal-body toke-release-popup">
+		<div class="modal-header">
+			<h6 class="modal-title">Withdraw Request</h6>
+			<button type="button" class="close" aria-label="Close" (click)="closePopupWithdraw()"><span
+					_ngcontent-rqr-c139="" aria-hidden="true">×</span></button>
+		</div>
+		<div class="create-new-fau mg-t-20">
+			<form *ngIf="kycApproved" [formGroup]="withdrawCommissionForm"
+				(ngSubmit)="openConfirmPopUpForCommissionWallet()">
+				<div class="col col-sm-12 col-xs-12 col-md-12">
+
+					<div class="form-group">
+
+						<input type="number" placeholder="Enter Amount" formControlName="commissionWalletAmount"
+							class="form-control" id="commissionWalletAmount" (keydown)="checkInputValue($event)">
+						<app-show-errors [control]="commissionWalletAmount"></app-show-errors>
+
+					</div>
+					<div class="form-group">
+
+						<input type="text" class="form-control" formControlName="commissionWalletAddress"
+							id="commissionWalletAddress"
+							[placeholder]="tokenWithdrawModal ? 'Enter Your '+ technology + ' Wallet Address' :'Enter Your '+commissionChainName +' Wallet Address' ">
+							<div class="wallt-icon" style="top: 67px !important;right: 18px !important;" (click)="pasteCommissionWalletAddress()">
+								<img src="../../../../assets/images/copy-cr.png" ngbTooltip="paste" />
+							</div>
+
+						<p class="text-danger" style="font-size:8px;">
+							<span style="color:#000; font-weight: 600;">Note:</span> Gas & one time KYC fees will be
+							deducted from the final amount.
+						</p>
+
+						<app-show-errors [control]="commissionWalletAddress"></app-show-errors>
+
+					</div>
+				</div>
+
+				<div class="btn-group-custom">
+					<button type="submit" class="btn btn-danger" (click)="closePopupWithdraw()">
+						Cancel</button>
+
+					<button type="submit" class="btn btn-success">
+						Proceed </button>
+				</div>
+
+			</form>
+		</div>
+
+		<div *ngIf="!kycApproved">
+			<p class="head-pop">Please complete your KYC to proceed. </p>
+			<div class="btn-group-custom">
+				<button type="submit" class="btn btn-danger" (click)="closePopup()">
+					Cancel</button>
+
+				<button type="button" routerLink="/settings/kyc" (click)="closePopup()" class="btn btn-success">
+					Ok </button>
+			</div>
+		</div>
+	</div>
+
+</ng-template>
+
+
+<ng-template #purchasePopupSecond let-modal>
+	<div class="modal-body seminor-login-modal-body" *ngIf="!gateResponse && !isCashCouponScreen">
+		<div class="modal-header">
+			<h6>Add Fund</h6>
+			<button type="button" class="close" aria-label="Close" (click)="closePopup()">
+				<span aria-hidden="true">×</span>
+			</button>
+		</div>
+		<div class="create-new-fau">
+			<div class="form-group">
+				<label>Amount to add (in USD)</label>
+				<input type="number" (keydown)="checkInputValue($event)" name="Amount" min="25"
+					(input)="checkFundAmount()" maxlength="10" [(ngModel)]="amountToAdd" placeholder="$00.00"
+					class="form-control" required>
+
+			</div>
+			<div class="form-group">
+				<label>Select payment method</label>
+				<ul (click)="handleDropDown()" class="select" [ngClass]="{'open':showDropDown}" id="my-select">
+					<span style="color: #696CA4" class="view-data-input"><img *ngIf="coinName || coinName==0"
+							[src]="paymentModes[coinName].image" /> {{selectedPaymentMethod}}</span>
+
+					<div class="view-poption">
+						<li *ngFor="let paymode of paymentModes;let i =index " (click)="resetErrorMessage(i)">
+							<div class="radio">
+								<input type="radio" [value]="i" [(ngModel)]="coinName" name="litecoin">
+								<label for="radio-1" class="radio-label">
+									<img [src]="paymode.image" /> {{paymode.name}} ({{paymode.subName}})</label>
+							</div>
+
+						</li>
+
+
+
+					</div>
+
+
+					<span></span>
+				</ul>
+
+				<p *ngIf="errorMessage" style="color:red">{{errorMessage}} </p>
+				<p *ngIf="successMessage" style="color:green">{{successMessage}} </p>
+				<p> <span style="color: #000; font-size:10px;">Note : </span>Due to humongous interest,
+					it might take longer than
+					usual for the funds to reflect in your wallet.</p>
+			</div>
+			<div class="button-widthrawl">
+				<a href="javascript:void(0)" (click)="closePopup()" class="btn btn-outline-secondary">Cancel</a>
+				<button href="javascript:void(0)" [disabled]="disableAddAmountButton"  (click)="createTransaction()" class="btn btn-warning">Add Amount</button>
+			</div>
+
+
+		</div>
+	</div>
+	<div class="modal-body seminor-login-modal-body" *ngIf="gateResponse">
+		<div class="modal-header">
+			<h6 style="font-weight: 400;font-size: 16px; line-height: 22px;">Please deposit
+				<b>{{gatewayData?.cryptoCoins}}</b> {{paymentModes[coinName].value}} to the below address.</h6>
+			<button type="button" class="close" aria-label="Close" (click)="closePopup()">
+				<span aria-hidden="true">×</span>
+			</button>
+		</div>
+		<div class="create-new-fau">
+			<p class="gatway-address"> {{gatewayData?.address}}</p>
+			<div class="text-center col col-sm-12 qr-code">
+				<img [src]="gatewayData?.qrcodeUrl">
+			</div>
+
+
+			<div class="col col-sm-12 text-center costom-qr-button">
+				<p *ngIf="errorMessage" style="color:red">{{errorMessage}} </p>
+				<p *ngIf="successMessage" style="color:green">{{successMessage}} </p>
+				<button type="button" class="btn btn-success" [disabled]="buttonClicked"
+					(click)="closePopupPayment(1)">I've paid</button> &nbsp;
+				<button type="button" class="btn btn-outline-secondary" [disabled]="buttonClicked"
+					(click)="closePopupPayment(3)">Cancel</button>
+				&nbsp;
+				&nbsp;
+
+				<button type="button" class="btn" [disabled]="buttonClicked" (click)="closePopupPayment(2)">I'll pay
+					later</button>
+			</div>
+		</div>
+	</div>
+	<div *ngIf="isCashCouponScreen">
+		<div>
+			<div>
+				<!-- Modal body -->
+				<div>
+					<div class="modal-header">
+						<h6 style="display: inline-block;">Apply Cash Coupon </h6>
+						<button type="button" class="close" aria-label="Close" (click)="closePopup()">
+							<span aria-hidden="true">×</span>
+						</button>
+
+					</div>
+					<div class="create-new-fau">
+
+						<div class="col col-sm-12 col-xs-12 col-md-12">
+							<div class="input-group cupon-box mb-3">
+								<input type="text" class="form-control text-center"
+									style="border-bottom: 1px #ccc solid;" placeholder="Enter Coupon Code"
+									[(ngModel)]="couponData">
+								<div class="input-group-append ">
+									<span class="input-group-text btn-cupon" style="cursor: pointer;"
+										(click)="redeemCashCoupon()"><i class="fa fa-arrow-right"
+											aria-hidden="true"></i></span>
+								</div>
+
+							</div>
+							<p *ngIf="errorMessage" style="color:red;text-align: center;">{{errorMessage}} </p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</ng-template>
+
+<ng-template #rejectionReason let-modal>
+
+	<div class="modal-body">
+		<div class="modal-header text-center">
+			<h6 style="display: inline-block; text-align: center;">Message</h6>
+			<button type="button" class="close" aria-label="Close" (click)="closePopup()">
+				<span aria-hidden="true">×</span>
+			</button>
+
+		</div>
+		<div class="create-new-fau massa-hight" style="color: #000 !important;">
+			<p style="font-size:12px !important;" class="word-break">{{rejectionMessage}}</p>
+		</div>
+	</div>
+</ng-template>

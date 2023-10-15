@@ -1,0 +1,106 @@
+
+
+<div class="container ipad-pd-left  p-0">
+	<div class="row screen-center">
+	  <div class="col-md-12 ">
+		<div class="card  custom_card">		 
+		  <div id="top" class="table-responsive fixTableHead myrestable">
+			<div class="outer">
+				<div  class="inner" (scroll)="onScroll($event)">
+			<table class="table table-striped">
+				<thead>
+					<tr class="bg-gradiants">
+						<th class="fixed-pos-mobile">Title</th>
+						<th>Time</th>
+						<th>Type</th>
+						<th>Reward</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let item of completedCampaigns; let i = index">
+						<td class="fixed-pos-mobile">
+							<span container="body" placement="top" [ngbTooltip]="item?.shoutoutCampaignId?.title">
+								{{item?.shoutoutCampaignId?.title | truncate: '80'}}
+							</span> 
+						</td>
+						<td>
+							<!-- <div style="cursor:pointer;" (click)="openDesctiption(description_pop_up,item?.shoutoutCampaignId?.description)">
+								<p href="javascript:void(0)" class="desc label">
+									{{item?.shoutoutCampaignId?.description | truncate: '50'}}
+								</p> -->
+								<div class="time">
+									{{item.createdAt | date:'medium'}}
+								</div>
+							<!-- </div> -->
+						</td>
+						<td>
+							{{item?.shoutoutCampaignId?.type?.category || '--'}} {{item?.shoutoutCampaignId?.type?.type ||'--'}}
+						
+						</td>
+						<td class="d-flex" style="padding-top: 20px;"> {{item?.shoutoutCampaignId?.projectId?.symbol == 'USD' ? '$': ''}}
+							{{item?.token?.$numberDecimal || '--'}} {{ item?.shoutoutCampaignId?.projectId?.symbol != 'USD' ? item?.shoutoutCampaignId?.projectId?.symbol : ''}}
+							<img placement="left" [ngbTooltip]="'Successfully Claimed'" *ngIf="item?.status == constant.TRANSACTION_STATUS.COMPLETED" class="ml-3 mr-2 float-right" style="width: 20px; height: 20px;" src="../../../../assets/images/sucess.png">
+							<img placement="left" [ngbTooltip]="'Cancelled'" *ngIf="item?.status == constant.TRANSACTION_STATUS.CANCELLED" class="ml-3 mr-2 float-right" style="width: 20px; height: 20px;" src="../../../../assets/images/delet.png">
+							<span class="ml-3 mr-2 float-right" *ngIf="item?.status == constant.TRANSACTION_STATUS.CANCELLED" placement="left" [ngbTooltip]="'Cancellation Reason'"  (click)="showCancellationReason(item,cancellationReason)"  style="cursor: pointer;"><i  class="fa fa-eye"   ></i></span>
+							<span class="ml-3 mr-2 float-right" *ngIf="item?.status == constant.TRANSACTION_STATUS.UNDER_REVIEW" placement="left" [ngbTooltip]="'Under Review'" style="cursor: pointer;">
+								<i class="fa fa-exclamation" aria-hidden="true"  style="color: #ebb205;"></i>
+							</span>
+							<span class=" ml-3 mr-2 float-right" *ngIf="item?.status == constant.TRANSACTION_STATUS.ONGOING" placement="left" [ngbTooltip]="'Ongoing'" style="cursor: pointer;">
+								<i class="fa fa-refresh" aria-hidden="true" style="color: #ebb205;"></i>
+							</span>
+						</td>
+
+					</tr>
+					<tr *ngIf="completedCampaigns?.length == 0">
+						<td colspan="5" style="text-align: center;">{{message.CONST_MSG.NO_DATA_FOUND}}</td>
+					</tr>
+				</tbody>
+			</table>
+				</div>
+			</div>
+		</div>
+		<div class="myrestable arow-fiex" >
+			<button (click)="handleLeftClick()" *ngIf="completedCampaigns?.length && !showRightSlider" id="left-button"><img src="../../../../../assets/images/prev.png" /></button>
+		  <button (click)="handleRightClick()" *ngIf="completedCampaigns?.length && showRightSlider" id="right-button"><img src="../../../../../assets/images/next.png" /></button>
+		</div>
+		<ngb-pagination *ngIf="completedCampaigns.length !== 0 && totalCount > rowsPerPage"
+			class="d-flex justify-content-end" [(page)]="currentPage" [pageSize]="rowsPerPage" [ellipses]="false"
+			[maxSize]="3" [collectionSize]="totalCount" (pageChange)="pageChanged($event)">
+		</ngb-pagination>
+	  
+   
+		</div>
+   
+</div>
+
+</div>
+</div>
+
+
+
+<ng-template #description_pop_up let-modal>
+	<div class="modal-header">
+		<h6 class="modal-title">Description</h6>
+		<button type="button" class="btn-close" aria-label="Close" (click)="closeModal()">
+			x
+		</button>
+	</div>
+	<div class="modal-body">
+
+		<p class="word-break">{{description |titlecase}}</p>
+	</div>
+
+</ng-template>
+
+<ng-template #cancellationReason let-modal>
+	<div class="modal-header">
+		<h6 class="modal-title">Reason</h6>
+		<button type="button" class="btn-close" aria-label="Close" (click)="closeModal()">
+			x
+		</button>
+	</div>
+	<div class="modal-body">
+		<p>{{msg}}</p>
+	</div>
+
+</ng-template>

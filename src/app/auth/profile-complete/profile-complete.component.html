@@ -1,0 +1,195 @@
+
+    <div class="col-md-12 col-sm-12 col-lg-12 no-margin h-100vh">
+      <div class="row" style="margin: 0;">        
+            <div class="loginform">
+             
+                
+                <p class="login-heading text-left" style="color: #ffad2f;">Fill in the form below to get instant access.</p>
+            
+                  
+                  <form [formGroup]="profileCompleteForm" style="width: 100%;" >
+                    <div class="form-group signup-mob" *ngIf="!stateTwo">
+                      <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" placeholder="First Name" (blur)="onBlur('firstName')" formControlName="firstname" name="firstName" class="form-control" required  id="firstName" >
+                            <ng-template #first>
+                              <app-show-errors  [control]="firstname"></app-show-errors>
+                            </ng-template>
+                            <div *ngIf="checkFirstName; else first">
+                              <p class="errro_font">No numbers are allowed</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                          <input type="text" placeholder="Last Name" (blur)="onBlur('lastName')" formControlName="lastname" name="lastName" class="form-control" required  id="lastName" >
+                          <ng-template #second>
+                            <app-show-errors [control]="lastname"></app-show-errors>                  
+                          </ng-template>
+                          <div *ngIf="checkLastName; else second">
+                            <p class="errro_font">No numbers are allowed</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" placeholder="Email address" formControlName="email" name="email" class="form-control" >
+                            <app-show-errors [control]="email"></app-show-errors>
+                        </div>
+                        <div class="col-md-6">
+                          <input type="text" placeholder="User Name" id="userName"   (blur)="checkForUserName()" formControlName="userName" name="User" class="form-control"  required>  
+                          <app-show-errors [control]="userName"></app-show-errors>
+                          <p *ngIf="userNameError" style="color:red; font-size: 12px;">{{userNameErrorMessage}}</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                            <input type="password" placeholder="Password" formControlName="password" name="Password" class="form-control" required  id="password" >
+                            <app-show-errors [control]="password"></app-show-errors>
+                        </div>
+                        <div class="col-md-6">
+                          <input type="password" placeholder="Confirm Password" formControlName="confirm" name="cnfPassword" class="form-control" required  id="cnfPassword" >
+                          <app-show-errors [control]="confirm"></app-show-errors>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="demo2">
+                            <input type="checkbox" (change)="checkForInvestor()" id="checkbox-2-1" formControlName="investor" class="regular-checkbox big-checkbox" /><label for="checkbox-2-1"></label>
+                          </div>
+                          <label container="body" placement="top auto" ngbTooltip="Check this box to to join TradeDog as an early investor" class="ckbox" >
+                            <span style="color: #000;" class="cursor_pointer"> I am an investor</span> 
+                          </label>
+                        </div>
+                      </div>
+                     
+                    </div>
+                    
+                    <div class="form-group signup-mob" *ngIf="stateTwo && investor.value">
+                      <div class="col-md-12">
+                      <div class="row">
+                        <div *ngIf="investor.value">
+                          <div class="">
+                            <p style="color: #ffad2f; margin-bottom: 10px;"> Your preferred Investment amount: <sup style="color:red">*</sup></p>
+                            <div class="row">
+                              <div class="col-md-3">
+                                <label class="ckbox" >
+                                  <input id="investmentRange" value="0 - 10,000" type="radio" formControlName='investmentRange'>
+                                  <span style="color: #000;" for="investmentRange" class="cursor_pointer">0 - $10,000</span>
+                                </label>
+                              </div>
+                            <div class="col-md-3">
+                            <label class="ckbox" >
+                              <input id="investmentRange" value="10,000 - 100,000" type="radio" formControlName='investmentRange' >
+                              <span style="color: #000;" for="investmentRange" class="cursor_pointer">$10,000 - $100,000</span>
+                            </label>
+                            </div>
+                            <div class="col-md-3">
+                            <label class="ckbox" >
+                              <input id="investmentRange" value="100,000 - 500,000" type="radio" formControlName='investmentRange'>
+                              <span style="color: #000;" for="investmentRange" class="cursor_pointer">$100,000 - $500,000</span>
+                            </label>
+                            </div>
+                            <div class="col-md-3">
+                            <label class="ckbox" >
+                              <input id="investmentRange" value="Above 500,000" type="radio" formControlName='investmentRange'>
+                              <span style="color: #000;" for="investmentRange" class="cursor_pointer">Above $500,000</span>
+                            </label>
+                            </div>
+                            </div>
+                          </div>
+                          <div >
+                            <p style="color: #ffad2f;margin-bottom: 10px;">You are a: <sup style="color:red">*</sup></p>
+                            <div class="row"> 
+                              <div class="col-md-6">
+                                <label class="ckbox" >
+                                  <input id="investorType" type="radio" value="Individual Investor" formControlName='investorType'>
+                                  <span style="color: #000;" for="investorType" class="cursor_pointer">Individual Investor</span>
+                                </label>
+                              </div>
+                              <div class="col-md-6">
+                              <label class="ckbox" >
+                                <input id="investorType" type="radio" value="VC Fund/ Family Office"  formControlName='investorType' >
+                                <span style="color: #000;" for="investorType" class="cursor_pointer">VC Fund/ Family Office</span>
+                              </label>
+                              </div>
+                              <div class="col-md-6">
+                              <label class="ckbox" >
+                                <input id="investorType" type="radio" value="Fund of Funds" formControlName='investorType'>
+                                <span style="color: #000;" for="investorType"  class="cursor_pointer"> Fund of Funds</span>
+                              </label>
+                              </div>
+                              <div class="col-md-6">
+                              <label class="ckbox" >
+                                <input id="investorType" type="radio" value="Insitutional Investor" formControlName='investorType'>
+                                <span style="color: #000;" for="investorType" class="cursor_pointer">Insitutional Investor</span>
+                              </label>
+                              </div>
+                            </div>
+                          </div>
+                          <div >
+                            <p style="color: #ffad2f;margin-bottom: 10px;">You prefer to invest in: <sup style="color:red">*</sup></p>
+                            <div class="row"> 
+                              <div class="col-md-4">
+                            <label class="ckbox" >
+                              <input id="investmentIn" type="radio" value="Seed stage"  formControlName='investmentIn'>
+                              <span style="color: #000;" for="investmentIn" class="cursor_pointer">Seed stage</span>
+                            </label>
+                            </div>
+                            <div class="col-md-4">
+                            <label class="ckbox" >
+                              <input id="investmentIn" value="Private Sale" type="radio" formControlName='investmentIn' >
+                              <span style="color: #000;" for="investmentIn" class="cursor_pointer">Private Sale</span>
+                            </label>
+                            </div>
+                            <div class="col-md-4">
+                            <label class="ckbox" >
+                              <input id="investmentIn" type="radio" value="ICOs and IEOs" formControlName='investmentIn'>
+                              <span style="color: #000;" for="investmentIn" class="cursor_pointer"> ICOs and IEOs </span>
+                            </label>
+                            </div>
+                            </div>
+                          </div>
+                          <div >
+                            <div class="row" >
+                              <div class="col-md-12">
+                                <p style="color: #ffad2f;margin-bottom: 10px;">Sectors of Interest: <sup style="color:red">*</sup></p>
+                               <ul class="list-check">
+                                <li *ngFor="let item of sectorsOfInterestLists; let i=index" >
+                                  <input type="checkbox" [value]="item.label" (change)="onCheckboxChange($event)" />
+                                 <span>{{item.label}}</span> 
+                                </li>
+                              </ul>
+                              </div>
+                            </div>
+                          </div>
+                          <div >
+                          <div class="row">
+                            <div class="col-md-6">
+                              <label class="social-p">Social Presence</label> 
+                              <input style="margin-bottom: 0;" formControlName='socialLink' type="text" placeholder="Put your website or social profile link  "  class="form-control" >               
+                            </div>
+                            <div class="col-md-6">
+                              <label class="social-p">Telegram Id:</label> 
+                              <input style="margin-bottom: 0;" formControlName='telegramId' type="text" placeholder="Put your telegram Id"  class="form-control" >               
+                            </div>
+                          </div>
+
+                          </div>
+                        </div>
+                      </div>
+                     </div>
+                    </div>
+                    <div class="col-md-12">
+                    <p><app-messages></app-messages></p>
+                    <p><span style="color: red;">{{errorMessage}}</span></p>
+                    <button href="javascript:void()" style="float: right; padding: 5px 20px;" class=" signup-btn" [disabled]="!profileCompleteForm.valid" *ngIf="showNextButton && !stateTwo" (click)="goToStateTwo()" >Next</button>
+                   
+                    <button type="submit" class="btn-block signup-btn" (click)="submitForm(profileCompleteForm.value)" *ngIf="!showNextButton" [disabled]="!profileCompleteForm.valid">Complete profile</button>
+                  </div>
+                    <div class="col-sm-12 text-center">
+                      <button type="submit" class=" signup-btn" (click)="submitForm(profileCompleteForm.value)" *ngIf="showNextButton && stateTwo" [disabled]="!profileCompleteForm.valid">Complete profile</button>
+                    </div>
+                  </form>               
+            </div>
+        
+      </div>
+  </div>

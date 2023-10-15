@@ -1,0 +1,74 @@
+<header class="header d-flex justify-content-center" >
+  <div class="container" *ngIf="!safeURL">
+    <div class="row top-card">
+      <div class="col-md-12 pr-0">
+       
+        <div class="card">
+          <h4 *ngIf="kycStatus != constants.APPROVED && kycStatus != constants.DECLINED &&  kycStatus != constants.INVALID && kycStatus != constants.FAILED">Complete your KYC</h4>
+          <h4 *ngIf="( kycStatus == constants.ACCEPTED || kycStatus == constants.APPROVED )">
+            Your KYC Verification is Completed! 
+          </h4>
+          <h4 *ngIf="(kycStatus == constants.DECLINED || kycStatus == constants.REJECTED || kycStatus == constants.INVALID || kycStatus == constants.FAILED) && !isDuplicate">KYC Verification Rejected! <br> Please try again, or <h6>Contact at ask@tdx.biz</h6>
+          </h4>
+          <h4 *ngIf="(kycStatus == constants.DECLINED || kycStatus == constants.REJECTED || kycStatus == constants.INVALID || kycStatus == constants.FAILED) && isDuplicate">KYC Verification Rejected! (using same document for kyc verification forbidden) <br> Please try again, or <h6>Contact at ask@tdx.biz</h6>
+          </h4>
+          <p>
+            <span *ngIf="kycStatus != constants.APPROVED">
+              To participate in whitelisting process, you need to verify your account.
+            </span>           
+              <!-- <span style="width: 50%;" *ngIf="( (kycStatus == constants.DECLINED || kycStatus == constants.REJECTED ) && kycRejectedReason)">
+                {{kycRejectedReason}}
+              </span> -->
+            <button class="btn-waalet" *ngIf="!walletConnected" (click)="creatUserWallet()">
+              <img src="../../../../assets/images/wallet.svg" width="15">
+              Enable Wallet</button>
+            <a (click)="goToLaunchpad()" class="btn-waalet" *ngIf="walletConnected">Proceed to Launchpad</a>
+
+          </p>
+        </div>
+        <!-- <div class="card" *ngIf="facekiVerificationStatus">
+          <h4>Kyc is verified successfully</h4>
+        </div> -->
+      </div>
+    </div>
+
+    <div *ngIf="kycStatus != constants.APPROVED" class="preceded-popup">
+		 <!-- <a (click)="onStartKyc()" class="effect effect-1">Start KYC process</a> -->
+		 <!-- <a style="cursor: not-allowed !important;"  triggers="hover focus click" ngbTooltip="KYC service temporarily unavailable, will resume our services by end of October." class="effect effect-1">Start KYC process</a> -->
+		 <a (click)="onStartKyc()" triggers="hover focus click"  class="effect effect-1">Start KYC process</a>
+
+      <a (click)="goToLaunchpad()" class="skip-btn">Skip Now</a>
+    </div>
+    <!-- <div id="sumsub-websdk-container"></div> -->
+  </div>
+  <div class="kyc-container" *ngIf="safeURL">
+    <a (click)="goBack()" class="back-button"> 
+      <img src="../../../../assets/images/back-icon.png">
+      Back
+    </a>
+    <iframe #myiframe [src]="safeURL" id="filecontainer" allow="camera" style="width: 100%;" height="700px" frameborder="0">
+    </iframe>
+  </div>
+</header>
+
+<ng-template #viewSample let-modal>
+  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <span aria-hidden="true">×</span>
+  </button>
+  <div class="modal-body view-Signels">
+    <img style="width:100%" class="profile-pic" src={{previewPhotoForBoth}} />
+  </div>
+</ng-template>
+
+<ng-template #kycVerifyModal let-modal>
+  <button type="button" class="close" aria-label="Close" (click)="onCloseKycPopup()">
+    <span aria-hidden="true">×</span>
+  </button>
+  <div class="modal-body view-Signels">
+    <iframe #myiframe [src]="safeURL" id="filecontainer" allow="camera" style="width: 100%; border-radius: 16px;" height="700px" frameborder="0">
+    </iframe>
+
+    <!-- <iframe src="https://apps.faceki.com/kycverify/47905fa5-9238-4818-aa48-c60c1faf0c5b" style="height: 700px; width: 600px;" height="700" width="700" frameborder="0">
+    </iframe> -->
+  </div>
+</ng-template>

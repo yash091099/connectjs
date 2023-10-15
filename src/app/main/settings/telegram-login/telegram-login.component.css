@@ -1,0 +1,24 @@
+#telegram-login-tdx_staging_bot::content.tgme_widget_login_button_icon {
+	width: 19px;
+	height: 17px;
+	background-size: 19px;
+	margin: 0 9px 0 -11px !important;
+}
+
+.icon{
+	width: 37px;
+    border: 2px solid #fff;
+    border-radius: 50px;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+	.icon{
+		width: 28px;
+	}
+}
+
+@media (min-width: 320px) and (max-width: 667px) {
+	.icon{
+		width: 32px;
+	}
+}

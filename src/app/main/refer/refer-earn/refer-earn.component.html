@@ -1,0 +1,352 @@
+<div class="header">
+	<div class="row top-card">
+	  <div class="col-md-12 pr-0 res-p">
+		<div class="card alloc-card">
+		  <div class="row iped-pro">
+			<div class="screen-center" *ngIf="!loadingDefaultRefferalLink">
+			  <div class="col-xs-12 col-md-12 col-lg-6 iped-left">
+				<div class="background-image-mobile">
+					<img src="../../../../assets/images/refer-banner.png" />
+				</div>
+				<div class="referl-content">
+				  <h1 class="tittle-refer">Refer & Earn</h1>
+				  <p class="upto-referl">Upto <b> $120 </b> on 10 referrals </p>
+				
+				  <div  id="inviteCode" class="invite-page">
+					<input id="link" [readonly]="true" [(ngModel)]="referLinkModel" placeholder="http//.refer//tdx.http/n" />
+					<a href="javascript:void(0);" class="edit-refrral" (click)="openEditReferral(content)">
+					  <img src="../../../../assets/images/Edit-logo.svg">
+					</a>
+					<div [ngClass]="{'copied':copy_link=='Copied'}" (click)="copyToClipboard()" id="copy" data-copytarget="#link">
+					  <img *ngIf="copy_link =='Copied'" src="../../../../assets/images/copy-tick.png" data-copytarget="#link">
+					  {{copy_link}}
+					  <img *ngIf="copy_link !='Copied'" src="../../../../assets/images/copy-icon.svg" data-copytarget="#link">
+					</div>
+				  </div>
+				
+				  <div class="subtitle fancy">
+					<span>Or</span>
+				  </div>
+				  <div class="bottom-link">
+					<button class="btn-waalet" (click)=" CreateCustomizedCampaign('referral-campaigns','pop-up')">
+					  <span>Create Customized Campaign</span>
+					  <img src="../../../../assets/images/add-icon-yellow.png" width="18" />
+					</button>
+					<a class="info" #ref="ngbTooltip" tooltip-trigger="focus manual" [closeDelay]="5000" [ngbTooltip]="hintTooltip" tooltipClass="my-custom-class" placement="right" container="body">
+					  <img src="../../../../assets/images/Info-icon.svg">
+					</a>
+				  </div>
+				  <ng-template #hintTooltip>
+					<h6>Customized campaign </h6> Click on ‘Create Customized Campaign’ to choose between a referral and a banner campaign. <a href="https://medium.com/@TDx_Launchpad" target="_blank" class="know-more">Know More </a>
+				  </ng-template>
+				</div>
+			  </div>
+			  <div class="col-xs-12 col-md-12 col-lg-6 iped-right d-none d-md-block">
+				<div class="refer-banner">
+				  <img src="../../../../assets/images/refer-banner.png" />
+				</div>
+			  </div>
+			</div>
+			<div class="skeleton row m-0" *ngIf="loadingDefaultRefferalLink">
+				
+				<div class="skeleton-right col-xs-12 col-md-12 col-lg-6 iped-left">
+				  <div class="line h17 w75 mt-5"></div>
+			
+				<div class="line"></div>
+				
+
+	  
+			<div class="skeleton-button">
+			  <div class="line"></div>
+			 
+			</div>
+			<div class="line"></div>
+			<div class="skeleton-button">
+				<div class="line"></div>
+			   
+			  </div>
+	  
+	  
+			  </div>
+			  <div class="skeleton-left col-xs-12 col-md-12 col-lg-6 iped-left">
+				<div class="square"></div>
+			  </div>
+		 </div>
+
+           
+
+
+
+			<div *ngIf="filterData ? 1 : totalBannerCount || totalPageCount " class="scroll-top" (click)="scrollToId('elId')">
+			  <a></a> Scroll to see insights
+			</div>
+			<div class="res-mobile">
+				<div  class="col-sm-12 table-top">
+					<div class="table-new-referl" id="elId" #target>
+					  <div class="row m-0">
+						<div class="col-sm-12" style="border-bottom: 1px solid #000;
+									padding: 0px;
+									margin: 15px 0px;
+									margin-bottom: 0;">
+						  <div class="tabs-referl">
+							<a (click)="handleTabChage('PAGE')" [ngClass]="{'active': selectedCampaign == selectCampaignType.PAGE}">Referral Campaign</a>
+							<a (click)="handleTabChage('BANNER')" [ngClass]="{'active': selectedCampaign == selectCampaignType.BANNER}" class="ml-4">Banner Campaign </a>
+						  </div>
+						  <div class="form-group has-search">
+							<span class="fa fa-search form-control-feedback"></span>
+							<input (keyup)="filterCampaignList($event)" type="text" class="form-control" placeholder="Search by campaign..." />
+						  </div>
+						</div>
+					  </div>
+								<table class="fold-table">
+									<thead>
+									  <tr>
+										<th style="text-align: left;" class="">Campaign Name</th>
+										<th>Visits</th>
+										<th>SignUps</th>
+										<th>Action</th>
+									  </tr>
+									</thead>
+									<tbody   *ngFor="let campaign of linkCampaignArrays; let i = index">
+									  <tr *ngIf="!loadingRefferalTableData" class="view" [ngClass]="{'bg-change': hideme[i]}">
+										<td class="" [ngClass]="{'bg-change': (hideme[i] && isMobileScreen )}">
+										  <span *ngIf="campaign?.campdata[0]?.name.length>=30" style="cursor: pointer;" [ngbTooltip]="campaign?.campdata[0]?.name| titlecase" class="campain-details">{{ campaign?.campdata[0]?.name| titlecase|truncate:30 }}</span>
+										  <span *ngIf="campaign?.campdata[0]?.name.length
+																					<30" [ngbTooltip]="campaign?.campdata[0]?.name| titlecase" style="cursor: pointer;" class="campain-details" tooltipClass="my-campin-class">{{ campaign?.campdata[0]?.name| titlecase }}
+										  </span>
+										  <a class="expand-row" *ngIf="!hideme[i]" (click)="getReferralArrayDetails(campaign?._id,i)">
+											<i class="fa fa-chevron-down"></i>
+										  </a>
+										  <a class="expand-row" *ngIf="hideme[i]" (click)="hideDiv(i)">
+											<i class="fa fa-chevron-up"></i>
+										  </a>
+										  <a (click)="getReferralArrayDetails(campaign?._id,i, content1)" class="table-popup-res">
+											<i class="fa fa-plus-circle" aria-hidden="true"></i>
+										</a>
+										</td>
+										<td>
+										  <span>{{ campaign.totalVisitCount }}</span>
+										</td>
+										<td>
+										  <span>{{ campaign.totalRegisterCount }}</span>
+										</td>
+										<td>
+										  <span>
+											<a class="more-details" (click)="getSelectedTab('analytics',campaign)">
+											  Show stats
+											</a>
+										  </span>
+										</td>
+									  </tr>
+									  <tr [hidden]="!hideme[i]">
+										<td colspan="7" class="fold">
+										  <div *ngFor=" let campaignDetail of campaign.details" class="fold-content" [ngClass]="{'dark': i%2!=0, 'light': i%2==0}">
+											
+											<table class="small-friendly">
+												<tbody>
+												  <tr>
+													<td *ngIf="campaignDetail?.promotion?.name.length>=30" [ngbTooltip]="campaignDetail?.promotion?.name" data-th="Company name" class="camaign-table-data" tooltipClass="my-campin-class" container='body' placement="right">{{ campaignDetail?.promotion?.name | truncate : 30 }}</td>
+													<td *ngIf="campaignDetail?.promotion?.name.length
+																										  <30" data-th="Company name" class="camaign-table-data">{{ campaignDetail?.promotion?.name }}
+													</td>
+													<td data-th="Visits" class="p-tab-table">{{ campaignDetail?.visitCount }}</td>
+													<td data-th="signUps" class="p-tab-table">{{ campaignDetail?.registerCount }}
+													</td>
+													<td>&nbsp;</td>
+												  </tr>
+												</tbody>
+											  </table>
+											
+										  </div>
+										</td>
+									  </tr>
+									</tbody>
+								</table>
+								
+								  <table class="tg" *ngIf="loadingRefferalTableData">
+									<tr>
+									  <th class="tg-cly1">  
+										  <div class="line"></div>
+									  </th>
+									  <th class="tg-cly1">
+										<div class="line"></div>
+									  </th>
+									  <th class="tg-cly1">
+										<div class="line"></div>
+									  </th>
+									  <th class="tg-cly1">
+										<div class="line"></div>
+									  </th>
+									  <th class="tg-cly1">
+										<div class="line"></div>
+									  </th>
+									
+									</tr>
+									<tr>
+									  <td class="tg-cly1">
+										<div class="line"></div>
+									  </td>
+									  <td class="tg-cly1">
+										<div class="line"></div>
+									  </td>
+									  <td class="tg-cly1">
+										<div class="line"></div>
+									  </td>
+									  <td class="tg-cly1">
+										<div class="line"></div>
+									  </td>
+									  <td class="tg-cly1">
+										<div class="line"></div>
+									  </td>
+									 
+									</tr>
+									<tr>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+									   
+									</tr>
+									<tr>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+									   
+									</tr>
+									<tr>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+									   
+									</tr>
+									<tr>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+									   
+									</tr>
+							 
+								  </table>  
+
+								  <table *ngIf="!linkCampaignArrays.length ">
+									<div class="col-md-12 text-center">
+									  <div class="no-data">No Data Found</div>
+									</div>
+								  </table>
+				
+					  <div class="col-sm-12 more-option" *ngIf="linkCampaignArrays.length !== 0 && totalCount > rowsPerPage">
+						<a (click)="getSelectedTab('referral-campaigns')" class="more-btn">
+						  <span>
+							<i class="fa fa-chevron-down" aria-hidden="true"></i>
+						  </span> More </a>
+					  </div>
+					</div>
+				  </div>
+
+			</div>
+			
+		  </div>
+		</div>
+	  </div>
+	</div>
+	<ng-template #content1 let-modal>
+		<div class="modal-header">
+			<h4 class="modal-title"></h4>
+			<button  type="button" aria-label="Close" class="btn-close" (click)="closeModal()">X</button>
+		</div>
+		<div class="modal-body resposive-popup">
+			<div class="table-responsive">
+				<table class="table table-bordered">
+					<thead>
+					  <tr>
+						<th>Campaign Name</th>
+						<th>Visits</th>
+						<th>SignUps</th>
+					
+					  </tr>
+					</thead>
+					<tbody>
+					  <tr *ngFor="let campaign of campaignDetails">
+					
+						<td *ngIf="campaign?.promotion?.name.length>=30" [ngbTooltip]="campaign?.promotion?.name"  tooltipClass="my-campin-class">{{ campaign?.promotion?.name }}</td>
+													<td *ngIf="campaign?.promotion?.name.length <30" >{{ campaign?.promotion?.name }}
+													</td>
+													<td >{{ campaign?.visitCount }}</td>
+													<td >{{ campaign?.registerCount }}
+													</td>
+						
+				
+					  </tr>
+					
+					</tbody>
+				  </table>
+			</div>	
+		</div>
+		
+	</ng-template>
+
+	<ng-template #content let-modal>
+	  <div class="modal-header">
+		<h4 class="modal-title"></h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"> X </button>
+	  </div>
+	  <div class="modal-body">
+		<h6>Rename your referral link</h6>
+		<div class="form-group" style="margin-bottom:10px;">
+		  <input type="text" (keyup)="referralLinkCheck($event)" [(ngModel)]="editReferLinkModel" class="form-control">
+		</div>
+		<p *ngIf="userLinkAvailableMsg!=''" class="user-abilable ">Username Available</p>
+		<p *ngIf="userLinkUnavailableMsg!=''" class="user-abilable" style="color:#ff1010;">Username Unavailable </p>
+		<div class="button-g">
+		  <button type="submit" (click)="updateReferralLink(editReferLinkModel)" class="btn btn-primary" [disabled]="(userLinkUnavailableMsg!='')||disableSaveButton">Save</button>
+		  <button type="submit" (click)="closeModal()" class="btn btn-outline-secondary">Cancel</button>
+		</div>
+	  </div>
+	</ng-template>

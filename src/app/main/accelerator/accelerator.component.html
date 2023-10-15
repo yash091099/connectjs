@@ -1,0 +1,235 @@
+<router-outlet></router-outlet>
+
+<ng-template #content3 let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title text-center" id="modal-basic-title">Token Purchase</h4>
+
+	</div>
+	<div class="modal-body pt-0 pb-0">
+		<form [formGroup]="purchaseTokensForm">
+			<input type="number" class="form-control" placeholder="Amount" style="display:none;">
+			<div class="input-group mb-1 border-input">
+
+				<input onKeyPress="if(this.value.length==12) return false;" formControlName="purchaseTokenAmount"
+					(keydown)="checkInputValue($event)" (input)="purchaseButtonEnable()" type="number"
+					class="form-control" placeholder="Amount">
+				<div class="token-value">
+					<span class="input-group-text text-right">
+						$ {{totalPurchaseAmount || 0 | number : '1.2-2'}}
+					</span>
+					<span class="input-group-text" style="    border-right: 0px; color: #767676 !important;">
+						USDT
+					</span>
+				</div>
+			</div>
+			<app-show-errors [control]="purchaseTokenAmount"></app-show-errors>
+			<span *ngIf="validationErrorMsg" class="error_msg">{{validationErrorMsg}}</span>
+			<p class="no-of-token"><b>No. of Tokens :</b> {{numberOfTockens | number : '1.2-2'}}
+				{{projectDetails?.symbol}} </p>
+			<p class="comment-form-cookies-consent">
+				<input (click)="useCommissionWalletOrNot($event)" id="wp-comment-cookies-consent"
+					[disabled]="commissionAmount == 0"
+					[style.cursor]="commissionAmount == 0 ? 'not-allowed' : 'pointer'" name="wp-comment-cookies-consent"
+					type="checkbox" value="yes">
+				<label for="wp-comment-cookies-consent">
+
+					<span>
+						Apply for Commission Wallet Deduction: ${{commissionAmount |number : '1.2-2'}}
+					</span>
+
+					<span style="font-size: 10px; color:#646363; font-weight: 300;">
+						( {{(((purchaseTokenAmount.value*15/100) > commissionAmount) && useCommissionWallet)?'Maximum
+						available balance':'15% of the allocation amount'}} )
+					</span>
+					<a href="https://medium.com/@TDx_Launchpad" target="_blank" class="info">
+						<img src="../../../assets/images/Info-icon.svg" />
+					</a>
+				</label>
+			</p>
+		</form>
+		<div class="modal-footer" style="padding-left: 0px; padding-right: 0px;">
+			<button type="button" class="btn btn-outline-dark" (click)="closePurchasePopUp()">
+				Cancel</button>
+			<button (click)="buyPackage()" type="button" class="btn btn-outline-dark" style="margin-left: 20px;">
+				Buy</button>
+		</div>
+	</div>
+</ng-template>
+
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title"></h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button>
+	</div>
+	<div class="modal-body pt-0 ">
+		<div class="transaction-details">
+			<h4 class="modal-title">Invoice</h4>
+			<div class="row">
+				<div class="col-md-8 col-sm-12">Transaction Id: {{selectedTransaction?.gatewaydata?.txnId}}
+
+				</div>
+				<div class="col-md-4 text-right col-sm-12 CCC">
+					Date: {{selectedTransaction?.createdAt | date:'longDate'}}
+				</div>
+
+			</div>
+		</div>
+		<div class="table-responsive-sm">
+			<table class="table">
+				<thead>
+					<tr>
+						<th style="width:280px;">Project Name</th>
+						<th>Investment Amount</th>
+						<th class="text-right pr-0">Allocated Tokens</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="width:280px;">
+							<b>
+								{{selectedTransaction?.startupDetails?.name}}({{selectedTransaction?.startupDetails?.symbol}})
+							</b>
+							<br>
+							<span>Token allocation</span>
+						</td>
+						<td class="p-amount">
+							${{selectedTransaction?.tokenAmount?.$numberDecimal*1 +
+							selectedTransaction?.walletAmount?.$numberDecimal*1 +
+							selectedTransaction?.commissionAmount?.$numberDecimal*1 | decimal}}
+						</td>
+						<td class="text-right">{{selectedTransaction?.quantity?.$numberDecimal ||
+							selectedTransaction?.quantity |
+							number:'1.0':'en-US'}}</td>
+
+					</tr>
+
+				</tbody>
+			</table>
+			<div class="row">
+				<div class="col-lg-2 col-sm-3">
+				</div>
+				<div class="col-lg-7 col-sm-7 ml-auto">
+					<table class="table table-clear">
+						<tbody>
+
+							<tr>
+								<td>
+									<p><strong>Subtotal</strong></p>
+									<p>
+										<strong>
+											Earning Wallet Deduction
+											<small>
+												({{isDeductionLess ? 'maximum amount available' : '15%'}})
+											</small>
+										</strong>
+									</p>
+								</td>
+								<td style="text-align:right !important;">
+									<p> ${{selectedTransaction?.tokenAmount?.$numberDecimal*1 +
+										selectedTransaction?.walletAmount?.$numberDecimal*1 +
+										selectedTransaction?.commissionAmount?.$numberDecimal*1 | decimal}} </p>
+									<p> -${{selectedTransaction?.commissionAmount?.$numberDecimal | decimal}} </p>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<strong>Net Investment</strong>
+								</td>
+								<td style="text-align:right !important;">
+									<strong>${{selectedTransaction?.tokenAmount?.$numberDecimal*1 +
+										selectedTransaction?.walletAmount?.$numberDecimal*1
+										| decimal}}</strong>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+
+			</div>
+		</div>
+
+		<h6>Note*</h6>
+		<p>This is an informal invoice and not a legal binding document. It should not be used for accounting purposes
+			and does not establish a contractual relationship between us and the party to whom it is addressed.</p>
+	</div>
+</ng-template>
+
+<ng-template #purchasePopupSecond let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">
+			{{purchaseComplted ? 'Purchase Completed' : 'Review And Purchase'}}
+		</h4>
+		<button type="button" aria-label="Close" class="btn-close" (click)="closeAllPopup(true)">X</button>
+	</div>
+	<div class="modal-body seminor-login-modal-body" *ngIf="!purchaseComplted" style="color:#000;">
+		<div class="create-new-fau">
+			<div class="bor-btm">
+				<div class="row">
+					<div class="col col-sm-12 col-xs-12 col-md-12 mobile-w">
+						<h5>Selected Startup</h5>
+						<p class="head-pop"> <span style="color:#dc8129">{{projectDetails.name}}</span></p>
+					</div>
+				</div>
+			</div>
+			<div class="col col-sm-12 col-xs-12 col-md-12">
+				<div class="row ">
+					<div class="col col-sm-3 col-xs-3 col-md-3" style="padding: 0px;">
+						<p class="head-pop">Token Name</p>
+					</div>
+					<div class="col col-sm-9 col-xs-9 col-md-9 text-right" style="padding-right: 0px;">
+						<p class="head-pop">{{localSymbol}}</p>
+					</div>
+					<div class="col col-sm-3 col-xs-3 col-md-3" style="padding: 0px;">
+						<p class="head-pop">Total Amount</p>
+					</div>
+					<div class="col col-sm-9 col-xs-9 col-md-9 text-right" style="padding-right: 0px;">
+						<p class="head-pop">${{calculatedAmount | decimal}}</p>
+					</div>
+				</div>
+			</div>
+			<div class="col col-sm-12 col-xs-12 col-md-12">
+				<div class="row ">
+					<div class="col col-sm-12 col-xs-12 col-md-12" style="padding-left: 0px;">
+						<p class="head-pop">Select Payment Method</p>
+						<div class="checkbox">
+							<p class="head-pop">
+								<input type="checkbox" disabled [checked]="useWalletToPay"
+									(change)="useWalletToPay = !useWalletToPay">TDX Wallet <span
+									style="margin-left:10px;"> Balance: ${{walletAmount | decimal}}</span>
+								<img height="20px" src="../../../assets/images/wallet.png">
+							</p>
+						</div>
+						<app-messages></app-messages>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer d-block text-right foot-p">
+				<div class="row">
+					<div class="col-sm-6 col-xs-6 col-md-6 text-left;" style="padding-left: 0px;">
+						<p *ngIf="errorMessage" style="color:red; font-size: 10px; text-align: left  !important;">
+							{{errorMessage}}</p>
+						<p *ngIf="succesMessage" style="color:green; font-size: 10px; text-align: left !important;">
+							{{succesMessage}}</p>
+					</div>
+					<div style="padding-right: 0; float: right; width: 100%;">
+						<button type="button" class="btn btn-default" (click)="buyPackage()">Buy</button>
+						<div style="clear: both;"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-body seminor-login-modal-body" *ngIf="purchaseComplted" style="color:#000;">
+		<p>Allocation will be done based on first come first serve.</p>
+		<p>Thank you.</p>
+		<div class="modal-footer d-block text-right foot-p">
+			<div class="row">
+				<div style="padding-right: 0; float: right; width: 100%;">
+					<button type="button" class="btn btn-default btns" (click)="closeAllPopup()">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</ng-template> 

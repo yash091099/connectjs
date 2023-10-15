@@ -1,0 +1,183 @@
+
+.googlebtn {
+
+	width: 100%;
+	height: 40px;
+	border-radius: 8px;
+	margin-bottom: 15px;
+	cursor: pointer;
+	line-height: 40px;
+	border: 1px solid #ccc;
+}
+p.login-para.text-center {
+    color: #000;
+}
+.eye {
+position: relative;
+width: 100%;
+}
+.eye img{
+position: absolute;
+right: 17px;
+top: -41px;
+width: 17px;
+}
+.reminder{
+position: relative;
+top: 3px;
+width: 17px;
+height: 17px;
+}
+.h-100vh{
+height: 100vh;
+display: flex;
+align-items: center;
+background: #fff;
+justify-items: center;
+justify-content: center;
+}
+.googlebtn .google-icon-wrapper {
+position: absolute;
+width: 40px;
+height: 40px;
+left: 27%;
+}
+.googlebtn .google-icon {
+position: absolute;
+margin-top: 11px;
+margin-left: 11px;
+width: 18px;
+height: 18px;
+}
+.googlebtn .google-icon1 {
+position: absolute;
+width: 40px;
+height: 40px;
+}
+.googlebtn .btn-text {
+font-weight: 500;
+font-size: 18px;
+text-align: center;
+color: #828282;
+}
+
+.login-links a {
+margin: 2px 0px;
+letter-spacing: 1px;
+font-weight: 400;
+}
+
+.signup-title span {
+color: #ffaa00;
+cursor: pointer;font-weight: bold;
+}
+.signup-title{
+ 
+float: right;
+ 
+color: #607D8B;
+font-weight: bold;
+font-size: 12px;
+}
+.signup-title a:hover{color: #ffaa00; text-decoration: underline;}
+.help-block {
+text-decoration: underline;
+float: right;
+width: 100%;
+color: #607D8B;
+font-size: 12px;
+
+}
+.facebookcolor {
+background: #355089
+}
+
+.error-msg{font-size: 13px;}
+
+@media (min-width: 2560px) and (max-width: 4000px){
+	
+	.googlebtn .google-icon-wrapper {
+
+	left: 35%;
+	}
+}
+
+@media only screen and (max-width:1024px) and (min-width:768px) {
+	.h-100vh{
+		display: block;
+	}
+	.loginform {
+		width: 100%;
+		padding-top: 20vh;
+	}
+	.ft-login {
+		font-size: 12px;
+	}
+	.googlebtn .google-icon-wrapper{
+		left: 10%;
+
+	}
+}
+
+
+@media (max-width:667px) and (min-width: 320px) {
+	.login-heading{
+		font-size: 26px;
+	}
+	.googlebtn .google-icon-wrapper{
+		left: 10%;
+
+	}
+	.login-leftbg {
+		margin: 0;
+	}
+	.h-100vh{
+		display: block;
+		padding: 0;
+		height: auto;
+	}
+	.loginform {
+		width: 100%;
+		padding-top: 30px;
+		box-sizing: border-box;
+		background: #fff;
+		margin-top: 0px;
+		margin: auto;
+	}
+	.login-links p {
+		color: #607D8B;
+		font-size: 13px;
+		margin: 10px 0px;
+		 
+	}
+	.width-full {
+		width: 50% !important;
+    flex: initial;
+	max-width: initial;
+	margin: auto;
+	}
+	.logo {
+		width: 150px;
+		margin: 20px auto;
+		display: block;
+	}
+	.form-group .form-control {
+		color: #000000 !important;
+	}
+	.ft-login{
+		font-size: 13px;
+	}
+	.mar-mob{
+		margin-top: 18px;
+	}
+	button.btn-block.login-button {
+		margin-top: 1rem;
+		margin-bottom: 3rem;
+	}
+}
+.loginform p {
+    color: #000000;
+    opacity: 0.7;
+    font-size: 13px;
+    margin-bottom: 20px;
+}

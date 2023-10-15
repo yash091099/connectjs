@@ -1,0 +1,51 @@
+<div class="player-inner-div" id="player">
+
+</div>
+
+<div  [hidden]="hideTime" class="timer"><p class="text text-center" >Ends in 
+	<span [hidden]="!totalHours">
+	<span style="color: #FDAF2F">{{totalHours > 9 ? totalHours: '0'+totalHours }}</span> hours
+	</span>
+	<span [hidden]="!totalMin || (!totalHours && !totalMin)" > <span style="color: #FDAF2F">{{totalMin > 9 ? totalMin : '0'+totalMin}}</span> min
+	</span>
+	<span style="color: #FDAF2F">{{totalSec >9 ? totalSec : totalSec > 0 ? '0'+totalSec : 0}}</span> seconds</p>
+</div>
+
+<button id="OpenModalForCampaign" type="button" [hidden]="true" (click)="open(modalCampaign)"></button>
+
+
+<ng-template #modalCampaign let-modal>
+
+	<div class="modal-body">
+     
+		<div style="color: black;">
+			<div id="clock" [hidden]="!showCounter">
+				<span id="seconds">{{timeLeftSecond}}</span>
+			</div>
+			<div class="d-flex align-items-center justify-content-center mt-2">
+				<p [ngClass]="{'blink_me': showCounter}" class="mb-0 font-16">Please wait, we are verifying your task
+				</p>
+				<span class="loader">
+					<span class="loader__element"></span>
+					<span class="loader__element"></span>
+					<span class="loader__element"></span>
+				</span>
+			</div>
+		</div>
+
+	</div>
+</ng-template>
+
+
+<ng-template #waitingModal let-modal>
+		
+	<div class="modal-body text-center">
+	  <img src="../../../../assets/images/wating.png">
+	  <h3>Please wait !!!</h3>
+	  <p>We’re verifying it only in <span style="color:#000" id="seconds">{{timeLeftSecond}} </span> seconds</p>
+	  <p style="font-size:11px; margin-bottom: 0px;">Do not press back or exit button </p>
+	</div>
+
+</ng-template>
+
+

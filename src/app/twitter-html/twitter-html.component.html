@@ -1,0 +1,4 @@
+<div *ngIf="showLoader" class="lds-facebook"><div></div><div></div><div></div></div>
+<div *ngIf="!showLoader && twitterHTML" class="twitter-tweet" (click)="preventAction($event)" [innerHTML]="twitterHTML"></div>
+<div *ngIf="!twitterHTML && !showLoader">No Preview Found</div>
+

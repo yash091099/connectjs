@@ -1,0 +1,91 @@
+ 
+.table-br{border: 1px #f18221  solid;    padding-bottom: 0;}
+.table-br h6{font-size: 14px;}
+.table{font-size: 10px; color: #ffffff;}
+.table th { text-align: center;
+    padding: 6px 6px;
+    color: #ffad2f;
+    vertical-align: middle;
+    border-top: 1px solid #f18221 !important;
+    border-left: 1px #f18221 solid !important;
+    font-size: 12px;
+    font-weight: 600;
+}
+.table thead th{border-bottom: 1px #f18221 solid;}
+.table-striped td{text-align: center !important;
+    padding: 5px !important;
+    vertical-align: middle !important;
+    border-top: 1px solid #3c393900;
+    font-size: 11px;
+    
+     
+}
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.52) !important;
+}
+.table img{width: 15px;margin-right: 10px;}
+.table a{color: green; font-size: 14px;}
+ 
+.peg-middle{height: 50px; }
+.tran-id{
+     
+    
+    white-space: nowrap;
+    overflow: hidden;
+    width: 50%;
+    margin: 0;
+   display: inline-block;
+    text-overflow: ellipsis;}
+
+    .table {
+        table-layout: fixed;
+      }
+      .text-overflow {
+        display: block;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-size: 11px;
+        width: 80%; float: left;
+      }
+      .copy-icon{float: right; width: 15%; cursor: pointer;    color: #FFC107;}
+      .cell-5 {
+        width: 110px;
+      }
+ 
+.no-found-deta {padding-top: 20%;}
+
+@media (min-width:768px) and (max-width:1024px){
+   
+  .no-found-deta {padding-top: 16% !important;}
+  .overflow-y {
+       
+    overflow-y: initial !important;
+    scrollbar-color: #c77700 #000000;
+    scrollbar-width: thin;
+}
+  
+}
+@media (max-width:768px){
+    table{width: 620px ;}
+     
+    .table-br{ margin-top: 0px; height: auto;} 
+    .overflow-y {
+       
+      overflow-y: initial !important;
+      scrollbar-color: #c77700 #000000;
+      scrollbar-width: thin;
+  }
+}
+
+@media (max-width:480px){
+  table{width: 620px ;}
+  .no-found-deta {padding-top: 3%;}
+  .table-br{ margin-top: 15px; height: auto;} 
+  .overflow-y {
+       
+    overflow-y: initial !important;
+    scrollbar-color: #c77700 #000000;
+    scrollbar-width: thin;
+}
+}

@@ -1,0 +1,13 @@
+.error_msg {
+    color: #f10808;
+    list-style: none;
+    margin-top: 5px;
+    font-size: 9px !important;
+    font-weight: 500;
+}
+
+@media only screen and (max-width: 667px) and (min-width:320px) {
+	.error_msg{
+		font-size: 9px !important;
+	}
+}

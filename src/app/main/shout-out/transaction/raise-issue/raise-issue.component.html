@@ -1,0 +1,27 @@
+<div class="modal-content">
+	<form [formGroup]="reportIssueForm" (submit)="submitRequest()">
+		<div class="form-group col-md-12">
+			<label> Description</label><br />
+			<textarea class="form-control" placeholder="Describe your issue"  rows="4" cols="50"
+				formControlName="description" maxlength="310"></textarea>
+			<app-show-errors [control]="description"></app-show-errors>
+		</div>
+		<div class="form-group col-md-12">
+			<div class="thumbnail">
+				<label> Attachment</label><br />
+				<input *ngIf="attachmentPreview == ''" #imageInput type="file" formControlName="attachments"
+					accept="image/*" (change)="onSelectAttachment($event, $event)" />
+				<img *ngIf="attachmentPreview" src="{{attachmentPreview}}" />
+				<a *ngIf="!(attachmentPreview == '')" (click)="deleteAttachment()"
+					class="crox">
+					<img src="../../../../assets/images/delet.png" class="cursor-pointer" />
+				</a>
+				<app-show-errors [control]="attachments">
+				</app-show-errors>
+			</div>
+		</div>
+		<button type="submit" class="btn btn-warning raise-btn float-right">Raise Ticket</button>
+
+	</form>
+
+</div>

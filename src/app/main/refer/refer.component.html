@@ -1,0 +1,35 @@
+<div class="container ipad-pd-left mg-t-20">
+	<div class="row screen-center">
+		<div class="col-md-12">
+			<div class="tab">
+				<span class="tabs-center">
+					<button class="tablinks" [ngClass]="selectedTab == selectTabArray[0] ? 'active' : ''"
+						(click)="handleTabChage('refer-earn')">Refer & Earn</button>
+
+					<button class="tablinks" [ngClass]="selectedTab == selectTabArray[1] ? 'active' : ''"
+						(click)="handleTabChage('referral-campaigns',$event)">My Campaign</button>
+
+					<button class="tablinks" [ngClass]="selectedTab == selectTabArray[2] ? 'active' : ''"
+						(click)="handleTabChage('analytics')">Analytics</button>
+
+				</span>
+			</div>
+
+			<div id="refer-earn" *ngIf="selectedTab == selectTabArray[0] " class="tabcontent">
+				<app-refer-earn (getSelectedTabEvent)="handleTab($event)"></app-refer-earn>
+			</div>
+			<div id="referral-campaigns" *ngIf="selectedTab == selectTabArray[1] " class="tabcontent">
+				<app-referral-campaigns [campaignType]="selectedCampaignType" (changeSelectedTab)="changeSelectedTab($event)" (selectedReferralData)="changeSelectedReferral($event)" (getSelectedTabEvent)="handleTab($event)" [item]="selectedCampaignId">
+				</app-referral-campaigns>
+			</div>
+			<div id="analytics" *ngIf="selectedTab == selectTabArray[2] " class="tabcontent">
+				<app-analytics (lessDetails)="getPreviousPage($event)" [campaignId]="selectedCampaignId">
+				</app-analytics>
+			</div>
+			<div id="analytics" *ngIf="selectedTab == 'banner_image' " class="tabcontent">
+				<app-referral-banner (getSelectedTabEvent)="handleTab($event)" [campaignType]="selectedCampaignType" [selectedReferralData]="selectedReferralData"></app-referral-banner>
+			</div>
+			
+		</div>
+	</div>
+</div>

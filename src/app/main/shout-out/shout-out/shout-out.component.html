@@ -1,0 +1,2125 @@
+<div class="container ipad-pd-left mg-t-20">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="row d-none">
+          <div class="col-lg-12">
+            <div class="mobile-flex">
+              <h5 class="mb-0 text-center">Dashboard</h5>
+            </div>
+          </div>
+        
+        </div>
+  
+      <!-- new code -->
+        <div
+          class="row justify-content-start align-items-center"
+          id="head_banner"
+        >
+        <div class="col-lg-6 order-lg-2 pt-3 text-center">
+            <img src="../../../../assets/images/banner_img.svg" width="380" />
+          </div>
+          <div class="col-lg-6 mob-center">
+            <h5 >Welcome to</h5>
+            <h1>Social <br /><span>Shoutout</span></h1>
+            <p>
+                Empowers users to 'perform to earn'<br />
+                and fosters a community-driven experience.<br />
+            </p>
+            <a href="https://tdx.biz/social-shoutout" target="_blank" >
+            <button type="button" class="btn btn-outline-light custom_btn mt-4">
+              Explore more
+            </button>
+            </a>
+            <a href="https://medium.com/@TDx_Launchpad/social-shoutout-product-description-and-user-guide-113b096e41c3" target="_blank" >
+                <button type="button" class="btn btn-outline-light custom_btn  mt-4 ml-4">
+                  How it works
+                </button>
+                </a>
+                
+          </div>
+          <hr class="d-block d-sm-none" style="margin-top: -8px !important;">
+          
+        </div>
+        <div class="row justify-content-start align-items-center">
+          <div class="col-lg-12 text-center scoll_ui">
+            <a class="scroll-top"
+            (click)="scrollToId('task_id')" ><img src="../../../../assets/images/mouse.svg" width="25" /></a>
+            <p>Scroll down to start tasks</p>
+          </div> 
+        </div>
+        
+  
+        
+      </div>
+  
+     
+
+      <div class="col-lg-12">
+      <div
+      class="row"
+  
+    >
+      <div class="col-lg-12" style="padding-bottom: 0px !important">
+  
+        <div class="row justify-content-start align-items-center mt-5 mb-5">
+          <div class="col-lg-12 text-center section_title">
+            <h5 class="center on-comp">Ongoing Competition</h5>
+            
+          </div>
+        </div>
+        <div class="carousel" [ngStyle]="{'display': showProjectSlider ? '':'none'}"  >
+          <div
+            class="my-card"
+            *ngIf="!hidePrevButton && upcommingCompitionsArray?.length > 1"
+            (click)="onClickSlider('prev')"
+            id="prev"
+          >
+            <img src="../../../../assets/images/left-icon.png" />
+          </div>
+		
+          <div class="card-carousel">
+            <div
+              *ngFor="let item of upcommingCompitionsArray; let i = index"
+              class="img-card my-card"
+            >
+              <a [href]="item?.projectUrl"><img [src]="item?.cardImage" /></a>
+              <p class="latest-socils">Socials</p>
+              <div class="bid-react-area">
+                <div class="socials-bid">
+                  <div class="social-card-icon">
+                    <span *ngFor="let social of item?.activeSocials"
+                      ><img
+                        *ngIf="social?.category == 'Telegram'"
+                        src="../../../../assets/images/teligram.png"
+                        alt="tel-icon"
+                        title="Telegram" />
+                      <img
+                        *ngIf="social?.category == 'Twitter'"
+                        src="../../../../assets/images/twi.png"
+                        alt="twi-icon"
+                        title="Twitter" />
+                      <img
+                        *ngIf="social?.category == 'Youtube'"
+                        src="../../../../assets/images/youtube.png"
+                        alt="yt-icon"
+                        title="Youtube"
+                      />
+                      <img
+                      *ngIf="social?.category == 'Other'"
+                      src="../../../../assets/images/website_logo.png"
+                      alt="twi-icon"
+                      title="Website" />
+                    </span>
+                  </div>
+                </div>
+                <div class="react-area">
+                  <h3>
+                    {{ item?.completedTasks }} <span>/</span>
+                    {{ item?.activetasks }}
+                  </h3>
+                  <p>Tasks Completed</p>
+                </div>
+              </div>
+              <div class="bid-react-area mt-3">
+                <div class="social-name">
+                  <h3>{{ item?.name }}</h3>
+                  <p>{{ item?.description }}</p>
+                </div>
+                <div class="social-next-btn">
+                  <a [href]="item?.projectUrl"
+                    ><i class="fa fa-long-arrow-right" aria-hidden="true"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="my-card"
+            *ngIf="!hideNextButton && upcommingCompitionsArray?.length > 1"
+            (click)="onClickSlider('next')"
+            id="next"
+          >
+            <img src="../../../../assets/images/right-icon.png" />
+          </div>
+        </div>
+        <div class="carousel-selectorn" >
+          <div class="selectorn" [ngStyle]="{'display': !showProjectSlider ? '':'none'}">
+            <div id="card" style="transform: scale(.9) translateY(0.5rem) translateX(0rem);">
+             <div class="card-image">
+             
+             <svg class="fpo " width="274px" height="270px" x="50%" y="50%" viewBox="0 0 84 63" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+               <title>Shape</title>
+               <desc>Created with Sketch.</desc>
+               <defs></defs>
+               <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-964.000000, -1012.000000)" fill-opacity="0.06">
+                 <g id="16---Workpaper-Loading-Copy" transform="translate(836.000000, 909.000000)" fill="#000000">
+                   <g id="Icons-/-Special-/-RTE-/-Image" transform="translate(100.000000, 67.000000)">
+                     <g id="Icons-/-RTE-/-ImageSpecial">
+                       <path d="M108.368088,36.5625 L30.8485565,36.5625 C29.319526,36.5625 28.0800018,37.8216991 28.0800018,39.375 L28.0800018,95.625 C28.0800018,97.1783009 29.319526,98.4375 30.8485565,98.4375 L108.368088,98.4375 C109.897118,98.4375 111.136642,97.1783009 111.136642,95.625 L111.136642,39.375 C111.136642,37.8216991 109.897118,36.5625 108.368088,36.5625 L108.368088,36.5625 Z M105.599533,42.1875 L105.599533,81.225 L96.7678436,68.68125 C96.2965986,68.0076728 95.5575991,67.5787153 94.747102,67.5082962 C93.936605,67.4378771 93.1366348,67.7331229 92.5596405,68.315625 L82.0668182,79.003125 L59.1154999,55.6875 C58.0356599,54.5970274 56.2916778,54.5970274 55.2118378,55.6875 L33.6171112,77.596875 L33.6171112,42.1875 L105.599533,42.1875 L105.599533,42.1875 Z M33.6171112,92.8125 L33.6171112,85.528125 L57.149826,61.621875 L80.1011444,84.9375 C81.1809844,86.0279726 82.9249665,86.0279726 84.0048065,84.9375 L94.1654022,74.64375 L105.599533,90.9 L105.599533,92.8125 L33.6171112,92.8125 L33.6171112,92.8125 Z M77.9139862,56.25 C77.9139862,53.1433983 80.3930345,50.625 83.4510956,50.625 C86.5091566,50.625 88.988205,53.1433983 88.988205,56.25 C88.988205,59.3566017 86.5091566,61.875 83.4510956,61.875 C80.3930345,61.875 77.9139862,59.3566017 77.9139862,56.25 L77.9139862,56.25 Z" id="Shape"></path>
+                     </g>
+                   </g>
+                 </g>
+               </g>
+             </svg>
+             </div>
+             <div class="card-content">
+             <div class="block2 pulsate">
+             </div>
+             <div class="block3 pulsate">
+             </div>
+             <div class="circle pulsate">
+             </div>
+             <div style="clear: both;"></div>
+             </div>
+           </div>
+       
+            </div>
+            <div class="selectorn" [ngStyle]="{'display': !showProjectSlider && !isMobileScreen  ? '':'none'}">
+              <div id="card">
+               <div class="card-image">
+               
+               <svg class="fpo " width="280px" height="270px" x="50%" y="50%" viewBox="0 0 84 63" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                 <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+                 <title>Shape</title>
+                 <desc>Created with Sketch.</desc>
+                 <defs></defs>
+                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-964.000000, -1012.000000)" fill-opacity="0.06">
+                   <g id="16---Workpaper-Loading-Copy" transform="translate(836.000000, 909.000000)" fill="#000000">
+                     <g id="Icons-/-Special-/-RTE-/-Image" transform="translate(100.000000, 67.000000)">
+                       <g id="Icons-/-RTE-/-ImageSpecial">
+                         <path d="M108.368088,36.5625 L30.8485565,36.5625 C29.319526,36.5625 28.0800018,37.8216991 28.0800018,39.375 L28.0800018,95.625 C28.0800018,97.1783009 29.319526,98.4375 30.8485565,98.4375 L108.368088,98.4375 C109.897118,98.4375 111.136642,97.1783009 111.136642,95.625 L111.136642,39.375 C111.136642,37.8216991 109.897118,36.5625 108.368088,36.5625 L108.368088,36.5625 Z M105.599533,42.1875 L105.599533,81.225 L96.7678436,68.68125 C96.2965986,68.0076728 95.5575991,67.5787153 94.747102,67.5082962 C93.936605,67.4378771 93.1366348,67.7331229 92.5596405,68.315625 L82.0668182,79.003125 L59.1154999,55.6875 C58.0356599,54.5970274 56.2916778,54.5970274 55.2118378,55.6875 L33.6171112,77.596875 L33.6171112,42.1875 L105.599533,42.1875 L105.599533,42.1875 Z M33.6171112,92.8125 L33.6171112,85.528125 L57.149826,61.621875 L80.1011444,84.9375 C81.1809844,86.0279726 82.9249665,86.0279726 84.0048065,84.9375 L94.1654022,74.64375 L105.599533,90.9 L105.599533,92.8125 L33.6171112,92.8125 L33.6171112,92.8125 Z M77.9139862,56.25 C77.9139862,53.1433983 80.3930345,50.625 83.4510956,50.625 C86.5091566,50.625 88.988205,53.1433983 88.988205,56.25 C88.988205,59.3566017 86.5091566,61.875 83.4510956,61.875 C80.3930345,61.875 77.9139862,59.3566017 77.9139862,56.25 L77.9139862,56.25 Z" id="Shape"></path>
+                       </g>
+                     </g>
+                   </g>
+                 </g>
+               </svg>
+               </div>
+               <div class="card-content">
+               <div class="block2 pulsate">
+               </div>
+               <div class="block3 pulsate">
+               </div>
+               <div class="circle pulsate">
+               </div>
+               <div style="clear: both;"></div>
+               </div>
+             </div>
+         
+              </div>
+          <div class="selectorn" [ngStyle]="{'display': !showProjectSlider && !isMobileScreen ? '':'none'}">
+         <div id="card" style="transform: scale(.9) translateY(0.5rem) translateX(0rem);">
+          <div class="card-image">
+          
+          <svg class="fpo " width="280px" height="270px" x="50%" y="50%" viewBox="0 0 84 63" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+            <title>Shape</title>
+            <desc>Created with Sketch.</desc>
+            <defs></defs>
+            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-964.000000, -1012.000000)" fill-opacity="0.06">
+              <g id="16---Workpaper-Loading-Copy" transform="translate(836.000000, 909.000000)" fill="#000000">
+                <g id="Icons-/-Special-/-RTE-/-Image" transform="translate(100.000000, 67.000000)">
+                  <g id="Icons-/-RTE-/-ImageSpecial">
+                    <path d="M108.368088,36.5625 L30.8485565,36.5625 C29.319526,36.5625 28.0800018,37.8216991 28.0800018,39.375 L28.0800018,95.625 C28.0800018,97.1783009 29.319526,98.4375 30.8485565,98.4375 L108.368088,98.4375 C109.897118,98.4375 111.136642,97.1783009 111.136642,95.625 L111.136642,39.375 C111.136642,37.8216991 109.897118,36.5625 108.368088,36.5625 L108.368088,36.5625 Z M105.599533,42.1875 L105.599533,81.225 L96.7678436,68.68125 C96.2965986,68.0076728 95.5575991,67.5787153 94.747102,67.5082962 C93.936605,67.4378771 93.1366348,67.7331229 92.5596405,68.315625 L82.0668182,79.003125 L59.1154999,55.6875 C58.0356599,54.5970274 56.2916778,54.5970274 55.2118378,55.6875 L33.6171112,77.596875 L33.6171112,42.1875 L105.599533,42.1875 L105.599533,42.1875 Z M33.6171112,92.8125 L33.6171112,85.528125 L57.149826,61.621875 L80.1011444,84.9375 C81.1809844,86.0279726 82.9249665,86.0279726 84.0048065,84.9375 L94.1654022,74.64375 L105.599533,90.9 L105.599533,92.8125 L33.6171112,92.8125 L33.6171112,92.8125 Z M77.9139862,56.25 C77.9139862,53.1433983 80.3930345,50.625 83.4510956,50.625 C86.5091566,50.625 88.988205,53.1433983 88.988205,56.25 C88.988205,59.3566017 86.5091566,61.875 83.4510956,61.875 C80.3930345,61.875 77.9139862,59.3566017 77.9139862,56.25 L77.9139862,56.25 Z" id="Shape"></path>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </svg>
+          </div>
+          <div class="card-content">
+          <div class="block2 pulsate">
+          </div>
+          <div class="block3 pulsate">
+          </div>
+          <div class="circle pulsate">
+          </div>
+          <div style="clear: both;"></div>
+          </div>
+        </div>
+    
+         </div>
+        </div>
+        
+      </div>
+    </div>
+    </div>
+  
+      <div *ngIf="!isLeaderBoardLoading" class="col-lg-12 m-auto leaderboard-slider" >
+        <div class="row justify-content-start align-items-center mt-5">
+            <div class="col-lg-10 m-auto text-center section_title">
+				<h5 *ngIf="projectNameLeaderBoard" [ngbTooltip]="projectNameLeaderBoard?.length > 35 ? projectNameLeaderBoard : ''">{{ projectNameLeaderBoard | truncate : 35 }}</h5>
+				<h5 *ngIf="!projectNameLeaderBoard">Social Shoutout Leaderboard</h5>
+              <div class="sort_by">
+                <button [routerLink]="['/shout-out/transaction/transactions']"  type="button" class="btn btn-outline-light custom_btn"> Transactions </button>
+              </div>
+            </div>
+          </div>
+        
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false" data-wrap="false">
+            <div class="carousel-inner">
+                <div *ngFor="let project of leadershipProjects; let index=index" class="carousel-item" [ngClass]="{'active': (selectedIndex == index && selectedIndex < leadershipProjects?.length)}">
+                    <div class="my-card">               
+                        <div class="card mg-t-40 height-box-last h-60vh leaderTable"
+                          >
+                          <div class="ladder-nav--results" >
+                              <div class="ladder-nav--results-col" style="flex-grow: 1.5; padding-left: 10px;">
+                              <label>Rank</label>
+                              </div>
+                              <div class="ladder-nav--results-col" style="flex-grow: 5; padding-left: 5px;">
+                              <label >User name</label>
+                              </div>
+                              <div class="ladder-nav--results-col text-center" style="flex-grow: 3">
+                              <label>Completed  tasks</label>
+                              </div>
+                          </div>
+                          <div
+                              *ngIf="!leadershipDataByProjects?.userRankData?.isRankInViewPort && leadershipDataByProjects?.userRankData?.taskDone"
+                              class="ladder-nav--results-players highlight-border"
+                          >
+                              <div class="results-col" style="flex-grow: 1.5">
+                              <span class="results-rank">
+                                  <span class="positions">#{{ leadershipDataByProjects?.userRankData?.rank }}</span>
+                              </span>
+                              </div>
+                  
+                              <div class="results-col user-icon-leader"  style="flex-grow: 5.5; ">
+                              <ngx-avatar
+                                  *ngIf="!loggedInUserDetails?.user?.profilePicture"
+                                  [name]="loggedInUserDetails?.user?.avatarName"
+                                  size="30"
+                                  [round]="true"
+                              >
+                              </ngx-avatar>
+                              <a *ngIf="loggedInUserDetails?.user?.profilePicture" style="padding: 0px !important;"
+                              class="btn btn-nav  user-avtar">
+                              <img [src]="loggedInUserDetails?.user?.profilePicture">
+                              </a>
+                              <span
+                                  *ngIf="
+                                  loggedInUserDetails.user?.displayName?.length > 16 &&
+                                  loggedInUserDetails?.user?.isHidden
+                                  "
+                                  class="results-team"
+                                  [ngbTooltip]="loggedInUserDetails?.user?.displayName"
+                                  >{{
+                                  loggedInUserDetails?.user?.displayName || "--"
+                                      | truncate : 16
+                                      | titlecase
+                                  }}</span
+                              >
+                              <span
+                                  *ngIf="
+                                  loggedInUserDetails?.user?.displayName?.length <= 16 &&
+                                  loggedInUserDetails?.user?.isNameHidden
+                                  "
+                                  [ngbTooltip]="loggedInUserDetails?.user?.displayName"
+                                  class="results-team"
+                                  >{{
+                                  loggedInUserDetails?.user?.displayName || "--"
+                                      | truncate : 16
+                                      | titlecase
+                                  }}</span
+                              >
+                              <span
+                                  class="results-team"
+                                  *ngIf="
+                                  !loggedInUserDetails?.user?.isNameHidden &&
+                                  loggedInUserDetails?.user?.name?.length > 16
+                                  "
+                                  [ngbTooltip]="loggedInUserDetails?.user?.name"
+                              >
+                                  {{
+                                  loggedInUserDetails?.user?.name || "--"
+                                      | truncate : 16
+                                      | titlecase
+                                  }}</span
+                              >
+                              <span
+                                  class="results-team"
+                                  *ngIf="
+                                  !loggedInUserDetails?.user?.isNameHidden &&
+                                  loggedInUserDetails?.user?.name?.length <= 16
+                                  "
+                                  [ngbTooltip]="loggedInUserDetails?.user?.name"
+                              >
+                                  {{
+                                  loggedInUserDetails?.user?.name || "--"
+                                      | truncate : 16
+                                      | titlecase
+                                  }}</span
+                              >
+                              </div>
+                  
+                              <div class="results-col text-center" style="flex-grow: 2;">
+                              <span class="results-gp">
+                                  {{ leadershipDataByProjects?.userRankData?.taskDone > 9 ? leadershipDataByProjects?.userRankData?.taskDone : "0"+leadershipDataByProjects?.userRankData?.taskDone || '00' }}</span
+                              >
+                              </div>
+                          </div>
+                          <button
+                              id="scrollHideProjectBtn"
+                              (click)="scrollLeaderBoardProjects(null,'scrollableDiv'+index)"
+                              [hidden]="true"
+                          ></button>
+                          <div
+                              [id]="'scrollableDiv'+index"
+                              class="leaderboardProjectscroll"
+                              (scroll)="scrollLeaderBoardProjects(null,'scrollableDiv'+index)"
+                              [ngClass]="{ 'hide-scroll-y': leadershipDataByProjects?.usersLeadershipBoard?.length > 5 }"
+                          >
+                              <div
+                              id="projectHandle"
+                              *ngFor="let leader of leadershipDataByProjects?.usersLeadershipBoard; let i = index"
+                              class="ladder-nav--results-players"
+                              (scroll)="scrollHandler($event)"
+                              [ngClass]="{ 'highlight-border': leadershipDataByProjects?.userRankData?.rank == i + 1 }"
+                              >
+                              <div class="results-col" style="flex-grow: 1.5">
+                                  <span class="results-rank">
+                                  <span [class]="leadershipDataByProjects?.userRankData?.rank == i + 1 ? 'positions box ' : 'positions'"
+                                      >#{{ i + 1 }}</span
+                                  >
+                                  <br />
+                                  <p *ngIf="leadershipDataByProjects?.userRankData?.rank == i + 1" class="small-text mb-0">
+                                      Your Ranking
+                                  </p>
+                                  </span>
+                              </div>
+                              <div
+                                  class="results-col user-icon-leader usernamed-left"
+                                  style="flex-grow: 5.5;"
+                              >
+                                  <ngx-avatar
+                                  *ngIf="!leader?.user?.profilePicture || loggedInUserDetails?.user?.email != leader?.user?.email" 
+                                  [name]="leader?.user?.avatarName"
+                                  size="30"
+                                  [round]="true"
+                                  >
+                                  </ngx-avatar>
+                                  <a *ngIf="leader?.user?.profilePicture &&  loggedInUserDetails?.user?.email == leader?.user?.email" style="padding: 0px !important;"
+                                  class="btn btn-nav  user-avtar">
+                                  <img [src]="loggedInUserDetails?.user?.profilePicture">
+                                  </a>
+                                  <span
+                                  *ngIf="
+                                      leader?.user?.displayName?.length > 16 &&
+                                      leader?.user?.isHidden
+                                  "
+                                  class="results-team"
+                                  [ngClass]="{ '': leadershipDataByProjects?.userRankData?.rank == i + 1 }"
+                                  [ngbTooltip]="leader?.user?.displayName | truncate : 75"
+                                  >{{
+                                      leader?.user?.displayName || "--" | truncate : 16 | titlecase
+                                  }}</span
+                                  >
+                                  <span
+                                  *ngIf="
+                                      leader?.user?.displayName?.length <= 16 &&
+                                      leader?.user?.isNameHidden
+                                  "
+                                  [ngClass]="{ '': leadershipDataByProjects?.userRankData?.rank == i + 1 }"
+                                  class="results-team"
+                                  >{{
+                                      leader?.user?.displayName || "--" | truncate : 16 | titlecase
+                                  }}</span
+                                  >
+                                  <span
+                                  class="results-team"
+                                  [ngClass]="{ '': leadershipDataByProjects?.userRankData?.rank == i + 1 }"
+                                  *ngIf="
+                                      !leader?.user?.isNameHidden && leader?.user?.avatarName?.length > 16
+                                  "
+                                  [ngbTooltip]="leader?.user?.avatarName | titlecase | truncate : 75"
+                                  >{{
+                                      leader?.user?.avatarName || "--" | truncate : 16 | titlecase
+                                  }}</span
+                                  >
+                                  <span
+                                  class="results-team"
+                                  [ngClass]="{ '': leadershipDataByProjects?.userRankData?.rank == i + 1 }"
+                                  *ngIf="
+                                      !leader?.user?.isNameHidden &&
+                                      leader?.user?.avatarName?.length <= 16
+                                  "
+                                  >{{
+                                      leader?.user?.avatarName || "--" | truncate : 16 | titlecase
+                                  }}</span
+                                  >
+                              </div>
+                              <div
+                                  class="results-col text-center"
+                                  [ngClass]="{ '': leadershipDataByProjects?.userRankData?.rank == i + 1 }"
+                                  style="flex-grow: 2; "
+                              >
+                                  <span class="results-gp">{{ leader?.taskDone > 9 ?  leader?.taskDone : '0'+leader?.taskDone || '00' }}</span>
+                              </div>
+                              </div>
+                              <div
+                              *ngIf="!leadershipDataByProjects?.usersLeadershipBoard?.length"
+                              style="text-align: center; line-height: 40vh"
+                              >
+                              <span>No Data Found</span>
+                              </div>
+                          </div>
+                              <div class="card-bottom">
+                                  <span
+                                  *ngIf="moreScrollProjectBtn && leadershipDataByProjects?.usersLeadershipBoard?.length > 30"
+                                  (click)="scrollLeaderBoardProjects('more','scrollableDiv'+index)"
+                                  id="more_scroll_id_2"
+                                  >
+                                  <a class="circles-arrow"
+                                      ><i class="fa fa-angle-down" aria-hidden="true"></i
+                                  ></a>
+                                  More
+                                  </span>
+                                  <span
+                                  (click)="scrollLeaderBoardProjects('top','scrollableDiv'+index)"
+                                  *ngIf="topScrollProjectBtn && leadershipDataByProjects?.usersLeadershipBoard?.length"
+                                  id="top_scroll_id_2"
+                                  >
+                                  <a class="circles-arrow"
+                                      ><i class="fa fa-angle-up" aria-hidden="true"></i
+                                  ></a>
+                                  Top 
+                                  </span>
+                              </div>
+                      </div>
+                        </div>
+                  </div>
+                 
+              <div class="carousel-item" *ngIf="selectedIndex == leadershipProjects?.length" [ngClass]="{'active': selectedIndex == leadershipProjects?.length}">
+                <div class="my-card">               
+                    <div class="card mg-t-40 height-box-last h-60vh leaderTable"
+                      >
+                      <div *ngIf="showHideMyName" class="text-right">
+                      <form [formGroup]="reverifyForm">
+                          <label for="html" class="checkbox"  style="font-weight: 200;"
+                          ><input
+                              class="mr-1 cursor-pointer"
+                              type="checkbox"
+                              formControlName="hideCheckBox"
+                              (click)="openhideMyNamePopUp(hideMyName)"
+                              id="html"
+                          />
+                          Hide my name
+                          </label>
+                      </form>
+                      </div>
+              
+                      <div class="ladder-nav--results" >
+                          <div class="ladder-nav--results-col" style="flex-grow: 1.5; padding-left: 10px;">
+                          <label>Rank</label>
+                          </div>
+                          <div class="ladder-nav--results-col" style="flex-grow: 5; padding-left: 5px;">
+                          <label >User name</label>
+                          </div>
+                          <div class="ladder-nav--results-col text-center" style="flex-grow: 3">
+                          <label>Completed  tasks</label>
+                          </div>
+                      </div>
+                      <div
+                          *ngIf="!isRankInViewPort"
+                          class="ladder-nav--results-players highlight-border"
+                      >
+                          <div class="results-col" style="flex-grow: 1.5">
+                          <span class="results-rank">
+                              <span class="positions">#{{ rank }}</span>
+                          </span>
+                          </div>
+              
+                          <div class="results-col user-icon-leader"  style="flex-grow: 5.5; ">
+                          <ngx-avatar
+                              *ngIf="!loggedInUserDetails?.user?.profilePicture"
+                              [name]="loggedInUserDetails?.user?.avatarName"
+                              size="30"
+                              [round]="true"
+                          >
+                          </ngx-avatar>
+                          <a *ngIf="loggedInUserDetails?.user?.profilePicture" style="padding: 0px !important;"
+                          class="btn btn-nav  user-avtar">
+                          <img [src]="loggedInUserDetails?.user?.profilePicture">
+                          </a>
+                          <span
+                              *ngIf="
+                              loggedInUserDetails.user?.displayName?.length > 16 &&
+                              loggedInUserDetails?.user?.isHidden
+                              "
+                              class="results-team"
+                              [ngbTooltip]="loggedInUserDetails?.user?.displayName"
+                              >{{
+                              loggedInUserDetails?.user?.displayName || "--"
+                                  | truncate : 16
+                                  | titlecase
+                              }}</span
+                          >
+                          <span
+                              *ngIf="
+                              loggedInUserDetails?.user?.displayName?.length <= 16 &&
+                              loggedInUserDetails?.user?.isNameHidden
+                              "
+                              [ngbTooltip]="loggedInUserDetails?.user?.displayName"
+                              class="results-team"
+                              >{{
+                              loggedInUserDetails?.user?.displayName || "--"
+                                  | truncate : 16
+                                  | titlecase
+                              }}</span
+                          >
+                          <span
+                              class="results-team"
+                              *ngIf="
+                              !loggedInUserDetails?.user?.isNameHidden &&
+                              loggedInUserDetails?.user?.name?.length > 16
+                              "
+                              [ngbTooltip]="loggedInUserDetails?.user?.name"
+                          >
+                              {{
+                              loggedInUserDetails?.user?.name || "--"
+                                  | truncate : 16
+                                  | titlecase
+                              }}</span
+                          >
+                          <span
+                              class="results-team"
+                              *ngIf="
+                              !loggedInUserDetails?.user?.isNameHidden &&
+                              loggedInUserDetails?.user?.name?.length <= 16
+                              "
+                              [ngbTooltip]="loggedInUserDetails?.user?.name"
+                          >
+                              {{
+                              loggedInUserDetails?.user?.name || "--"
+                                  | truncate : 16
+                                  | titlecase
+                              }}</span
+                          >
+                          </div>
+              
+                          <div class="results-col text-center" style="flex-grow: 2; padding-left: 10px;">
+                          <span class="results-gp">
+                              {{ loggedInUserDetails?.taskDone > 9 ? loggedInUserDetails?.taskDone : '0'+loggedInUserDetails?.taskDone  || 0 }}</span
+                          >
+                          </div>
+                      </div>
+                      <button
+                          id="scrollHideBtn"
+                          (click)="scrollLeaderBoard()"
+                          [hidden]="true"
+                      ></button>
+                      <div
+                          id="scrollableDiv"
+                          (scroll)="scrollLeaderBoard()"
+                          class="leaderboardscroll"
+                          [ngClass]="{ 'hide-scroll-y': leaderShipBoardArray?.length > 5 }"
+                      >
+                          <div
+                          id="scrollHandle"
+                          *ngFor="let leader of leaderShipBoardArray; let i = index"
+                          class="ladder-nav--results-players"
+                          (scroll)="scrollHandler($event)"
+                          [ngClass]="{ 'highlight-border': rank == i + 1 }"
+                          >
+                          <div class="results-col" style="flex-grow: 1.5">
+                              <span class="results-rank">
+                              <span [class]="rank == i + 1 ? 'positions box ' : 'positions'"
+                                  >#{{ i + 1 }}</span
+                              >
+                              <br />
+                              <p *ngIf="rank == i + 1" class="small-text mb-0">
+                                  Your Ranking
+                              </p>
+                              </span>
+                          </div>
+                          <div
+                              class="results-col user-icon-leader usernamed-left"
+                              style="flex-grow: 5.5;"
+                          >
+                              <ngx-avatar
+                              *ngIf="!leader?.profilePicture || loggedInUserDetails?.user?.email != leader?.email" 
+                              [name]="leader?.avatarName"
+                              size="30"
+                              [round]="true"
+                              >
+                              </ngx-avatar>
+                              <a *ngIf="leader?.profilePicture &&  loggedInUserDetails?.user?.email == leader?.email" style="padding: 0px !important;"
+                              class="btn btn-nav  user-avtar">
+                              <img [src]="loggedInUserDetails?.user?.profilePicture">
+                              </a>
+                              <span
+                              *ngIf="
+                                  leader?.displayName?.length > 16 &&
+                                  leader?.isHidden
+                              "
+                              class="results-team"
+                              [ngClass]="{ '': rank == i + 1 }"
+                              [ngbTooltip]="leader?.displayName | truncate : 75"
+                              >{{
+                                  leader?.displayName || "--" | truncate : 16 | titlecase
+                              }}</span
+                              >
+                              <span
+                              *ngIf="
+                                  leader?.displayName?.length <= 16 &&
+                                  leader?.isNameHidden
+                              "
+                              [ngClass]="{ '': rank == i + 1 }"
+                              class="results-team"
+                              >{{
+                                  leader?.displayName || "--" | truncate : 16 | titlecase
+                              }}</span
+                              >
+                              <span
+                              class="results-team"
+                              [ngClass]="{ '': rank == i + 1 }"
+                              *ngIf="
+                                  !leader?.isNameHidden && leader?.avatarName?.length > 16
+                              "
+                              [ngbTooltip]="leader?.avatarName | titlecase | truncate : 75"
+                              >{{
+                                  leader?.avatarName || "--" | truncate : 16 | titlecase
+                              }}</span
+                              >
+                              <span
+                              class="results-team"
+                              [ngClass]="{ '': rank == i + 1 }"
+                              *ngIf="
+                                  !leader?.isNameHidden &&
+                                  leader?.avatarName?.length <= 16
+                              "
+                              >{{
+                                  leader?.avatarName || "--" | truncate : 16 | titlecase
+                              }}</span
+                              >
+                          </div>
+                          <div
+                              class="results-col text-center"
+                              [ngClass]="{ '': rank == i + 1 }"
+                              style="flex-grow: 2; "
+                          >
+                              <span class="results-gp">{{ leader?.taskDone > 9 ? leader?.taskDone : '0'+leader?.taskDone  || "0" }}</span>
+                          </div>
+                          </div>
+                          <div
+                          *ngIf="!leaderShipBoardArray.length"
+                          style="text-align: center; line-height: 40vh"
+                          >
+                          <span>No Data Found</span>
+                          </div>
+                      </div>
+                          <div class="card-bottom">
+                              <span
+                              *ngIf="moreScrollBtn && leaderShipBoardArray.length > 30"
+                              (click)="scrollLeaderBoard('more')"
+                              id="more_scroll_id"
+                              >
+                              <a class="circles-arrow"
+                                  ><i class="fa fa-angle-down" aria-hidden="true"></i
+                              ></a>
+                              More
+                              </span>
+                              <span
+                              (click)="scrollLeaderBoard('top')"
+                              *ngIf="topScrollBtn && leaderShipBoardArray?.length"
+                              id="top_scroll_id"
+                              >
+                              <a class="circles-arrow"
+                                  ><i class="fa fa-angle-up" aria-hidden="true"></i
+                              ></a>
+                              Top
+                              </span>
+                          </div>
+                  </div>
+                    </div>
+              </div>
+            
+            
+            </div>
+            <a *ngIf="selectedIndex != 0" class="carousel-control-prev"  role="button" data-slide="prev" (click)="getIndex(true)">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a *ngIf="selectedIndex < leadershipProjects?.length" class="carousel-control-next"  role="button" data-slide="next" (click)="getIndex(false)">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        
+      </div>
+      <div *ngIf="isLeaderBoardLoading" class="col-lg-12 m-auto leaderboard-slider" >
+        <div class="row justify-content-start align-items-center mt-5">
+            <div class="col-lg-10 m-auto text-center section_title">
+				<h5 *ngIf="projectNameLeaderBoard" [ngbTooltip]="projectNameLeaderBoard?.length > 35 ? projectNameLeaderBoard : ''">{{ projectNameLeaderBoard | truncate : 35 }}</h5>
+				<h5 *ngIf="!projectNameLeaderBoard">Social Shoutout Leaderboard</h5>
+              
+            </div>
+            <div class="skeleton-led card mg-t-40 height-box-last h-60vh leaderTable">
+              <table class="tg">
+                <tr>
+                  <th class="tg-cly1" style="width:150px;">  
+                      <div class="line"></div>
+                  </th>
+                  <th class="tg-cly1">
+                    <div class="line"></div>
+                  </th>
+                  <th class="tg-cly1">
+                    <div class="line"></div>
+                  </th>
+                
+                
+                </tr>
+                <tr>
+                  <td class="tg-cly1">
+                    <div class="line"></div>
+                  </td>
+                  <td class="tg-cly1">
+                    <div class="line"></div>
+                  </td>
+                  <td class="tg-cly1">
+                    <div class="line"></div>
+                  </td>
+
+                </tr>
+                <tr>
+                  <td class="tg-cly1">
+                    <div class="line"></div>
+                  </td>
+                  <td class="tg-cly1">
+                    <div class="line"></div>
+                  </td>
+                  <td class="tg-cly1">
+                    <div class="line"></div>
+                  </td>
+
+                </tr>
+                <tr>
+                  <td class="tg-cly1">
+                    <div class="line"></div>
+                  </td>
+                  <td class="tg-cly1">
+                    <div class="line"></div>
+                  </td>
+                  <td class="tg-cly1">
+                    <div class="line"></div>
+                  </td>
+
+                </tr>
+                <tr>
+                  <td class="tg-cly1">
+                    <div class="line"></div>
+                  </td>
+                  <td class="tg-cly1">
+                    <div class="line"></div>
+                  </td>
+                  <td class="tg-cly1">
+                    <div class="line"></div>
+                  </td>
+
+                </tr>
+                <tr>
+                  <td class="tg-cly1">
+                    <div class="line"></div>
+                  </td>
+                  <td class="tg-cly1">
+                    <div class="line"></div>
+                  </td>
+                  <td class="tg-cly1">
+                    <div class="line"></div>
+                  </td>
+
+                </tr>
+                <tr>
+                  <td class="tg-cly1">
+                    <div class="line"></div>
+                  </td>
+                  <td class="tg-cly1">
+                    <div class="line"></div>
+                  </td>
+                  <td class="tg-cly1">
+                    <div class="line"></div>
+                  </td>
+
+                </tr>
+                <tr>
+                  <td class="tg-cly1">
+                    <div class="line"></div>
+                  </td>
+                  <td class="tg-cly1">
+                    <div class="line"></div>
+                  </td>
+                  <td class="tg-cly1">
+                    <div class="line"></div>
+                  </td>
+
+                </tr> <tr>
+                  <td class="tg-cly1">
+                    <div class="line"></div>
+                  </td>
+                  <td class="tg-cly1">
+                    <div class="line"></div>
+                  </td>
+                  <td class="tg-cly1">
+                    <div class="line"></div>
+                  </td>
+
+                </tr> 
+             
+         
+         
+              </table> 
+            </div>
+          
+          </div>
+        
+     
+      </div>
+
+      <div *ngIf="!tasksDetailsLoading" class="col-lg-12" >
+        <div class="row justify-content-start align-items-center pt-4 mt-5" id="task_id">
+            <div class="col-lg-12 text-center section_title">
+              <h5 class="center">Tasks</h5>
+            </div>
+          </div>
+        <div
+          class="card mg-t-40 height-box-last h-60vh d-none"
+          style="background-color: rgba(62, 62, 62, 0.3) !important"
+        >
+          <div class="card-header search-refersh">
+          </div>
+  
+          <ul
+            class="sosail-twiter-list"
+            [ngClass]="{ 'hide-scroll-y': campaignsArray?.length > 5 }"
+          >
+            <li
+              *ngFor="let task of campaignsArray; let i = index"
+              [ngClass]="{ 'margin-last-task': i == campaignsArray?.length - 1 }"
+            >
+              <div
+                class="twitter-bg"
+                [ngClass]="
+                  task?.type?.category == SOCIAL_CONNECTIONS.TWITTER
+                    ? 'tw-color'
+                    : task?.type?.category == SOCIAL_CONNECTIONS.YOUTUBE
+                    ? 'youtube-color'
+                    : 'tle-color'
+                "
+              >
+                <span>
+                  <a
+                    *ngIf="task.type?.category == SOCIAL_CONNECTIONS.YOUTUBE"
+                    target="_blank"
+                    style="color: #fff !important"
+                  >
+                    <i class="fa fa-play" aria-hidden="true"></i>
+                  </a>
+  
+                  <a
+                    *ngIf="task.type.category == SOCIAL_CONNECTIONS.TWITTER"
+                    target="_blank"
+                  >
+                    <img
+                      class="icon"
+                      src="../../../assets/images/twitter-logo.png"
+                    />
+                  </a>
+  
+                  <a
+                    *ngIf="task.type.category == SOCIAL_CONNECTIONS.TELEGRAM"
+                    target="_blank"
+                  >
+                    <i
+                      class="fa fa-paper-plane"
+                      style="color: #fff !important"
+                      aria-hidden="true"
+                    ></i>
+                  </a>
+                </span>
+              </div>
+              <div
+                class="test-socail-type"
+                [ngbTooltip]="task?.title | titlecase"
+              >
+                {{ task?.title | titlecase }}
+              </div>
+              <button class="btn btn-warning-outline">
+                <ng-container *ngIf="task?.projectId?.symbol == 'USD'"
+                  >$ {{ task?.reward?.$numberDecimal }}</ng-container
+                >
+                <ng-container *ngIf="task?.projectId?.symbol != 'USD'"
+                  >{{ task?.reward?.$numberDecimal }}
+                  {{ task?.projectId?.symbol }}</ng-container
+                >
+              </button>
+              <div
+                class="task-update"
+                title="Perform Task"
+                style="cursor: pointer"
+                (click)="
+                  startEarning(
+                    task?._id,
+                    task?.type?.category,
+                    task?.url,
+                    task?.type?.type,
+                    task?.urlArray,
+                    task?.reward?.$numberDecimal,
+                    task?.videosDuration,
+                    task?.mentionHandles,
+                    task
+                  )
+                "
+              >
+                <img src="../../../../assets/images/telegram.png" />
+              </div>
+            </li>
+            <div *ngIf="!campaignsArray.length" class="no-camp">
+              Some awesome campaigns coming soon
+            </div>
+          </ul>
+
+        </div>
+  
+        <div class="card mt-4" id="table_ui"   #target>
+
+		  <div class="table-responsive">
+			<table class="table">
+				
+			  <thead>
+				<tr>
+				  <th scope="col" style="width: 150px;" class="text-center header">Social Required</th>
+				  <th scope="col" style="width: 450px;" class="text-left px-4 header">Task</th>
+				  <th scope="col" class="header">Earnings</th>
+				  <th scope="col" class="header">Status</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<tr  *ngFor="let task of campaignsArray; let i = index">
+				  <td scope="row" class="text-center">
+					<a class="cursor-default" href="javascript:void(0)" *ngIf="task.type.category == SOCIAL_CONNECTIONS.TWITTER">
+					  <img src="../../../../assets/images/twitter-s.svg" width="46"
+					/></a>
+					<a class="cursor-default" href="javascript:void(0)" *ngIf="task.type?.category == SOCIAL_CONNECTIONS.YOUTUBE">
+					  <img src="../../../../assets/images/youtube.svg" width="46"
+					/></a>
+					<a  class="cursor-default" href="javascript:void(0)" *ngIf="task.type.category == SOCIAL_CONNECTIONS.TELEGRAM">
+					  <img src="../../../../assets/images/telegram_icon.png" width="46"
+					/></a>
+					<a  class="cursor-default" href="javascript:void(0)" *ngIf="task.type.category == SOCIAL_CONNECTIONS.WEBSITE||task.type.category == SOCIAL_CONNECTIONS.OTHER">
+						<img  src="../../../../assets/images/website_logo.png" width="50"
+					  /></a>
+					<a  class="cursor-default" href="javascript:void(0)" *ngIf="task.type.category == SOCIAL_CONNECTIONS.DISCORD">
+						<img  src="../../../../assets/images/discord.png" width="50"
+					  /></a>
+				
+
+                  </td>
+                  <td class="text-left px-4" style="max-width: 200px;">
+                    <p class="text-truncate cursor-pointer" *ngIf="task?.title?.length > 40" [ngbTooltip]="task?.title | titlecase"> 
+                      <a style=" margin-right: 10px; cursor:pointer;color: orange;" *ngIf="task?.isPrimary">
+                        <i class="fa fa-star"></i>
+                      </a>
+                      {{ (task?.title | titlecase | truncate:40) }}
+                    </p>
+                    <p class="text-truncate cursor-pointer" *ngIf="task?.title?.length <= 40" > 
+                      <a style=" margin-right: 10px; cursor:pointer;color: orange;" *ngIf="task?.isPrimary">
+                        <i class="fa fa-star"></i>
+                      </a>
+                      {{ task?.title | titlecase }}
+                    </p>
+
+				  </td>
+				  <td class="earnings text-center">
+					<ng-container *ngIf="task?.projectId?.symbol == 'USD'"
+					>$ {{ task?.reward?.$numberDecimal }}</ng-container
+					>
+				  <ng-container *ngIf="task?.projectId?.symbol != 'USD'"
+					>{{ task?.reward?.$numberDecimal }}
+					{{ task?.projectId?.symbol }}</ng-container
+				  >
+				  </td>
+				  <td class="text-center">
+					<button type="button" *ngIf="task?.transactionStatus != 'ONGOING' && task?.transactionStatus != 'UNDER_REVIEW'" (click)="
+					startEarning(
+					  task?._id,
+					  task?.type?.category,
+					  task?.url,
+					  task?.type?.type,
+					  task?.urlArray,
+					  task?.reward?.$numberDecimal,
+					  task?.videosDuration,
+					  task?.mentionHandles,
+					  task
+					)
+				  " class="btn btn-warning">
+					  <img src="../../../../assets/images/next-a.svg" style="margin-right: 7px;" width="18"
+					  /> 
+					  <span *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.LIKE">Like</span>
+					  <span *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.COMMENT">Comment</span>
+					  <span *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.WATCH">Watch</span>
+					  <span *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.SUBSCRIBE">Subscribe</span>
+					  <span *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.TWEET"> Tweet</span>
+					  <span *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.RETWEET">Retweet</span>
+					  <span *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.FOLLOW">Follow</span>
+					  <span *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.QUOTE">Quote</span>
+					  <span *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.MENTION">Mention</span>
+					  <span *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.GROUP">Join Group</span>
+					  <span *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.JOIN_CHAT">Join & Chat</span>
+					  <span *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.VISIT">Visit</span>
+					  <span *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.ENGAGEMENT">Proceed</span>
+					  <span *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.SIGNUP">Proceed</span>
+					</button>
+					<button type="button" class="btn btn-warning" *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.ENGAGEMENT && task?.transactionStatus == 'ONGOING'"
+					 (click)="OpenModalFormentionHandles(task)" >
+					 <img src="../../../../assets/images/next-a.svg" style="margin-right: 7px;" width="18"
+					 /> 
+					 <span>Ongoing</span>
+					</button>
+					<button type="button" class="btn btn-warning" *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.ENGAGEMENT && task?.transactionStatus == 'UNDER_REVIEW'">
+						<span>Engaged</span>
+					</button>
+				  </td>
+				</tr>
+				<tr *ngIf="campaignsArray?.length == 0">
+				  <td colspan="4"  style="text-align: center; line-height: 40vh; color: #fff;">
+					Some awesome campaigns coming soon
+				  </td>
+				</tr>
+			  </tbody>
+			</table>
+		  </div>
+		</div>
+   
+        
+      </div>
+      <div *ngIf="tasksDetailsLoading" class="col-lg-12" >
+        <div class="row justify-content-start align-items-center pt-4 mt-5" id="task_id">
+          <div class="col-lg-12 text-center section_title">
+            <h5 class="center">Tasks</h5>
+          </div>
+        </div>
+        <div class="skeleton-led card mg-t-40 height-box-last h-60vh leaderTable">
+          <table class="tg">
+            <tr>
+              <th class="tg-cly1" style="width:20%;">  
+                  <div class="line"></div>
+              </th>
+              <th class="tg-cly1">
+                <div class="line"></div>
+              </th>
+              <th class="tg-cly1" style="width:20%;">
+                <div class="line"></div>
+              </th>
+              <th class="tg-cly1" style="width:20%;">
+                <div class="line"></div>
+              </th>
+            
+            
+            </tr>
+            <tr>
+              <td class="tg-cly1">
+                <div class="line"></div>
+              </td>
+              <td class="tg-cly1">
+                <div class="line"></div>
+              </td>
+              <td class="tg-cly1">
+                <div class="line"></div>
+              </td>
+              <td class="tg-cly1">
+                <div class="line"></div>
+              </td>
+
+            </tr>
+            <tr>
+              <td class="tg-cly1">
+                <div class="line"></div>
+              </td>
+              <td class="tg-cly1">
+                <div class="line"></div>
+              </td>
+              <td class="tg-cly1">
+                <div class="line"></div>
+              </td>
+              <td class="tg-cly1">
+                <div class="line"></div>
+              </td>
+
+            </tr>
+            <tr>
+              <td class="tg-cly1">
+                <div class="line"></div>
+              </td>
+              <td class="tg-cly1">
+                <div class="line"></div>
+              </td>
+              <td class="tg-cly1">
+                <div class="line"></div>
+              </td>
+              <td class="tg-cly1">
+                <div class="line"></div>
+              </td>
+
+            </tr>
+            <tr>
+              <td class="tg-cly1">
+                <div class="line"></div>
+              </td>
+              <td class="tg-cly1">
+                <div class="line"></div>
+              </td>
+              <td class="tg-cly1">
+                <div class="line"></div>
+              </td>
+              <td class="tg-cly1">
+                <div class="line"></div>
+              </td>
+
+            </tr>
+            <tr>
+              <td class="tg-cly1">
+                <div class="line"></div>
+              </td>
+              <td class="tg-cly1">
+                <div class="line"></div>
+              </td>
+              <td class="tg-cly1">
+                <div class="line"></div>
+              </td>
+              <td class="tg-cly1">
+                <div class="line"></div>
+              </td>
+
+            </tr>
+    
+         
+     
+     
+          </table> 
+        </div>
+      </div>
+
+     
+    </div>
+    <hr class="d-block d-sm-none">
+    
+  
+    <button
+      id="OpenModalForSocial"
+      type="button"
+      [hidden]="true"
+      (click)="open(modalSocial)"
+    ></button>
+    <button
+      id="OpenModalForCampaign"
+      type="button"
+      [hidden]="true"
+      (click)="open(modalCampaign)"
+    ></button>
+    <button
+      id="openModalForTelegram"
+      type="button"
+      [hidden]="true"
+      (click)="open(modalTelegram)"
+    ></button>
+    <button
+      id="openModalForDiscord"
+      type="button"
+      [hidden]="true"
+      (click)="open(modalDiscord)"
+    ></button>
+    <button
+      id="OpenModalForMentionHandles"
+      type="button"
+      [hidden]="true"
+      (click)="open(mentionHandles)"
+    ></button>
+    <button
+      id="OpenModalForMentionHandlesDiscord"
+      type="button"
+      [hidden]="true"
+      (click)="open(mentionHandlesDiscord)"
+    ></button>
+    <button
+      id="reverifyModal"
+      type="button"
+      [hidden]="true"
+      (click)="open(reverifModal)"
+    ></button>
+    <button
+    id="OpenModalForTwitterTask"
+    type="button"
+    [hidden]="true"
+    (click)="openTwitterTask(twitterTaskModal)"
+  ></button>
+    <a
+      id="youtubeWatch"
+      target="_blank"
+      [hidden]="true"
+      [href]="['shout-out/youtube-watch/' + '?id=' + YoutubeWatchDataToSend]"
+    ></a>
+  
+    <ng-template #reverifModal let-modal>
+      <div class="modal-header">
+        <h6>Enter your {{ campaignType }} Link to verify</h6>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="closeModal()"
+        >
+          X
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="mb-0" style="color: red">
+          <strong>Something Unusual happens !</strong>
+        </p>
+        <p style="color: #3a1d1d">
+          We could not verify your task, please enter your {{ campaignType }} link
+          here, so that we can verify.
+        </p>
+        <form [formGroup]="reverifyForm" (submit)="resetPassword()">
+          <div class="form-group log-pwd">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Enter {{ campaignType }} Link"
+              formControlName="verificationUrl"
+            />
+  
+            <app-show-errors
+              [control]="verificationUrl"
+              [fname]="'URL'"
+            ></app-show-errors>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer" style="justify-content: center;">
+        <button
+          id="reverifyOkBtn"
+          class="btn btn-primary"
+          (click)="reverifyModalSubmit()"
+        >
+          Ok
+        </button>
+        <button class="btn btn-danger" (click)="closeModal()">Cancel</button>
+      </div>
+    </ng-template>
+  
+    <ng-template #modalSocial let-modal>
+      <div class="modal-header">
+        <h6></h6>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="closeModal()"
+        >
+          X
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <h5>Add your social account to continue</h5>
+      </div>
+      <div class="modal-footer" style="justify-content: center;">
+        <button
+          class="btn btn-warning btn-padding"
+          (click)="addSocialConnection()"
+        >
+          Ok
+        </button>
+      </div>
+    </ng-template>
+  
+    <ng-template #modalCampaign let-modal>
+      <div class="modal-header" *ngIf="!startVerifyTask">
+        <h6></h6>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="closeModal()"
+        >
+          X
+        </button>
+      </div>
+      <div class="modal-body">
+        <h6 *ngIf="!startVerifyTask && !showErrorMessage.length">
+          {{ taskPerformContent[category][campaignType] }}?
+        </h6>
+        <h6
+          *ngIf="showErrorMessage.length && !startVerifyTask"
+          class="text-danger"
+        >
+          It seems that you have not performed the task, Please perform the task
+          to claim reward
+        </h6>
+      </div>
+      <div
+        class="modal-footer" style="justify-content: center;"
+        *ngIf="showErrorMessage.length && !startVerifyTask"
+      >
+        <button
+          class="btn btn-primary btn-padding"
+          (click)="
+            startEarning(
+              campaignId,
+              category,
+              campaignUrl,
+              campaignType,
+              urlArray,
+              reward,
+              videosDuration,
+              mentionHandlesArr,
+              {
+                tweetContent: tweetImage,
+                tweetContent: tweetContent,
+                symbol: symbol
+              },
+              true
+            )
+          "
+        >
+          Proceed
+        </button>
+      </div>
+      <div
+        class="modal-footer" style="justify-content: center;"
+        *ngIf="!startVerifyTask && !showErrorMessage.length"
+      >
+        <button
+          class="btn btn-primary btn-padding"
+          (click)="OpenWaitingModalForCampaign()"
+        >
+          Yes
+        </button>
+        <button class="btn btn-danger btn-padding" (click)="closeModal()">
+          No
+        </button>
+      </div>
+    </ng-template>
+  
+	<ng-template #mentionHandlesDiscord let-modal>
+	  <div class="modal-header">
+		<h6
+		  *ngIf="
+			campaignType != SOCIAL_CONNECTIONS.TWEET &&
+			campaignType != 'Join & Chat' &&
+			campaignType != SOCIAL_CONNECTIONS.ENGAGEMENT
+		  "
+		>
+		  You have to mention these handles on your {{ campaignType }}
+		</h6>
+  
+        <h6 *ngIf="campaignType == 'Join & Chat'">
+          {{ shoutoutCampaign?.title }}
+        </h6>
+  
+		<h6 *ngIf="campaignType == SOCIAL_CONNECTIONS.TWEET"> Tweet On Twitter</h6>
+
+		<h6 *ngIf="campaignType == SOCIAL_CONNECTIONS.ENGAGEMENT && shoutoutCampaign?.transactionStatus != 'ONGOING'">
+			Join Group and Engage Yourself
+		</h6>
+		<h6 *ngIf="shoutoutCampaign?.type?.type == SOCIAL_CONNECTIONS.ENGAGEMENT && shoutoutCampaign?.transactionStatus == 'ONGOING'">
+			Mark Task as Completed
+		</h6>
+
+		<button
+		  type="button"
+		  class="btn-close"
+		  aria-label="Close"
+		  (click)="closeModal()"
+		>
+		  X
+		</button>
+	  </div>
+	  <div class="modal-body task-popup">
+		<div *ngIf="campaignType == SOCIAL_CONNECTIONS.TWEET" class="mt-1">
+		  <form [formGroup]="twitterContentForm">
+			<div class="form-group">
+			 
+  
+              <select
+                class="form-control mb-3"
+                formControlName="twitterContent"
+                style="line-height: 0px; height: auto"
+              >
+                <option value="null" selected disabled>
+                  Select Tweet Content
+                </option>
+                <option *ngFor="let tweet of tweetContent" [value]="tweet">
+                  {{ (tweet | truncate : 60) || "--" }}
+                </option>
+              </select>
+              <app-show-errors [control]="twitterContent"></app-show-errors>
+            </div>
+          </form>
+          <div class="twe-content">
+            <img *ngIf="tweetImage" [src]="tweetImage" alt="img" />
+          </div>
+        
+          <p class="break-word text-dark text_p" *ngIf="twitterContent">
+            {{ twitterContent.value }}
+          </p>
+        </div>
+  
+		<div *ngIf="campaignType == 'Join & Chat'" class="mt-1">  
+		  <p class="break-word">{{ shoutoutCampaign?.description }}</p>
+		  <!-- Note -->
+		  <p *ngIf="shoutoutCampaign?.telegramContent?.length" class="note-text">
+			Note: You can select any content from below
+		  </p>
+		  <div
+			*ngIf="shoutoutCampaign?.telegramContent?.length"
+			class="twe-content"
+		  >
+			<div *ngFor="let telegram of shoutoutCampaign?.telegramContent">
+			  <p class="break-word">
+				{{ telegram }}
+				<i
+				  (click)="copyToClipboard(telegram)"
+				  class="fa fa-copy cursor-pointer"
+				></i>
+			  </p>
+			</div>
+		  </div>
+		</div>
+    <div *ngIf="campaignType == SOCIAL_CONNECTIONS.ENGAGEMENT" class="mt-1 text-head">  
+			<div *ngIf="shoutoutCampaign?.telegramMessagesDetails?.isContinuation">
+				<h6>
+					Send messages for {{ shoutoutCampaign?.telegramMessagesDetails?.duration }} days on continuation 
+					( minimum {{getCielValue(shoutoutCampaign?.telegramMessagesDetails?.messagesCount,shoutoutCampaign?.telegramMessagesDetails?.duration)}} messages is required )
+					<!-- ( minimum {{ shoutoutCampaign?.telegramMessagesDetails?.messagesCount }} messages is required ) -->
+				</h6>
+			</div>
+			<div *ngIf="!shoutoutCampaign?.telegramMessagesDetails?.isContinuation" class="text-head">
+
+       
+        <h6>
+          Send {{ shoutoutCampaign?.telegramMessagesDetails?.messagesCount }} messages in {{shoutoutCampaign?.telegramMessagesDetails?.duration }} {{shoutoutCampaign?.telegramMessagesDetails?.duration > 1 ?'days':'day'}}  {{(shoutoutCampaign?.telegramMessagesDetails?.duration > 1) ?'(send atleast '+ shoutoutCampaign?.telegramMessagesDetails?.messagesCount +' messages per day)':' '}}
+        </h6>
+			</div>
+			
+			<div
+			  *ngIf="shoutoutCampaign?.telegramContent?.length"
+			  class="twe-content"
+			>
+			  <div *ngFor="let telegram of shoutoutCampaign?.telegramContent">
+				<p class="break-word">
+				  <label class="text-bold">Sample Messages :</label>
+				 <span class="text-eplips">{{ telegram | truncate: '50' }}  <img src="../../../../assets/images/copy.png" (click)="copyToClipboard(telegram)"  style="cursor: pointer;width:20px !important; min-height:25px !important;"></span> 
+				 
+				 
+			
+				</p>
+			  </div>
+			</div>
+			<p *ngIf="shoutoutCampaign?.telegramContent?.length && shoutoutCampaign?.transactionStatus == 'ONGOING'" class="note-text">
+				Note : Are you sure you have completed the task, otherwise this request will be rejected and you have to restart the task again.
+			</p>
+		  </div>
+	
+	  </div>
+	  <div class="modal-footer" style="justify-content: center; align-items: center;">
+		<button 
+		  *ngIf="
+			campaignType === SOCIAL_CONNECTIONS.TWEET &&
+			campaignType != 'Join & Chat'
+		  "
+		  class="btn btn-warning btn-padding"
+		  (click)="onProceedClick()"
+		>
+		<i class="fa fa-upload" aria-hidden="true"></i>
+		  Post
+		</button>
+		<button
+		  *ngIf="campaignType == 'Join & Chat'"
+		  class="btn btn-warning btn-padding"
+		  (click)="onProceedClick()"
+		>
+		  Proceed
+		</button>
+		<button  *ngIf="campaignType == 'Join & Chat'" class="btn btn-danger btn-padding" (click)="closeModal()">
+		  Cancel
+		</button>
+		<button  *ngIf="
+		campaignType === SOCIAL_CONNECTIONS.TWEET &&
+		campaignType != 'Join & Chat'
+	  " class="btn btn-secondary btn-padding" (click)="closeModal()">
+			Perform Later
+		</button>
+		<button
+		  *ngIf="campaignType == SOCIAL_CONNECTIONS.ENGAGEMENT && shoutoutCampaign?.transactionStatus != 'ONGOING'"
+		  class="btn btn-warning btn-padding"
+		  (click)="insertActionLog()"
+		>
+		  Start Now
+		</button>
+		<button  
+		*ngIf="campaignType ===  SOCIAL_CONNECTIONS.ENGAGEMENT && shoutoutCampaign?.transactionStatus != 'ONGOING'" 
+		class="btn btn-secondary btn-padding" (click)="closeModal()">
+			Start Later
+		</button>
+		<button
+		*ngIf="campaignType == SOCIAL_CONNECTIONS.ENGAGEMENT && shoutoutCampaign?.transactionStatus == 'ONGOING'"
+		class="btn btn-warning btn-padding"
+		(click)="waitingModalForEngagement()"
+	  >
+		Mark as Completed
+	  </button>
+	  <button  
+	  *ngIf="campaignType ===  SOCIAL_CONNECTIONS.ENGAGEMENT && shoutoutCampaign?.transactionStatus == 'ONGOING'" 
+	  class="btn btn-secondary btn-padding" (click)="closeModal()">
+		  Cancel
+	  </button>
+	  </div>
+	</ng-template>
+
+
+	<ng-template #mentionHandles let-modal>
+	  <div class="modal-header">
+		<h6
+		  *ngIf="
+			campaignType != SOCIAL_CONNECTIONS.TWEET &&
+			campaignType != 'Join & Chat' &&
+			campaignType != SOCIAL_CONNECTIONS.ENGAGEMENT
+		  "
+		>
+		  You have to mention these handles on your {{ campaignType }}
+		</h6>
+  
+        <h6 *ngIf="campaignType == 'Join & Chat'">
+          {{ shoutoutCampaign?.title }}
+        </h6>
+  
+		<h6 *ngIf="campaignType == SOCIAL_CONNECTIONS.TWEET"> Tweet On Twitter</h6>
+
+		<h6 *ngIf="campaignType == SOCIAL_CONNECTIONS.ENGAGEMENT && shoutoutCampaign?.transactionStatus != 'ONGOING'">
+			Join Group and Engage Yourself
+		</h6>
+		<h6 *ngIf="shoutoutCampaign?.type?.type == SOCIAL_CONNECTIONS.ENGAGEMENT && shoutoutCampaign?.transactionStatus == 'ONGOING'">
+			Mark Task as Completed
+		</h6>
+
+		<button
+		  type="button"
+		  class="btn-close"
+		  aria-label="Close"
+		  (click)="closeModal()"
+		>
+		  X
+		</button>
+	  </div>
+	  <div class="modal-body task-popup">
+		<div *ngIf="campaignType == SOCIAL_CONNECTIONS.TWEET" class="mt-1">
+		  <form [formGroup]="twitterContentForm">
+			<div class="form-group">
+			 
+  
+              <select
+                class="form-control mb-3"
+                formControlName="twitterContent"
+                style="line-height: 0px; height: auto"
+              >
+                <option value="null" selected disabled>
+                  Select Tweet Content
+                </option>
+                <option *ngFor="let tweet of tweetContent" [value]="tweet">
+                  {{ (tweet | truncate : 60) || "--" }}
+                </option>
+              </select>
+              <app-show-errors [control]="twitterContent"></app-show-errors>
+            </div>
+          </form>
+          <div class="twe-content">
+            <img *ngIf="tweetImage" [src]="tweetImage" alt="img" />
+          </div>
+        
+          <p class="break-word text-dark text_p" *ngIf="twitterContent">
+            {{ twitterContent.value }}
+          </p>
+        </div>
+  
+		<div *ngIf="campaignType == 'Join & Chat'" class="mt-1">  
+		  <p class="break-word">{{ shoutoutCampaign?.description }}</p>
+		  <!-- Note -->
+		  <p *ngIf="shoutoutCampaign?.telegramContent?.length" class="note-text">
+			Note: You can select any content from below
+		  </p>
+		  <div
+			*ngIf="shoutoutCampaign?.telegramContent?.length"
+			class="twe-content"
+		  >
+			<div *ngFor="let telegram of shoutoutCampaign?.telegramContent">
+			  <p class="break-word">
+				{{ telegram }}
+				<i
+				  (click)="copyToClipboard(telegram)"
+				  class="fa fa-copy cursor-pointer"
+				></i>
+			  </p>
+			</div>
+		  </div>
+		</div>
+		<div *ngIf="campaignType == SOCIAL_CONNECTIONS.ENGAGEMENT" class="mt-1 text-head">  
+			<div *ngIf="shoutoutCampaign?.telegramMessagesDetails?.isContinuation">
+				<h6>
+					Send messages for {{ shoutoutCampaign?.telegramMessagesDetails?.duration }} days on continuation 
+					( minimum {{getCielValue(shoutoutCampaign?.telegramMessagesDetails?.messagesCount,shoutoutCampaign?.telegramMessagesDetails?.duration)}} messages is required )
+					<!-- ( minimum {{ shoutoutCampaign?.telegramMessagesDetails?.messagesCount }} messages is required ) -->
+				</h6>
+			</div>
+			<div *ngIf="!shoutoutCampaign?.telegramMessagesDetails?.isContinuation" class="text-head">
+
+       
+        <h6>
+          Send {{ shoutoutCampaign?.telegramMessagesDetails?.messagesCount }} messages in {{shoutoutCampaign?.telegramMessagesDetails?.duration }} {{shoutoutCampaign?.telegramMessagesDetails?.duration > 1 ?'days':'day'}}  {{(shoutoutCampaign?.telegramMessagesDetails?.duration > 1) ?'(send atleast '+ shoutoutCampaign?.telegramMessagesDetails?.messagesCount +' messages per day)':' '}}
+        </h6>
+			</div>
+			
+			<div
+			  *ngIf="shoutoutCampaign?.telegramContent?.length"
+			  class="twe-content"
+			>
+			  <div *ngFor="let telegram of shoutoutCampaign?.telegramContent">
+				<p class="break-word">
+				  <label class="text-bold">Sample Messages :</label>
+				 <span class="text-eplips">{{ telegram | truncate: '50' }}  <img src="../../../../assets/images/copy.png" (click)="copyToClipboard(telegram)"  style="cursor: pointer;width:20px !important; min-height:25px !important;"></span> 
+				 
+				 
+			
+				</p>
+			  </div>
+			</div>
+			<p *ngIf="shoutoutCampaign?.telegramContent?.length && shoutoutCampaign?.transactionStatus == 'ONGOING'" class="note-text">
+				Note : Are you sure you have completed the task, otherwise this request will be rejected and you have to restart the task again.
+			</p>
+		  </div>
+	  </div>
+	  <div class="modal-footer" style="justify-content: center; align-items: center;">
+		<button 
+		  *ngIf="
+			campaignType === SOCIAL_CONNECTIONS.TWEET &&
+			campaignType != 'Join & Chat'
+		  "
+		  class="btn btn-warning btn-padding"
+		  (click)="onProceedClick()"
+		>
+		<i class="fa fa-upload" aria-hidden="true"></i>
+		  Post
+		</button>
+		<button
+		  *ngIf="campaignType == 'Join & Chat'"
+		  class="btn btn-warning btn-padding"
+		  (click)="onProceedClick()"
+		>
+		  Proceed
+		</button>
+		<button  *ngIf="campaignType == 'Join & Chat'" class="btn btn-danger btn-padding" (click)="closeModal()">
+		  Cancel
+		</button>
+		<button  *ngIf="
+		campaignType === SOCIAL_CONNECTIONS.TWEET &&
+		campaignType != 'Join & Chat'
+	  " class="btn btn-secondary btn-padding" (click)="closeModal()">
+			Perform Later
+		</button>
+		<button
+		  *ngIf="campaignType == SOCIAL_CONNECTIONS.ENGAGEMENT && shoutoutCampaign?.transactionStatus != 'ONGOING'"
+		  class="btn btn-warning btn-padding"
+		  (click)="insertActionLog()"
+		>
+		  Start Now
+		</button>
+		<button  
+		*ngIf="campaignType ===  SOCIAL_CONNECTIONS.ENGAGEMENT && shoutoutCampaign?.transactionStatus != 'ONGOING'" 
+		class="btn btn-secondary btn-padding" (click)="closeModal()">
+			Start Later
+		</button>
+		<button
+		*ngIf="campaignType == SOCIAL_CONNECTIONS.ENGAGEMENT && shoutoutCampaign?.transactionStatus == 'ONGOING'"
+		class="btn btn-warning btn-padding"
+		(click)="waitingModalForEngagement()"
+	  >
+		Mark as Completed
+	  </button>
+	  <button  
+	  *ngIf="campaignType ===  SOCIAL_CONNECTIONS.ENGAGEMENT && shoutoutCampaign?.transactionStatus == 'ONGOING'" 
+	  class="btn btn-secondary btn-padding" (click)="closeModal()">
+		  Cancel
+	  </button>
+	  </div>
+	</ng-template>
+  
+    <ng-template #hideMyName let-modal>
+      <div class="modal-header">
+        <h6>Hide My Name</h6>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="closeModal()"
+        >
+          X
+        </button>
+      </div>
+      <div class="modal-body hideName">
+        <p *ngIf="hideCustomizeColumn && leaderData">
+          Suggested Custom Name:- {{ leaderData[0] | titlecase }}*****{{
+            leaderData[leaderData?.length - 1]
+          }}
+        </p>
+  
+        <div class="form-check">
+          <input
+            type="checkbox"
+            class="form-check-input cursor-pointer"
+            (click)="toggleHideMyNameContent()"
+          />
+          <label class="form-check-label" for="check2"
+            >Want to Customize your name?</label
+          >
+        </div>
+  
+        <input
+          *ngIf="!hideCustomizeColumn"
+          [(ngModel)]="customNameToSend"
+          type="text"
+          class="form-control"
+          placeholder="Custom Name"
+          required
+          style="margin-top: 10px"
+        />
+        <small
+          *ngIf="!hideCustomizeColumn && customNameToSend?.trim() == '' && showError"
+          class="text-danger"
+          >Name is required!!</small
+        >
+      </div>
+      <div class="modal-footer" style="justify-content: center;">
+        <button
+          class="btn btn-warning btn-padding"
+          (click)="hideName(leaderData)"
+          [disabled]="!hideCustomizeColumn && customNameToSend?.trim() == '' && showError"
+        >
+          OK
+        </button>
+      </div>
+    </ng-template>
+  
+    <ng-template #modalDiscord let-modal>
+      <div class="modal-header">
+        <h4></h4>
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="closeModal()"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5 class="text-center" style="font-weight: 300; margin-top: 20px;">
+          Please connect your Discord in profile section
+        </h5>
+      </div>
+      <div class="modal-footer" style="justify-content: center;">
+        <button class="btn btn-warning btn-padding" (click)="redirectToProfile()">
+          OK
+        </button>
+      </div>
+    </ng-template>
+
+    <ng-template #modalTelegram let-modal>
+      <div class="modal-header">
+        <h4></h4>
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="closeModal()"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5 class="text-center" style="font-weight: 300; margin-top: 20px;">
+          Please connect your telegram in profile section
+        </h5>
+      </div>
+      <div class="modal-footer" style="justify-content: center;">
+        <button class="btn btn-warning btn-padding" (click)="redirectToProfile()">
+          OK
+        </button>
+      </div>
+    </ng-template>
+  
+	<!-- <ng-template #infoModal let-modal>
+	  <div class="modal-header">
+		<h4 class="modal-title"></h4>
+		<button
+		  type="button"
+		  class="btn-close"
+		  aria-label="Close"
+		  (click)="closeModal('info')"
+		>
+		  <span aria-hidden="true">×</span>
+		</button>
+	  </div>
+	  <div class="modal-body text-center pt-0">
+		<img
+		  *ngIf="selectedModalType == modalType.CLAIMED"
+		  src="../../../../assets/images/congrats.png"
+		/>
+		<img
+		  *ngIf="selectedModalType == modalType.NOT_CLAIMED"
+		  src="../../../../assets/images/reward_cancel.png"
+		/>
+		<img
+		  *ngIf="selectedModalType == modalType.ERROR"
+		  src="../../../../assets/images/connection-error.png"
+		/>
+		<img
+		  *ngIf="selectedModalType == modalType.SUCCESS"
+		  src="../../../../assets/images/connection-successfull.png"
+		/>
+		<h3
+		  [ngStyle]="{
+			color: selectedModalType == modalType.CLAIMED ? '#000000' : '#54595E'
+		  }"
+		>
+		  {{
+			selectedModalType == modalType.CLAIMED
+			  ? "Congratulations!"
+			  : selectedModalType == modalType.SUCCESS
+			  ? "Success"
+			  : "Error"
+		  }}
+		</h3>
+		<p *ngIf="reward && selectedModalType == modalType.CLAIMED">
+		  You’ve earned
+		  <span style="color: #fdaf2f; font-size: 16px; font-weight: 500">{{
+			reward
+		  }}</span>
+		  {{ symbol }}
+		</p>
+		<p *ngIf="campaignType == SOCIAL_CONNECTIONS.ENGAGEMENT && shoutoutCampaign?.transactionStatus == 'ONGOING'">
+			Your task is under review, please check your shoutout transaction after few days.
+		</p>
+		<p *ngIf="selectedModalType != modalType.CLAIMED">
+		  {{ taskErrorMessage }}
+		</p>
+	  </div>
+	</ng-template> -->
+
+  <ng-template #infoModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title"></h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body text-center pt-0">
+      <img *ngIf="selectedModalType == modalType.CLAIMED " src="../../../../assets/images/congrats.png">
+      <img *ngIf="selectedModalType == modalType.NOT_CLAIMED "  src="../../../../assets/images/reward_cancel.png">
+      <img
+      *ngIf="selectedModalType == modalType.ERROR"
+      src="../../../../assets/images/connection-error.png"
+    />
+    <img
+      *ngIf="selectedModalType == modalType.SUCCESS"
+      src="../../../../assets/images/connection-successfull.png"
+    />
+      <h3 [ngStyle]="{color:  selectedModalType == modalType.CLAIMED ? '#000000': '#54595E'}">{{ (selectedModalType == modalType.CLAIMED||(campaignType == SOCIAL_CONNECTIONS.ENGAGEMENT && shoutoutCampaign?.transactionStatus == 'ONGOING')) ?  'Congratulations!' : selectedModalType == modalType.SUCCESS
+      ? "Success" : 'Error'  }}</h3>
+      <p *ngIf="(reward &&  selectedModalType == modalType.CLAIMED ||(campaignType == SOCIAL_CONNECTIONS.ENGAGEMENT && shoutoutCampaign?.transactionStatus == 'ONGOING'))">You’ve earned <span style="color:#FDAF2F; font-size: 16px;font-weight: 500;">{{reward}}</span> {{symbol}}</p>
+      <p *ngIf="selectedModalType != modalType.CLAIMED">{{taskErrorMessage}}</p>
+      <!-- <p *ngIf="campaignType == SOCIAL_CONNECTIONS.ENGAGEMENT && shoutoutCampaign?.transactionStatus == 'ONGOING'">
+      Your task is under review, please check your shoutout transaction after few days.
+    </p> -->
+    </div>
+    
+  </ng-template>
+  
+    <ng-template #waitingModal let-modal>
+      <div class="modal-body text-center">
+        <img src="../../../../assets/images/wating.png" />
+        <h3 style="color: '#000000'">Please wait !!!</h3>
+        <p>
+          We’re verifying it only in
+          <span style="color: #000; font-size: 16px" id="seconds"
+            >{{ timeLeftSecond }}
+          </span>
+          seconds
+        </p>
+        <p style="font-size: 11px; margin-bottom: 0px">
+          Do not press back or exit button
+        </p>
+      </div>
+    </ng-template>
+
+    <ng-template #twitterTaskModal let-modal>
+        <div class="modal-header">
+            <h4 *ngIf="campaignType != SOCIAL_CONNECTIONS.FOLLOW">Tweet Preview</h4>
+            <button
+              type="button"
+              class="close"
+              aria-label="Close"
+              (click)="closeModal()"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+        <div class="modal-body text-center pt-0 pb-0">
+            <div *ngIf="campaignType != SOCIAL_CONNECTIONS.FOLLOW" style="height: 320px; overflow-y: auto;">
+                <ngx-tweet style="width: 100%; height: 100%;cursor: not-allowed !important; border: 0px; margin: auto;
+                pointer-events: none;" [tweetId]="twitterLink"> </ngx-tweet>
+                
+            </div>
+            <div *ngIf="campaignType == SOCIAL_CONNECTIONS.QUOTE || campaignType == SOCIAL_CONNECTIONS.COMMENT">
+                <form [formGroup]="twitterTaskContentForm">
+                          <div class="mt-2">
+                              <div class="input-group">
+                                  <textarea type="text" formControlName="comment" (input)="checkHandles($event)"
+                                      placeholder="Add Comment" aria-describedby="button-addon1" class="form-control text-ui"></textarea>
+                                     
+                              </div>
+                              <app-show-errors class="text-left" [control]="comment" [fname]="'Comment'"></app-show-errors>
+                             <p class="text-left"  style="font-size: 12px;color: #f10808" *ngIf="handlesError && comment?.value">{{handlesError}}</p>
+                              
+                          </div>
+                      </form>
+            </div>
+            <div *ngIf="campaignType == SOCIAL_CONNECTIONS.FOLLOW && twitterFollowContent"  >
+                <fieldset class="scheduler-border">
+                    <legend class="scheduler-border"><img style="width: 35px;" src="../../../../assets/images/twitercon.png"></legend>
+                    <div class="twiiter_logo"><img [src]="twitterFollowContent?.profile "/></div> 
+                    <h4 class="mt-1 mb-3">@{{twitterFollowContent?.username}}</h4>
+                </fieldset>
+             
+
+                <button
+                (click)="performTask()"
+              class="btn btn-warning btn-padding"
+            >
+            <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+            
+              Follow
+            </button>
+            <button
+           
+              class="btn btn-secondary btn-padding ml-2"
+              (click)="closeModal()"
+            >
+              Perform Later
+            </button>
+            </div>
+
+        </div>
+        <div class="modal-footer" style="justify-content: center;">
+            <button
+            *ngIf="campaignType != SOCIAL_CONNECTIONS.FOLLOW"
+              class="btn btn-warning btn-padding"
+              (click)="performTwitterTask()"
+            >
+            <i class="fa fa-heart" *ngIf="campaignType == SOCIAL_CONNECTIONS.LIKE" aria-hidden="true"></i>
+            <i class="fa fa-retweet" *ngIf="campaignType == SOCIAL_CONNECTIONS.RETWEET" aria-hidden="true"></i>
+            <i class="fa fa-pencil-square-o" *ngIf="campaignType == SOCIAL_CONNECTIONS.QUOTE" aria-hidden="true"></i>
+            <i class="fa fa-comment-o" *ngIf="campaignType == SOCIAL_CONNECTIONS.COMMENT" aria-hidden="true"></i>
+              {{campaignType}}
+            </button>
+            <button
+            *ngIf="campaignType != SOCIAL_CONNECTIONS.FOLLOW"
+              class="btn btn-secondary ml-2"
+              (click)="closeModal()"
+            >
+              Perform Later
+            </button>
+          </div>
+      </ng-template>
+
+      <ng-template #twitterReconnectModal let-modal>
+        <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              aria-label="Close"
+              (click)="closeModal()"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+        <div class="modal-body text-center mt-2 error-twi-popup">
+          <img src="../../../../assets/images/error-twi.png" />
+          <h6 style="color: #555555; margin-bottom:0px; font-size:16px; font-weight:800; text-align: center;">Error</h6>
+          <p style="color: #9E9E9E; margin-bottom:0px; font-size:12px; font-weight:400; text-align: center;">
+            Oops! It looks like Twitter is busy right now due to high traffic.
+          </p>
+        </div>
+        <div class="modal-footer" style="justify-content: center;">
+          <button
+          class="btn btn-secondary ml-2"
+          (click)="closeModal()"
+        >
+        Check Later
+        </button>
+            <button
+              class="btn btn-warning btn-padding"
+              (click)="connectUserToSecondApp()"
+            >
+            Try Now
+            </button>
+           
+          </div>
+      </ng-template>
+  </div>
+  
+  <button
+  id="noTaskModel"
+  (click)="openNoTaskModel(modalNewTaskUpdate)"
+  [hidden]="true"
+></button>
+
+  <ng-template #modalNewTaskUpdate let-modal>
+    <div class="modal-header">
+      <h4></h4>
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="closeModal()"
+      >
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="div-get-update align-items-center">
+        <img src="../../../../assets/images/Pop-Up-Subcription.png" >
+      </div>
+      <div class="div-get-update">
+        <h6>Get our new tasks</h6>
+        <h5>Updates</h5>
+         <p class="hide-mob">Get latest updates on the new <br>
+          tasks to perform, right in your<br>
+           mailbox. <br> <b> Subscribe now! </b></p>
+           <p class="show-mob">Get latest updates on the new 
+            tasks to perform, right in your
+             mailbox. <br> <b style="margin-top: 30px;
+             display: block;"> Subscribe now! </b></p>  
+      </div>
+      <form [formGroup]="noTaskupdate" class="subscribe_form">
+        <div class="input-group">
+        <input type="email" placeholder="Email Address" formControlName="email" name="email" class="form-control">
+        
+        <span class="input-group-btn">
+        <button class="btn btn-warning btn-padding" (click)="VerifyUpdateNewTask()">
+          Subscribe
+        </button>
+        </span>
+        </div>
+        <app-show-errors [control]="email" [fname]="'Email'"></app-show-errors>
+      </form>
+      <p class="text-center buttom-text-get">Your email is safe with us, we dont spam.</p>
+    </div>
+   
+  </ng-template>

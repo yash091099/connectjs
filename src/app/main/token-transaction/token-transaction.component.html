@@ -1,0 +1,278 @@
+	<!-----------TRANSACTION     ---------INFORMATION ------------>
+    <div class="container ipad-pd-left mg-t-20">
+        <div class="row">
+        <div class="col-lg-12">
+        <div class="card">
+            <h4 class="panel-title">Transactions</h4>
+            <div class="myrestable" >
+             <div class="outer" >
+                <div class="inner" (scroll)="onScroll($event)">
+                    <table class="table scroller" *ngIf="!transactionDataLoading">
+                        <thead>
+                            <tr>
+    
+                                <th style="text-align:left;" class="fixed-pos-mobile">Date</th>
+                                <th class="mobLeft">Transaction Id</th>
+                                <th style="text-align: left;">Particulars</th>
+                                <th>Amount Paid</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        
+                            
+                            <tr *ngFor="let transaction of transactionArray">
+                                <td style="text-align: left;" class="fixed-pos-mobile">{{transaction?.createdAt | date: 'MMM dd, yyyy'}}</td>
+                                <td class="truncate">{{transaction?.gatewaydata?.txnId}}</td>
+                                <td style="text-align: left;">{{transaction?.startupDetails?.symbol}} Token </td>
+                                <td>${{transaction?.tokenAmount?.$numberDecimal*1 +
+                                    transaction?.walletAmount?.$numberDecimal*1 +
+                                    transaction?.commissionAmount?.$numberDecimal*1 | decimal}}
+                                </td>
+                                <td>
+                                    <a (click)="openInvoicePopup(content, transaction)"
+                                        class="invoce-text">
+                                        View
+    
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr *ngIf="!transactionArray?.length">
+                                <td colspan="5" class="text-center">No Transaction Found</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                 
+                      <table class="tg" *ngIf="transactionDataLoading">
+                        <tr>
+                          <th class="tg-cly1">  
+                              <div class="line"></div>
+                          </th>
+                          <th class="tg-cly1">
+                            <div class="line"></div>
+                          </th>
+                          <th class="tg-cly1">
+                            <div class="line"></div>
+                          </th>
+                          <th class="tg-cly1">
+                            <div class="line"></div>
+                          </th>
+                          <th class="tg-cly1">
+                            <div class="line"></div>
+                          </th>
+                        
+                        </tr>
+                        <tr>
+                          <td class="tg-cly1">
+                            <div class="line"></div>
+                          </td>
+                          <td class="tg-cly1">
+                            <div class="line"></div>
+                          </td>
+                          <td class="tg-cly1">
+                            <div class="line"></div>
+                          </td>
+                          <td class="tg-cly1">
+                            <div class="line"></div>
+                          </td>
+                          <td class="tg-cly1">
+                            <div class="line"></div>
+                          </td>
+                         
+                        </tr>
+                        <tr>
+                            <td class="tg-cly1">
+                              <div class="line"></div>
+                            </td>
+                            <td class="tg-cly1">
+                              <div class="line"></div>
+                            </td>
+                            <td class="tg-cly1">
+                              <div class="line"></div>
+                            </td>
+                            <td class="tg-cly1">
+                              <div class="line"></div>
+                            </td>
+                            <td class="tg-cly1">
+                              <div class="line"></div>
+                            </td>
+                           
+                        </tr>
+                        <tr>
+                            <td class="tg-cly1">
+                              <div class="line"></div>
+                            </td>
+                            <td class="tg-cly1">
+                              <div class="line"></div>
+                            </td>
+                            <td class="tg-cly1">
+                              <div class="line"></div>
+                            </td>
+                            <td class="tg-cly1">
+                              <div class="line"></div>
+                            </td>
+                            <td class="tg-cly1">
+                              <div class="line"></div>
+                            </td>
+                           
+                        </tr>
+                        <tr>
+                            <td class="tg-cly1">
+                              <div class="line"></div>
+                            </td>
+                            <td class="tg-cly1">
+                              <div class="line"></div>
+                            </td>
+                            <td class="tg-cly1">
+                              <div class="line"></div>
+                            </td>
+                            <td class="tg-cly1">
+                              <div class="line"></div>
+                            </td>
+                            <td class="tg-cly1">
+                              <div class="line"></div>
+                            </td>
+                           
+                        </tr>
+                        <tr>
+                            <td class="tg-cly1">
+                              <div class="line"></div>
+                            </td>
+                            <td class="tg-cly1">
+                              <div class="line"></div>
+                            </td>
+                            <td class="tg-cly1">
+                              <div class="line"></div>
+                            </td>
+                            <td class="tg-cly1">
+                              <div class="line"></div>
+                            </td>
+                            <td class="tg-cly1">
+                              <div class="line"></div>
+                            </td>
+                           
+                        </tr>
+                 
+                      </table>  
+                
+                 </div>
+                    </div>
+                       </div>
+              <div class="myrestable arow-fiex" >
+						<button (click)="handleLeftClick()" *ngIf="!showRightSlider"  id="left-button"><img src="../../../assets/images/prev.png" /></button>
+					   <button (click)="handleRightClick()" *ngIf="showRightSlider"  id="right-button"><img src="../../../assets/images/next.png" /></button>
+				
+				</div>
+            <div *ngIf="totalCountTransaction > rowsPerPageTransaction" class="peg-middle">
+                <ngb-pagination *ngIf="transactionArray?.length > 0"
+                    class="d-flex justify-content-center" [(page)]="currnetPageTransaction"
+                    [maxSize]="3" [ellipses]="false" [pageSize]="rowsPerPageTransaction"
+                    [collectionSize]="totalCountTransaction"
+                    (pageChange)="pageChanged($event)"></ngb-pagination>
+            </div>
+        </div> 
+        </div>
+       </div>
+   </div>
+        
+<!-----------TRANSACTION     ---------INFORMATION ------------>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title"></h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button>
+    </div>
+    <div class="modal-body pt-0 ">
+        <div class="transaction-details">
+            <h4 class="modal-title">Invoice</h4>
+            <div class="row">
+                <div class="col-md-8 col-sm-12">Transaction Id: {{selectedTransaction?.gatewaydata?.txnId}}
+
+                </div>
+                <div class="col-md-4 text-right col-sm-12 CCC">
+                    Date: {{selectedTransaction?.createdAt | date:'longDate'}}
+                </div>
+
+            </div>
+        </div>
+        <div class="table-responsive-sm">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="width:280px;">Project Name</th>
+                        <th>Investment Amount</th>
+                        <th class="text-right pr-0">Allocated Tokens</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="width:280px;">
+                            <b>
+                                {{selectedTransaction?.startupDetails?.name}}({{selectedTransaction?.startupDetails?.symbol}})
+                            </b>
+                            <br>
+                            <span>Token allocation</span>
+                        </td>
+                        <td class="p-amount">
+                            ${{selectedTransaction?.tokenAmount?.$numberDecimal*1 +
+                            selectedTransaction?.walletAmount?.$numberDecimal*1 +
+                            selectedTransaction?.commissionAmount?.$numberDecimal*1 | decimal}}
+                        </td>
+                        <td class="text-right">{{selectedTransaction?.quantity?.$numberDecimal ||
+                            selectedTransaction?.quantity |
+                            number:'1.0':'en-US'}}</td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-lg-2 col-sm-3">
+                </div>
+                <div class="col-lg-7 col-sm-7 ml-auto">
+                    <table class="table table-clear">
+                        <tbody>
+
+                            <tr>
+                                <td>
+                                    <p><strong>Subtotal</strong></p>
+                                    <p>
+                                        <strong>
+                                            Earning Wallet Deduction
+                                            <small>
+                                                ({{isDeductionLess ? 'maximum amount available' : '15%'}})
+                                            </small>
+                                        </strong>
+                                    </p>
+                                </td>
+                                <td style="text-align:right !important;">
+                                    <p> ${{selectedTransaction?.tokenAmount?.$numberDecimal*1 +
+                                        selectedTransaction?.walletAmount?.$numberDecimal*1 +
+                                        selectedTransaction?.commissionAmount?.$numberDecimal*1 | decimal}} </p>
+                                    <p> -${{selectedTransaction?.commissionAmount?.$numberDecimal | decimal}} </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Net Investment</strong>
+                                </td>
+                                <td style="text-align:right !important;">
+                                    <strong>${{selectedTransaction?.tokenAmount?.$numberDecimal*1 +
+                                        selectedTransaction?.walletAmount?.$numberDecimal*1
+                                        | decimal}}</strong>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+
+        <h6>Note*</h6>
+        <p>This is an informal invoice and not a legal binding document. It should not be used for accounting purposes
+            and does not establish a contractual relationship between us and the party to whom it is addressed.</p>
+    </div>
+</ng-template>

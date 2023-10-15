@@ -1,0 +1,40 @@
+/****************************************
+  IMPORTANT 
+*****************************************/
+
+.scrollTop {
+	transition: opacity .3s;
+	background: #2d2d2d;
+	border-radius: 4px 4px 0 0;
+	bottom: 0;
+	color: #ffad2f;
+	display: block;
+	height: 9px;
+	opacity: 0;
+	padding: 10px 10px 35px;
+	position: fixed;
+	right: 10px;
+	text-align: center;
+	text-decoration: none;
+	min-width: 50px;
+	z-index: 1040;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+.scrollTop:hover>i {
+	-webkit-animation: furnSlideInUp 1s infinite;
+	animation: furnSlideInUp 1s infinite;
+}
+
+.text-center {
+	text-align: center !important;
+}
+
+p {
+	color: black;
+}
+
+a {
+	color: #ff9900;
+}

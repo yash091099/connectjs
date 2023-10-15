@@ -1,0 +1,213 @@
+<div class="container ipad-pd-left">
+    <!-- <div class="row">
+        <div class="col-lg-12">
+        <div class="form-group has-search ">
+        </div>
+    </div>
+    </div> -->
+    <div class="row mt-3">
+        <div class=" col-sm-6 col-xs-12">
+            <div class="heading_details">
+                <div class="row">
+                    <div class="col-3 col-xs-2 col-md-2 pr-0  d-flex align-items-center"><a (click)="goBackToHome()"><img  src="../../../../assets/images/back-airrow.svg" /></a></div>
+                    <div class="col-9 col-sm-10">
+                        <div class="row">
+                            <div class="col-2 col-xs-2 col-md-1  d-flex align-items-center px-0 text-center"><span>  <img *ngIf="projectDetails?.logo" [src]="projectDetails?.logo" /></span></div>
+
+                            <div *ngIf="projectDetails?.name?.length>13" [ngbTooltip]="projectDetails?.name" class="col col-xs-9 col-md-9  d-flex align-items-center p-xs-0"><h5 class="text-truncate" >  {{projectDetails?.name|truncate:13}}</h5> </div>
+                            <div *ngIf="projectDetails?.name?.length<=13" class="col-7 col-xs-10 col-md-11 d-flex align-items-center p-xs-0"><h5 class="text-truncate" >  {{projectDetails?.name}}</h5> </div>
+                        </div>
+
+                    </div>
+
+                  
+
+                </div>          
+            
+            </div>
+            <div class="d-sm-block d-none">
+                <p *ngIf="projectDetails?.description?.length>320" [ngbTooltip]="projectDetails?.description" class="mt-3" style="font-weight:300;">{{projectDetails?.description||'--'|truncate:320}}</p>
+                <p *ngIf="projectDetails?.description?.length<=320"class="mt-3" style="font-weight:300;">{{projectDetails?.description||'--'}}</p>
+
+                <div class="row mt-4 links_file">
+                    <div *ngIf="projectDetails?.litePaperLink" class="col col-sm-4 col-xs-4">
+                        <a target="_blank" [href]="projectDetails?.litePaperLink"><img  src="../../../../assets/images/file.svg" /> Lite Paper</a>
+                    </div>
+                    <div  *ngIf="projectDetails?.whitePaperLink"  class="col col-sm-4 col-xs-4">
+                        <a target="_blank" [href]="projectDetails?.whitePaperLink"><img  src="../../../../assets/images/file.svg" /> White Paper</a>
+                    </div>
+                    <div *ngIf="projectDetails?.pitchDeckLink"  class="col col-sm-4 col-xs-4">
+                        <a target="_blank" [href]="projectDetails?.pitchDeckLink"><img   src="../../../../assets/images/file.svg" />Pitch</a>
+                    </div>
+                </div>
+
+                <div class="row mt-4 counters">
+                    <div class="col col-sm-4 col-xs-4">
+                        <h4 class="text-left">${{projectDetails?.rounds?.sellingAmount?.$numberDecimal ||'--'}}</h4>
+                        <p class="text-left">Offering Price</p>
+                    </div>
+                    <div class="col col-sm-4 col-xs-4">
+                        <h4>${{projectDetails?.currentPrice?.$numberDecimal}}</h4>
+                        <p>Lisiting Price</p>
+                    </div>
+                    <div class="col col-sm-4 col-xs-4 pr-0">
+                        <h4 class="text-truncate" *ngIf="projectDetails?.rounds?.supplyToken>18" [ngbTooltip]="projectDetails?.rounds?.supplyToken">{{projectDetails?.rounds?.supplyToken ||'--'|truncate:15}}</h4>
+                        <h4 class="text-truncate" *ngIf="projectDetails?.rounds?.supplyToken<=18">{{projectDetails?.rounds?.supplyToken ||'--'}}</h4>
+
+                        <p>Current round Supply</p>
+                    </div>
+                
+                
+                </div>
+
+                <div class="mt-4 mb-4">
+
+                    <button class="btn btn-outline-primary  alloc-btn" (click)="open(content,projectDetails?.symbol)" >Apply Allocation</button>
+                </div>
+                <div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card-top mt-3 ">
+                <img *ngIf="projectDetails?.cardImage" class="img-fluid" [src]="projectDetails?.cardImage" />           
+            </div>
+        </div>
+        <div class="col-12 d-sm-none d-block">             
+            <p *ngIf="projectDetails?.description?.length>320" [ngbTooltip]="projectDetails?.description" class="mt-3" style="font-weight:400; font-size: 14px;">{{projectDetails?.description||'--'|truncate:320}}</p>
+            <p *ngIf="projectDetails?.description?.length<=320"class="mt-3" style="font-weight:300;font-size: 12px;">{{projectDetails?.description||'--'}}</p>
+
+            <div class="row mt-4 links_file">
+                <div *ngIf="projectDetails?.litePaperLink" class="col col-sm-4 col-xs-4">
+                    <a target="_blank" [href]="projectDetails?.litePaperLink"><img  src="../../../../assets/images/file.svg" /> Lite Paper</a>
+                </div>
+                <div  *ngIf="projectDetails?.whitePaperLink"  class="col col-sm-4 col-xs-4">
+                    <a target="_blank" [href]="projectDetails?.whitePaperLink"><img  src="../../../../assets/images/file.svg" /> White Paper</a>
+                </div>
+                <div *ngIf="projectDetails?.pitchDeckLink"  class="col col-sm-4 col-xs-4">
+                    <a target="_blank" [href]="projectDetails?.pitchDeckLink"><img   src="../../../../assets/images/file.svg" />Pitch</a>
+                </div>
+            </div>
+
+            <div class="row mt-4 counters">
+                <div class="col-sm-4 col-xs-12">
+                    <p class="text-left">Offering Price</p>
+                    <h4 class="text-left">${{projectDetails?.rounds?.sellingAmount?.$numberDecimal ||'--'}}</h4>                 
+                </div>
+                <div class="col-sm-4 col-xs-12">
+                    <p>Lisiting Price</p>
+                    <h4>${{projectDetails?.currentPrice?.$numberDecimal}}</h4>                   
+                </div>
+                <div class="col-sm-4 col-xs-12 pr-0">
+                    <p>Current round Supply</p>
+                    <h4 class="text-truncate" *ngIf="projectDetails?.rounds?.supplyToken>18" [ngbTooltip]="projectDetails?.rounds?.supplyToken">{{projectDetails?.rounds?.supplyToken ||'--'|truncate:15}}</h4>
+                    <h4 class="text-truncate" *ngIf="projectDetails?.rounds?.supplyToken<=18">{{projectDetails?.rounds?.supplyToken ||'--'}}</h4>
+
+                  
+                </div>
+            
+            
+            </div>
+
+            <div class="mt-4 mb-4">
+
+                <button class="btn btn-outline-primary  alloc-btn" (click)="open(content,projectDetails?.symbol)" >Apply Allocation</button>
+            </div>
+            <div>
+            </div>
+        </div>
+    </div>
+    <div  class="row mt-3" id="pool_details">
+        <div class="col-sm-12" >
+        <h5 ><strong>POOL DETAILS</strong>    </h5>
+
+    </div>
+    <div class="col-sm-12 mt-3 d-none d-sm-block">
+        <div class="pool-card-dv">
+ 
+        <span *ngFor="let item of poolsArray,let i=index">
+        <ng-container *ngIf="i===poolsArray?.length-1">
+
+            <app-pool-card [projectdata]="item" [detectLastCardBool]="true"></app-pool-card>
+        </ng-container>
+        <ng-container *ngIf="i!==poolsArray?.length-1">
+
+            <app-pool-card [projectdata]="item" ></app-pool-card>
+        </ng-container>
+
+        </span>
+            
+        </div>
+    </div>
+    <div class="col-sm-12 mt-3 d-block d-sm-none">
+        <div class="poolCard-mob row">
+ 
+        <div class="col-6 px-2" *ngFor="let item of poolsArray,let i=index">
+        <ng-container *ngIf="i===poolsArray?.length-1">
+
+            <app-pool-card [projectdata]="item" [detectLastCardBool]="true"></app-pool-card>
+        </ng-container>
+        <ng-container *ngIf="i!==poolsArray?.length-1">
+
+            <app-pool-card [projectdata]="item" ></app-pool-card>
+        </ng-container>
+
+        </div>
+            
+        </div>
+    </div>
+    
+        <div class="col-sm-12 mt-5 px-3 mb-3  align-items-center" *ngIf="defaultBannerImage">
+      <div class="bottom_banner text-end ">
+           <a href=""><img class="img-fluid" [src]="defaultBannerImage||'../../../../assets/images/bg-banner.jpg'" />
+            <a class="text-white  pt-4 px-4 mob-res-know" *ngIf="defaultBannerLink" target="_blank" [href]="defaultBannerLink">Know More</a> </a>       
+        </div>
+
+        </div>
+ 
+    </div>
+
+
+  
+    
+
+</div>
+
+<ng-template #content let-modal  >
+ 
+	<div class="modal-body allocation_modal"  >
+       <div class="moddal-header"><h6 class="text-center">Token Allocation</h6></div> 
+
+
+       <form [formGroup]="purchaseTokensForm" class="mt-4">
+        <div class="row">
+            
+            <div class="col-md-12 gropu-input">
+                <label>Amount (in USD)</label>
+                <input type="number" onKeyPress="if(this.value.length==12) return false;" formControlName="purchaseTokenAmount"
+                (keydown)="checkInputValue($event)" (input)="purchaseButtonEnable()" type="number" class="form-control" placeholder="$00.00">
+                <span>{{poolName||'Pool'}}</span>
+            </div>
+            
+        </div>
+        <app-show-errors [control]="purchaseTokenAmount" [fname]="'Amount'"></app-show-errors>
+        <div class="row mt-3" >
+            <div class="col-md-12 gropu-input">
+                <label>Number of tokens</label>
+                <input type="number" class="form-control" [value]="numberOfTockens||0" [disabled]="true">
+                <span>{{tokenSymbol}}</span>
+            </div>
+        </div>
+        <label class="mt-3 d-flex align-items-center text-dark"><input (click)="useCommissionWalletOrNot($event)" id="wp-comment-cookies-consent"
+            [disabled]="commissionAmount == 0"
+            [style.cursor]="commissionAmount == 0 ? 'not-allowed' : 'pointer'" name="wp-comment-cookies-consent"
+            type="checkbox" value="yes" class="mr-3"> Use ${{commissionAmount?.toFixed(2)}} from my Commission Wallet</label>
+        <div class="mt-4  ">
+            <button type="button" class="btn cancel_btn" (click)="closePurchasePopUp()">Cancel</button>
+            <button type="button" class="btn  but_btn " [disabled]="disableBuyButton" (click)="buyToken()">Buy {{tokenSymbol | truncate : 6 }}</button>
+        </div>
+       </form>
+		 
+	</div>
+
+</ng-template>

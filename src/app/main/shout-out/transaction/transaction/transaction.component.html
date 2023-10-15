@@ -1,0 +1,27 @@
+<div class="container ipad-pd-left mg-t-80">
+	<div class="row screen-center">
+		<div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 p-0" style="position:relative;">
+           <div class="col-sm-12 back-heading">
+<p class="text-light"><a [routerLink]="['/shout-out']" href="#"><img src="../../../../../assets/images/back-airrow.svg" width="37"></a> Social Shoutout Transactions</p>
+		   </div>
+			<div class="toogle-active-button">
+				<div class=" mt-3">
+			<div class="col-sm-12">
+					<div class=" d-block refeal-active-user ">
+						<a [ngClass]="selectedTab == constants.TRANSACTIONS?'active':''"
+							(click)=" selectTab(constants.TRANSACTIONS)" class="">Campaign Transactions</a>
+						<a [ngClass]="selectedTab == constants.ACTIVITY_LOGS?'active':''"
+							(click)="selectTab(constants.ACTIVITY_LOGS)" class="ml-2 mr-2">Activity Logs</a>
+					</div>
+					</div>
+				</div>
+			</div>
+			<div *ngIf="selectedTab == constants.TRANSACTIONS" class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
+				<app-transactions-listing></app-transactions-listing>
+			</div>
+		</div>
+		<div *ngIf="selectedTab == constants.ACTIVITY_LOGS" class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
+			<app-activity-logs-listing></app-activity-logs-listing>
+		</div>
+	</div>
+</div>

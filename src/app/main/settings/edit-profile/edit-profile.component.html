@@ -1,0 +1,325 @@
+<div class="container mg-t-20 small-mg-t-0 ipad-pd-left">
+	<h2 class="profileName d-sm-block d-none">Welcome, <span style="font-style: italic;">{{userData?.name?.split(' ')[0]}}</span>  </h2>
+	
+	<div class="d-flex verifed-edit" *ngIf="!userObj.emailVerified">
+		<h6>Kindly confirm your email address in order to proceed with account verification.</h6>
+		<button class="btn btn-warning" (click)="openVerifyOtpModal(otpVerifyModal)">
+
+		 <img src="../../../../assets/images/veri-email.png"> Verify	
+		</button>
+	</div>	
+	<div class="row screen-center">
+      <div class="col-sm-4" style="position: relative;">
+	
+		<div class="background-profile">
+			<h2 class="profileName d-sm-none d-block">Welcome,  {{userData?.name?.split(' ')[0]}} </h2>
+			<div class="profile-pic-wrapper">
+				<div class="pic-holder" [formGroup]="updateProfileForm">
+				
+				  <img *ngIf="profilePictureSrc" id="profilePic" class="pic" [src]="profilePictureSrc">
+				  <img *ngIf="!profilePictureSrc" id="profilePic" class="pic"
+					  [src]="'../../../../assets/images/user.png'">
+				  <input class="uploadProfileInput" type="file" formControlName="profilePicture" (change)="onSelectImage($event,$event)" id="newProfilePhoto" accept="image/*" style="opacity: 0;" />
+				  <label for="newProfilePhoto" class="upload-file-block">
+					<div class="text-center">
+					  <div class="mb-2">
+						<i class="fa fa-upload" aria-hidden="true"></i>
+					  </div>
+					  <div class="text-uppercase">
+						Update <br /> Profile Photo
+					  </div>
+					</div>
+				  </label>
+				</div>
+			  </div>
+		</div>
+         <div class="card mobBgg" style="border-radius: 0px 0px 22px 22px !important;">
+           <div class="profile-info" *ngIf="!showChangePassword">
+              <h5>{{ userData?.name }}</h5>
+			  <h6>{{ userData?.email }}</h6>
+			  <div id="half-stars-example">
+				<div class="rating-group">
+					<ngb-rating [max]="5" [(rate)]="userRating" [readonly]="true"></ngb-rating>
+					
+				</div>
+			  <p class="desc">{{ userRating }} Star Investor</p>
+			</div>
+			<a (click)="goToChangePassword()" *ngIf="userObj?.provider == 'email'" class="profile-change">Change password</a>
+		   </div>	
+		   <form [formGroup]="changePasswordForm" *ngIf="showChangePassword" class="change-pass">
+			<h5>Password Change</h5>
+			<div class="row">
+			   <div class="col-sm-12" style="position:relative;">
+				 <label for="uname">Password</label>
+				 <input type="{{showPassword ? 'text' : 'password'}}" placeholder="Enter Password" formControlName="password"
+				   name="Password" class="form-control" id="password" (input)="checkConfirmPassword()">
+				   <div class="eye" (click)="handleShowPassword()">
+					<i *ngIf="!showPassword" class="fa fa-eye-slash" aria-hidden="true" ></i>
+					<i *ngIf="showPassword" class="fa fa-eye" aria-hidden="true" ></i>
+				   </div>
+				 <app-show-errors [control]="password" [fname]="'Password'"></app-show-errors>
+			   </div>
+			   <div class="col-sm-12">
+				 <label for="uname">Retype Password</label>
+				 <input type="{{showConPassword ? 'text' : 'password'}}" placeholder="Enter Confirm Password"
+				   formControlName="confirmPass" name="cnfPassword" class="form-control" id="cnfPassword"
+				   (input)="checkConfirmPassword()">
+				   <div class="eye" (click)="handleShowConPassword()">
+					<i *ngIf="!showConPassword" class="fa fa-eye-slash" aria-hidden="true" ></i>
+					<i *ngIf="showConPassword" class="fa fa-eye" aria-hidden="true" ></i>
+				  </div>
+				 <app-show-errors [control]="confirmPass" [fname]="'Confirm Password'"></app-show-errors>
+				 <div *ngIf="confirmPass?.value && confirmPass?.value != password?.value">
+				   <p class="errro_font">Confirm Password do not match</p>
+				 </div>
+			   </div>
+			   <div class="btn-forget">
+				<button type="submit" (click)="goBackToProfileSection()" class="btn btn-outline-secondary">Cancel</button>
+				<button type="button" class="btn btn-primary" (click)="onChangePasswordSubmit()">Change password</button>
+			   </div>
+			  
+			 </div>
+		   </form>		   
+		 </div>
+	
+	  </div>
+	  <div class="col-sm-4">
+		<div class="card scrore-card height-card">
+			<div class="social-connact">
+				<h4>Investor Score</h4>
+		    <div class="scror-text" style="text-align:left;"[ngbTooltip]="userInvestorPoints" *ngIf="userInvestorPoints>99999">{{userInvestorPoints|truncate:5}}</div>  
+		    <div class="scror-text" style="text-align:left;"[ngbTooltip]="userInvestorPoints" *ngIf="userInvestorPoints<=99999">{{userInvestorPoints}}</div>  
+			
+			<div class="scror-text">
+				<div class="percent-66-sm" >
+					<div *ngIf="userInvestorPoints > 0">
+						<rg-gauge-chart
+						[canvasWidth]="canvasWidth"
+						[needleValue]="investorGraphNeedleValue"
+						[centralLabel]="centralLabel"
+						[options]="options"
+						>
+						</rg-gauge-chart> 
+					</div>
+					<div class="speedo" *ngIf="userInvestorPoints == 0">
+						<div class="face">							
+							<div class="needle"></div>
+						</div>
+					</div>
+				  </div>
+
+				  
+			</div>		
+		   </div>		
+           <h6>
+		 </h6>
+
+		   <p>Your investor score depends upon your token holding patterns in <br>
+			the TDX Launchpad itself. Better investor score let you participate in <span style="color:#FFAD2F;"> Private sale</span> and allocate your tokens early. <b>Keep moving forward</b> and get more points!   </p>
+			<div class="socail-info">
+			 <img src="../../../../assets/images/info-so.png"  alt="social TDX" />	Learn more about the Investor Lifecycle Management.
+			</div>
+		</div>
+	  </div>
+	  <div class="col-sm-4">
+		<div class="card height-card">
+			<div class="social-connact">
+				<h4>Social Connections</h4>
+				<ul class="w-100">
+				 <li > 
+					<div class="d-flex justify-content-between">
+						<div><img  src="../../../../assets/images/Twitter-180x180.webp" /> Twitter</div>
+						<a *ngIf="istwitterLinked && activeSocialConnection[SOCIAL_CONNECTIONS.TWITTER]?.active" (click)="checkActivityOfSocial(confirmationModal,SOCIAL_CONNECTIONS.TWITTER)" href="javascript:void(0)" class="disconnect-socail"> <i class="fa fa-minus-circle ml-2" aria-hidden="true"></i> Disconnect </a>
+						<a *ngIf="istwitterLinked && !activeSocialConnection[SOCIAL_CONNECTIONS.TWITTER]?.active"  (click)="checkActivityOfSocial(confirmationModal,SOCIAL_CONNECTIONS.TWITTER)" href="javascript:void(0)"><i class="fa fa-plus-circle ml-2" aria-hidden="true"></i> Connect </a> 
+						<a *ngIf="!istwitterLinked" (click)="connectSocialChannel(SOCIAL_CONNECTIONS.TWITTER)" href="javascript:void(0)"><i class="fa fa-plus-circle ml-2" aria-hidden="true"></i> Connect </a> 
+					</div>
+				</li>	
+				 <li > 
+					<div class="d-flex justify-content-between">
+						<div><img  src="../../../../assets/images/youtube.png" /> Youtube </div>
+						<a *ngIf="isYoutubeLinked && activeSocialConnection[SOCIAL_CONNECTIONS.YOUTUBE]?.active" (click)="checkActivityOfSocial(confirmationModal,SOCIAL_CONNECTIONS.YOUTUBE)" href="javascript:void(0)" class="disconnect-socail"> <i class="fa fa-minus-circle" aria-hidden="true"></i> Disconnect </a>
+						<a *ngIf="isYoutubeLinked && !activeSocialConnection[SOCIAL_CONNECTIONS.YOUTUBE]?.active" (click)="checkActivityOfSocial(confirmationModal,SOCIAL_CONNECTIONS.YOUTUBE)" href="javascript:void(0)"><i class="fa fa-plus-circle" aria-hidden="true"></i> Connect </a> 
+						<a *ngIf="!isYoutubeLinked" (click)="connectSocialChannel(SOCIAL_CONNECTIONS.YOUTUBE)" href="javascript:void(0)"><i class="fa fa-plus-circle ml-2" aria-hidden="true"></i> Connect </a> 
+					</div>
+				</li>	
+				 <li >
+					<div class="d-flex justify-content-between">
+						<div><img  src="../../../../assets/images/telegram_icon.png" /> Telegram </div>
+						<a *ngIf="isTelegramLinked && activeSocialConnection[SOCIAL_CONNECTIONS.TELEGRAM]?.active" (click)="checkActivityOfSocial(confirmationModal,SOCIAL_CONNECTIONS.TELEGRAM)" href="javascript:void(0)" class="disconnect-socail"> <i class="fa fa-minus-circle" aria-hidden="true"></i> Disconnect </a>
+						<a *ngIf="isTelegramLinked && !activeSocialConnection[SOCIAL_CONNECTIONS.TELEGRAM]?.active" (click)="checkActivityOfSocial(confirmationModal,SOCIAL_CONNECTIONS.TELEGRAM)" href="javascript:void(0)"><i class="fa fa-plus-circle" aria-hidden="true"></i> Connect </a>
+						<a *ngIf="!isTelegramLinked" container="body" (click)="connectToTwitter()">
+							<i class="fa fa-plus-circle" aria-hidden="true"></i> Connect
+							<telegram-login (found)="handleTelegramLogin($event)"></telegram-login>
+						</a>
+					</div>
+				 </li>	
+				 <li > 
+					<div class="d-flex justify-content-between">
+						<div><img  src="../../../../assets/images/discord.png" /> Discord </div>
+						<a *ngIf="isDiscordLinked && activeSocialConnection[SOCIAL_CONNECTIONS.DISCORD]?.active" (click)="checkActivityOfSocial(confirmationModal,SOCIAL_CONNECTIONS.DISCORD)" href="javascript:void(0)" class="disconnect-socail"> <i class="fa fa-minus-circle" aria-hidden="true"></i> Disconnect </a>
+						<a *ngIf="isDiscordLinked && !activeSocialConnection[SOCIAL_CONNECTIONS.DISCORD]?.active" (click)="checkActivityOfSocial(confirmationModal,SOCIAL_CONNECTIONS.DISCORD)" href="javascript:void(0)"><i class="fa fa-plus-circle" aria-hidden="true"></i> Connect </a> 
+						<a *ngIf="!isDiscordLinked" (click)="connectSocialChannel(SOCIAL_CONNECTIONS.DISCORD)" href="javascript:void(0)"><i class="fa fa-plus-circle ml-2" aria-hidden="true"></i> Connect </a> 
+					</div>
+				</li>
+				</ul>				
+			</div>	
+		</div>
+	  </div>
+	  <div class="col-sm-12">
+		<div class="d-flex edit-wallet">
+			<h6 class="mb-0">Kindly connect to Metamask and connect you web3 wallet</h6>
+			<button class="btn btn-warning content-bt" [ngbTooltip]="(walletAddress?.length ? walletAddress[0] : 'Connect Wallet')" (click)="connectWallet()">
+	
+			 <img src="../../../../assets/images/wal.png">{{(walletAddress?.length ? walletAddress[0] : 'Connect Wallet')|truncate:15}} 	
+			</button>
+		</div>	
+	  </div>
+	 
+
+	  <div class="col-sm-12" style="filter: blur(3px);">
+		<div class="card"> 	
+			<div class="row top-earn">
+				<div class="col">
+					<h4>Reward Earnings</h4>	
+					<p>Total earning Based on your tasks performed.</p>
+				  </div>
+				  <div class="col">
+				    <div class="top-earn-card">
+					 <img src="../../../../assets/images/usd-t.png" />	
+					 <p>USDT Earnings</p>
+					 <h5>$132  <span>USDT</span></h5>
+					</div>
+				  </div>
+				  <div class="col">
+				    <div class="top-earn-card">
+					 <img src="../../../../assets/images/brg.jpeg" />	
+					 <p>Bridge Network</p>
+					 <h5>50  <span>BRDG</span></h5>
+					</div>
+				  </div>
+				  <div class="col">
+				    <div class="top-earn-card">
+					 <img src="../../../../assets/images/boll.png" />	
+					 <p>Ballers</p>
+					 <h5>50<span>BRDG</span></h5>
+					</div>
+				  </div>
+				  <div class="col">
+				    <div class="top-earn-card">
+						<img src="../../../../assets/images/goon.jpg" />
+					 <p>Goons of Balatron</p>
+					 <h5>50<span>50</span></h5>
+					</div>
+				  </div>
+	
+        
+			</div>
+          
+		</div>
+
+	 </div>	
+	</div>
+	
+</div>
+
+<ng-template #confirmationModal let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">
+		</h4>
+		<button type="button" aria-label="Close" class="btn-close" (click)="closeModal()">X</button>
+	</div>
+	<div class="modal-body">
+		<h6 class="text-left" style="color: black;">To participate in campaign you will have to reconnect your social
+			connection</h6>
+		<p class="text-left" style="color: black;">Still wants to disconnect your social connection?</p>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-primary" (click)="connectSocialAccount()">Yes</button>
+		<button class="btn btn-danger" (click)="closeModal()" style="padding: 8px 15px !important;">No</button>
+	</div>
+</ng-template>
+
+<ng-template #infoModal let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title"></h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="closeModal()">
+			<span aria-hidden="true">×</span>
+		</button>
+	</div>
+	<div class="modal-body text-center pt-0">
+	  <img *ngIf="selectedModalType == modalType.CLAIMED " src="../../../../assets/images/congrats.png">
+	  <img *ngIf="selectedModalType == modalType.NOT_CLAIMED "  src="../../../../assets/images/reward_cancel.png">
+	  <img *ngIf="selectedModalType == modalType.ERROR "  src="../../../../assets/images/connection-error.png">
+	  <img *ngIf="selectedModalType == modalType.SUCCESS "  src="../../../../assets/images/connection-successfull.png">
+	  <h3 [ngStyle]="{color:  selectedModalType == modalType.CLAIMED ? '#000000': '#54595E'}">{{ selectedModalType == modalType.CLAIMED ?  'Congratulations!' : 
+		selectedModalType == modalType.SUCCESS ? 'Success' : 'Error'  }}</h3>
+	  <p *ngIf="selectedModalType != modalType.CLAIMED">{{taskErrorMessage}}</p>
+	</div>
+	
+</ng-template>
+
+<ng-template #otpVerifyModal let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">
+		</h4>
+		<button type="button" aria-label="Close" class="btn-close" (click)="closeModal()">X</button>
+	</div>
+	<div class="modal-body">
+		<div class="row" style="margin: 0;" *ngIf="!showOtpSuccess">
+			<div class="loginform">
+				<p class="login-heading">Please enter the One - Time Password to verify your account</p>
+				 <p class="Otp-text">OTP has been sent to your email</p>
+				 <form [formGroup]="otpForm" (ngSubmit)="verifyOtp(otpForm.value,otpSuccessModal)">
+					<div class="form-group text-center">
+					   
+						<ng-otp-input  (onInputChange)="onOtpChange($event)"   [config]="otpSettings"></ng-otp-input>
+						
+						<app-show-errors class="text-center" [control]="otp" [fname]="'OTP'"></app-show-errors>
+					</div>
+								  
+					<button type="submit" class="btn-block login-button">Validate OTP</button>
+	
+					<div  class="ft-login" style="padding-top: 15px; letter-spacing: 0.08em;
+					color: #5C5C5C;"> Didn’t receive the OTP?<a  
+						style="color: #265B97; text-decoration: none; background-color: transparent;" 
+						(click)="resendEmail()"> Resend OTP </a></div>
+					<p class="text-center check-spam">Please check spam if not received in inbox. Bring this to your primary inbox</p>
+				</form>
+			</div>
+		</div>
+		<div class="row" *ngIf="showOtpSuccess">
+			<div class="loginform">
+				<img src="../../../../assets/images/Completed-verification.svg">
+				<h6 class="login-heading">Congratulations, your verification has been confirmed.</h6>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+	</div>
+</ng-template>
+
+<!-- <ng-template #walletConnectPopup let-modal>
+	<div class="modal-header">
+		<h6 class="modal-title"></h6>
+		<button type="button" class="btn-close" aria-label="Close" (click)="closePopup()">X</button>
+	</div>
+	<div class="modal-body pt-0">
+		<h6 class="modal-title">Connect your wallet</h6>
+       <div class="connectWallet-type">
+          <a href="javascript:void(0)"> 
+			<div class="icon-wallet-meta">
+				<img src="../../../../assets/images/wallet-icon-1.png" />
+			</div>
+			<h5>MetaMask</h5>
+		  </a>
+		  <a href="javascript:void(0)" class="mr-0"> 
+			<div class="icon-wallet-meta">
+				<img src="../../../../assets/images/WalletConnect.png" />
+			</div>
+			<h5>WalletConnect</h5>
+		  </a>
+	   </div>
+
+	</div>
+	
+</ng-template> -->

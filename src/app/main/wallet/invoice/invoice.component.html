@@ -1,0 +1,243 @@
+<div class="col-md-12" *ngIf="purchase != null">
+	<div class="page-heading">
+		<h5>Purchase Details</h5>
+	</div>
+	<div class="card table-br">
+		<table class="table">
+			<tbody>
+				<tr>
+					<td>
+						<table class="table-header">
+							<tbody>
+								<tr>
+									<td>User Name : &nbsp;</td>
+									<td>{{userName}}</td>
+								</tr>
+								<tr>
+									<td>Email ID : &nbsp;</td>
+									<td>{{email}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+					<td>
+						<table class="table-right" style="width: 100%;">
+							<tbody>
+								<tr>
+									<td align="right">
+										Date Of Purchase
+									</td>
+								</tr>
+								<tr>
+									<td align="right">
+										{{purchase.createdAt | date:'medium'}}
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="row">
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Subscription Name</th>
+							<th>Transaction ID</th>
+							<th>Mode - coins</th>
+							<th>Amount</th>
+							<th>Status</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>{{purchase?.subscriptionDetails?.name }}</td>
+							<td>{{purchase?.gatewaydata?.txnId }}</td>
+							<td>{{purchase?.paymode }} {{purchase.cryptoCoins }}</td>
+							<td>${{purchase.paymode == paymode.WALLET ? purchase.walletAmount?.$numberDecimal :
+								purchase.tokenAmount?.$numberDecimal }}</td>
+							<td>{{purchase.status }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="thanks">
+		<h5>Thank you for your purchase</h5>
+	</div>
+</div>
+<div class="col-md-12" *ngIf="startup != null">
+	<div class="page-heading">
+		<h5>Invoice Details</h5>
+	</div>
+	<div class="card table-br">
+		<table class="table">
+			<tbody>
+				<tr>
+					<td>
+						<table class="table-header">
+							<tbody>
+								<tr>
+									<td>User Name : &nbsp;</td>
+									<td>{{userName}}</td>
+								</tr>
+								<tr>
+									<td>Email ID : &nbsp;</td>
+									<td>{{email}}</td>
+								</tr>
+
+							</tbody>
+						</table>
+					</td>
+					<td>
+						<table class="table-right" style="width: 100%;">
+							<tbody>
+								<tr>
+									<td align="right">
+										Date Of Transaction
+									</td>
+								</tr>
+								<tr>
+									<td align="right">
+										{{startup.createdAt | date:'medium'}}
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="row">
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Product Name</th>
+							<th>Transaction ID</th>
+							<th>Mode - coins</th>
+							<th>Amount</th>
+							<th>Status</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>{{startup?.startupDetails?.name }}({{startup?.startupDetails?.symbol}})</td>
+							<td>{{startup?._id }}</td>
+							<td>
+								<span *ngIf="startup.paymode == paymode.LITE_COIN_BLOCK_IO">
+									LTC
+								</span>
+								<span *ngIf="startup.paymode == paymode.BITCOIN_BLOCK_IO">
+									BTC
+								</span>
+								<span *ngIf="startup.paymode == paymode.ETHERIUM_BLOCK_IO">
+									ETH
+								</span>
+								<span *ngIf="startup.paymode == paymode.TETHER_BLOCK_IO">
+									USDT
+								</span>
+								<span *ngIf="startup.paymode == paymode.WALLET">
+									<img src="../../../../assets/images/wallet.png" title="Wallet" style="width: 15px;">
+								</span>
+								<span *ngIf="startup.paymode == paymode.MIXED">
+									<img src="../../../../assets/images/mixed.png" title="Mixed" style="width: 15px;">
+								</span> {{startup.gatewaydata.cryptoCoins }}
+							</td>
+							<td>${{startup.paymode == paymode.WALLET ? startup.walletAmount?.$numberDecimal :
+								startup.tokenAmount?.$numberDecimal }}</td>
+							<td>{{startup.status }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="thanks">
+		<h5>Thank you for your Purchase</h5>
+	</div>
+</div>
+
+<div class="col-md-12" *ngIf="deposit != null">
+	<div class="page-heading">
+		<h5>Deposit Details</h5>
+	</div>
+	<div class="card table-br">
+		<table class="table">
+			<tbody>
+				<tr>
+					<td>
+						<table class="table-header">
+							<tbody>
+								<tr>
+									<td>User Name : &nbsp;</td>
+									<td>{{userName}}</td>
+								</tr>
+								<tr>
+									<td>Email ID : &nbsp;</td>
+									<td>{{email}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+					<td>
+						<table class="table-right" style="width: 100%;">
+							<tbody>
+								<tr>
+									<td align="right">
+										Date Of Deposit
+									</td>
+								</tr>
+								<tr>
+									<td align="right">
+										{{deposit.createdAt | date:'medium'}}
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="row">
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Transaction ID</th>
+							<th>Payment Mode</th>
+							<th>Amount</th>
+							<th>Coin Value</th>
+							<th>Status</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>{{deposit.gatewaydata.txnId}}</td>
+							<td>{{deposit.paymode}}</td>
+							<td>$
+								<span *ngIf="deposit.paymode == paymode.WALLET || deposit.paymode == paymode.COUPONS">
+									{{deposit.walletAmount?.$numberDecimal}}
+								</span>
+								<span *ngIf="!(deposit.paymode == paymode.WALLET || deposit.paymode == paymode.COUPONS)">
+									{{deposit.tokenAmount?.$numberDecimal}}
+								</span>
+							</td>
+							<td>{{deposit.gatewaydata?.cryptoCoins || '--'}}</td>
+							<td>{{deposit.status}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="thanks">
+		<h5>Thank you for your purchase</h5>
+	</div>
+</div>

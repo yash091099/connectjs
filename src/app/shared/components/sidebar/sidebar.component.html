@@ -1,0 +1,308 @@
+<div class="my-sidebar">
+  <div class="side-bar active">
+    <header>
+      <div class="close-btn">
+        <i class="fas">
+          <img src="../../../../assets/images/crox-new.svg" />
+        </i>
+      </div>
+      <img
+        alt="TDX Launchpad"
+        src="../../assets/images/TDXPAD-Logo.png"
+        style="margin-left: -10px"
+        class="side-logo"
+      />
+    </header>
+    <div id="sidebar" class="menu-new">
+     
+      <div class="item has-collapsible">
+        <a
+          href="javascript:void(0)"
+          (click)="connectWallet()"
+          class="hideMobileClick connect-wallet" [ngbTooltip]="(walletAddress?.length ? walletAddress[0] : 'Connect Wallet')">
+          <i class="fas un-active-img"
+            ><img src="../../../../assets/images/wal.png" /></i>
+            {{(walletAddress?.length ? walletAddress[0] : 'Connect Wallet')|truncate:15}}
+            </a
+        >
+      </div>
+      <div class="item has-collapsible new-design-profile">
+        <a style="position: relative;">
+          <i class="fas un-active-img">
+            <img src="../../../../assets/images/profile.svg" />
+            <img [ngbTooltip]="'Please verify your account'" container="body" placement="top" *ngIf="!showProfileVerify" src="../../../../assets/images/exclamation.svg" class="exclamation-icon" id="blinking-text">
+          </i>
+          <i class="fas is-active-img">
+            <img src="../../../../assets/images/profile-active.svg" />
+          </i>
+          Profile<i class="fas fa-angle-right dropdown"></i
+        >
+      </a>
+        <div class="sub-menu mob-profile-new">
+          <a
+            [routerLink]="['/settings/profile']"
+            routerLinkActive="menu-active"
+            (click)="preventCollaps($event)"
+            href="javascript:void(0)"
+            class="sub-item viewprofile hideMobileClick"
+            >View profile</a
+          >
+          <div class="boder-line-new"></div>
+
+          <a
+            [routerLink]="['/settings/profile']"
+            (click)="preventCollaps($event)"
+            routerLinkActive="menu-active"
+            href="javascript:void(0)"
+            class="sub-item dorp-menu-pro-iteam hideMobileClick"
+            style="margin-top: 10px"
+          >
+            <img src="../../../../assets/images/sidebar-icons/web-drop.png" />
+            Social Connection
+          </a>
+
+          <a
+            [routerLink]="['/refer']"
+            (click)="preventCollaps($event)"
+            routerLinkActive="menu-active"
+            href="javascript:void(0)"
+            class="sub-item dorp-menu-pro-iteam hideMobileClick"
+            style="margin-bottom: 10px"
+          >
+            <img src="../../../../assets/images/sidebar-icons/web-send.png" />
+            Invite to Launchpad
+          </a>
+          <div class="boder-line-new"></div>
+          <a
+            [routerLink]="['/settings/kyc']"
+            (click)="preventCollaps($event)"
+            routerLinkActive="menu-active"
+            href="javascript:void(0)"
+            class="sub-item"
+            [ngClass]="[kycApproved ? 'verifed' : 'get-verifed']"
+          >
+            <img
+              *ngIf="kycApproved"
+              src="../../../../assets/images/icon_verified.png"
+            />
+            {{ kycApproved ? "Verified" : "Get Verified" }}
+            <i
+              *ngIf="!kycApproved"
+              class="fa fa-long-arrow-right"
+              aria-hidden="true"
+            ></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="item has-collapsible">
+        <a
+          href="javascript:void(0)"
+          (click)="resetReferralActive()"
+          [routerLink]="['/launchpad']"
+          routerLinkActive="menu-active"
+          class="hideMobileClick"
+        >
+          <i class="fas un-active-img"
+            ><img src="../../../../assets/images/sidebar-icons/menu-home.png"
+          /></i>
+          <i class="fas is-active-img"
+            ><img
+              src="../../../../assets/images/sidebar-icons/menu-home-active.png"
+          /></i>Home</a
+        >
+      </div>
+      <div class="item has-collapsible">
+        <a
+          (click)="resetReferralActive()"
+          [routerLink]="['/project-sale']"
+          routerLinkActive="menu-active"
+        >
+          <i class="fas un-active-img">
+            <img
+              src="../../../../assets/images/sidebar-icons/menu-projects.png"
+            />
+          </i>
+          <i class="fas is-active-img">
+            <img
+              src="../../../../assets/images/sidebar-icons/menu-projects-active.png"
+            />
+          </i>Project Sale<i class="fas fa-angle-right dropdown"></i
+        ></a>
+        <div class="sub-menu">
+			<a [routerLink]="['/project-sale']" (click)="preventCollaps($event)" routerLinkActive="menu-active"
+            href="javascript:void(0)" class="sub-item hideMobileClick">Public Sale</a>
+          <a routerLinkActive="menu-active" (click)="preventCollaps($event)" href="javascript:void(0)"
+            class="sub-item hideMobileClick" style="cursor: not-allowed !important;">Private Sale</a>
+       
+        </div>
+      </div>
+      <div class="item has-collapsible">
+        <a
+          href="javascript:void(0)"
+          (click)="resetReferralActive()"
+          [routerLink]="['/shout-out']"
+          routerLinkActive="menu-active"
+          class="hideMobileClick"
+          ><i class="fas un-active-img"
+            ><img src="../../../../assets/images/sidebar-icons/menu-shot.png"
+          /></i>
+          <i class="fas is-active-img"
+            ><img
+              src="../../../../assets/images/sidebar-icons/menu-shot-act.png"
+          /></i>Social Shoutout</a
+        >
+      </div>
+      <div class="item has-collapsible">
+        <a
+          class=""
+          (click)="resetReferralActive(); onClickOfReferEarn()"
+          id="refer-earn-tab"
+          [ngClass]="{
+            'menu-active':
+              selectedStatusTab === 'refer-earn' ||
+              selectedStatusTab === 'referral-campaigns' ||
+              selectedStatusTab === 'analytics'
+          }"
+        >
+          <i class="fas un-active-img"
+            ><img
+              src="../../../../assets/images/sidebar-icons/menu-refer.png"
+            />
+          </i>
+          <i class="fas is-active-img"
+            ><img
+              src="../../../../assets/images/sidebar-icons/menu-refer-act.png"
+            />
+          </i>Refer and Earn<i class="fas fa-angle-right dropdown"></i
+        ></a>
+        <div class="sub-menu">
+          <a
+            href="javascript:void(0)"
+            (click)="onReferralTabClick('refer-earn', $event)"
+            [routerLink]="['/refer']"
+            [ngClass]="{ 'menu-active': selectedStatusTab == 'refer-earn' }"
+            class="sub-item hideMobileClick"
+            >Refer & Earn</a
+          >
+          <a
+            href="javascript:void(0)"
+            (click)="onReferralTabClick('referral-campaigns', $event)"
+            [routerLink]="['/refer', 'referral-campaigns']"
+            [ngClass]="{
+              'menu-active': selectedStatusTab == 'referral-campaigns'
+            }"
+            class="sub-item hideMobileClick"
+            >My Campaign</a
+          >
+          <a
+            href="javascript:void(0)"
+            (click)="onReferralTabClick('analytics', $event)"
+            [routerLink]="['/refer', 'analytics']"
+            [ngClass]="{ 'menu-active': selectedStatusTab == 'analytics' }"
+            class="sub-item hideMobileClick"
+            >Analytics</a
+          >
+        </div>
+      </div>
+      <div class="item has-collapsible">
+        <a
+          href="javascript:void(0)"
+          (click)="resetReferralActive()"
+          [routerLink]="['/wallet']"
+          routerLinkActive="menu-active"
+          class="hideMobileClick"
+        >
+          <i class="fas un-active-img"
+            ><img src="../../../../assets/images/sidebar-icons/menu-wallet.png"
+          /></i>
+          <i class="fas is-active-img"
+            ><img
+              src="../../../../assets/images/sidebar-icons/menu-wallet-act.png"
+          /></i>Wallet</a
+        >
+      </div>
+      <div class="item has-collapsible">
+        <a
+          href="javascript:void(0)"
+          (click)="resetReferralActive()"
+          [routerLink]="['/transaction']"
+          routerLinkActive="menu-active"
+          class="hideMobileClick"
+        >
+          <i class="fas un-active-img"
+            ><img
+              src="../../../../assets/images/sidebar-icons/trans-inactive.png"
+          /></i>
+          <i class="fas is-active-img"
+            ><img
+              src="../../../../assets/images/sidebar-icons/trans-active.png"
+          /></i>Transactions</a
+        >
+      </div>
+    </div>
+    <a
+      (click)="openLogOutModal(logOutModal)"
+      href="javascript:void(0)"
+      class="logout-side"
+      routerLinkActive="menu-active"
+      >Log out
+      <img src="../../../../assets/images/sidebar-icons/menu-log-out.png" />
+    </a>
+  </div>
+</div>
+
+<ng-template #logOutModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title"></h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="closeLogOutModal()"
+    >
+      X
+    </button>
+  </div>
+  <div class="modal-body delete-release-popup">
+    <div class="btn-group-custom mb-5">
+      <button type="submit" class="btn btn-danger mr-2" (click)="logout(true)">
+        Logout from this device
+      </button>
+      <button
+        type="submit"
+        class="btn btn-danger"
+        (click)="logout(false)"
+        style="margin-right: 0px"
+      >
+        Logout from all devices
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<!-- <ng-template #walletConnectPopup let-modal>
+	<div class="modal-header">
+		<h6 class="modal-title"></h6>
+		<button type="button" class="btn-close" aria-label="Close" (click)="closePopup()">X</button>
+	</div>
+	<div class="modal-body pt-0">
+		<h6 class="modal-title">Connect your wallet</h6>
+       <div class="connectWallet-type">
+          <a href="javascript:void(0)"> 
+			<div class="icon-wallet-meta">
+				<img src="../../../../assets/images/wallet-icon-1.png" />
+			</div>
+			<h5>MetaMask</h5>
+		  </a>
+		  <a href="javascript:void(0)" class="mr-0 mb-0"> 
+			<div class="icon-wallet-meta">
+				<img src="../../../../assets/images/WalletConnect.png" />
+			</div>
+			<h5>WalletConnect</h5>
+		  </a>
+	   </div>
+
+	</div>
+	
+</ng-template> -->

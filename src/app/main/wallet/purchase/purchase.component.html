@@ -1,0 +1,97 @@
+<div class="card table-br">
+    <h6>My Purchase </h6>
+
+    <div class="row">
+        <div class="table-responsive ">
+            <div class="overflow-y">
+                <div>
+ 
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>Date</th>
+                          <th>Transaction ID</th>
+                          <th>Subscription Name</th>
+                          <th class="cell-5">Mode - Amount</th>
+                           <th class="cell-5">Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let temp of purchaseArray;let i = index">
+                            <td title="{{temp.createdAt | date: 'dd-MMM-yy h:m a'}}" >{{temp.createdAt | date: 'dd-MMM-yy h:m a'}}</td>
+                          <td>
+                            <span class="text-overflow" title="{{temp.gatewaydata?.txnId}}">{{temp.gatewaydata?.txnId}}</span> 
+                            <i class="fa fa-files-o" (click)="cpyToClipboard(temp?.gatewaydata?.txnId)" class="fa fa-copy cpy-icon" title="copy to clipboard" aria-hidden="true"></i>
+                              </td>
+                          <td> <span class="text-overflow" title="{{temp.subscriptionDetails.name}}">{{temp.subscriptionDetails.name}}</span></td>
+                          <td class="cell-5">
+                            <span *ngIf="temp.paymode == paymode.LITE_COIN_BLOCK_IO">
+                              LTC
+                          </span>
+                          <span *ngIf="temp.paymode == paymode.BITCOIN_BLOCK_IO">
+                              BTC
+                          </span>
+                          <span *ngIf="temp.paymode == paymode.ETHERIUM_BLOCK_IO">
+                            ETH
+                          </span>
+                          <span *ngIf="temp.paymode == paymode.TETHER_BLOCK_IO">
+                            USDT
+                          </span>
+                          <span *ngIf="temp.paymode == paymode.WALLET">
+                              <img src="../../../../assets/images/wallet.png" title="Wallet" style="width: 15px;" >
+                          </span>
+                          <span *ngIf="temp.paymode == paymode.MIXED">
+                              <img src="../../../../assets/images/mixed.png" title="Mixed" style="width: 15px;" >
+                          </span>
+                             ${{temp.paymode == paymode.WALLET ? temp.walletAmount?.$numberDecimal : temp.tokenAmount?.$numberDecimal}}
+                             
+                          </td>
+                          <td class="cell-5"> 
+                            <a href="javascript:void(0)" *ngIf="temp.status== walletStatus.PENDING" title="PENDING">
+                                <img src="../../../../assets/images/pending.png" width="18px">
+                            </a>
+                            <a href="javascript:void(0)" *ngIf="temp.status== walletStatus.CANCELLED" title="CANCELLED">
+                                <img src="../../../../assets/images/cancel.png" width="18px">
+                            </a>
+                            <a href="javascript:void(0)" *ngIf="temp.status== walletStatus.PROCESSING" title="PROCESSING">
+                                <img src="../../../../assets/images/process.png" width="18px">
+                            </a>
+                            <a href="javascript:void(0)" *ngIf="temp.status== walletStatus.FAILED" title="FAILED">
+                                <img src="../../../../assets/images/failed.png" width="18px">
+                            </a>
+                            <a href="javascript:void(0)" *ngIf="temp.status== walletStatus.ONHOLD" title="ONHOLD">
+                              <img src="../../../../assets/images/onhold.png" width="18px">
+                          </a>
+                            <a href="javascript:void(0)" style="cursor: pointer;" *ngIf="temp.status== walletStatus.COMPLETED" (click)="sendDataToInvoice(temp)" title="COMPLETED"><i class="fa fa-file-text-o" aria-hidden="true"></i></a>
+                            <a href="javascript:void(0)" *ngIf="temp.status== walletStatus.REJECTED" title="REJECTED"><i class="fa fa-thumbs-down" aria-hidden="true"></i></a>
+                            
+                          </td>
+                        </tr>
+
+                       
+                        <tr *ngIf="purchaseArray.length == 0"  style="background-color: rgb(0 0 0 / 0%) !important;">
+                            <td colspan="5"><div class="no-found-deta">No purchase history found</div></td>
+                        </tr> 
+                      </tbody>
+                    </table>
+                  </div>
+            </div>
+            </div>
+            
+            <div *ngIf="totalCount > rowsPerPage" class="peg-middle">
+            <ngb-pagination
+            *ngIf="purchaseArray.length > 0"
+            class="d-flex justify-content-end"
+            [(page)]="currentPage"
+            [maxSize]="3"
+            [ellipses]="false"
+            [pageSize]="rowsPerPage"
+            [collectionSize]="totalCount"
+            (pageChange)="pageChanged($event)"
+          >
+          
+        </ngb-pagination>
+          </div>
+    </div>
+
+</div>

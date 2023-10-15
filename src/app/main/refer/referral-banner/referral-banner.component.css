@@ -1,0 +1,229 @@
+.header {
+	width: 100%;
+	float: left;
+	color: white;
+	position: relative;
+	padding-top: 40px;
+}
+.borline {
+    display: none;
+}
+.card {
+    padding: 0px;
+    box-sizing: border-box;
+    background: #10171a00 !important;
+    border-radius: 0px !important;
+    border: none;
+    margin-top: 0px;
+    padding-right: 20px;
+    box-shadow: none !important;
+}
+.card.alloc-card h4 {
+    padding-left: 10px;
+    font-weight: 500;
+    font-size: 20px;
+    margin-bottom: 30px;
+    line-height: 35px;
+}
+.back-icon {
+    width: 35px;
+    height: 35px;
+    display: inline-block;
+    float: left;
+    border: 1.5px solid #cacaca;
+    border-radius: 50%;
+    margin-right: 20px;
+    text-align: center;
+    line-height: 35px !important;
+}
+.back-icon img {
+    width: 14px;
+    position: relative;
+    top: -2px;
+}
+.pl-30{
+    padding-left:80px;
+}
+.banner_Box_card {
+    width: 100%;
+    float: left;
+    position: relative;
+    padding: 20px 0px;
+    border: 1px solid #ccc;
+    text-align: center;
+    border-radius: 2px;
+}
+button.btn-waalet.copied {
+    color: #10B40D;
+    border-color: #10B40D;
+}
+button.btn-waalet.copied img {
+    width: 18px;
+}
+.banner-name{
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0.01em;
+    color: rgba(255, 255, 255, 0.58);
+    margin-bottom: 25px;
+}
+
+.banner_Box_card .banner-image-border {
+    width: 330px;
+}
+
+.expen-icon {
+    position: absolute;
+    bottom: 8px;
+    right: 10px;
+    cursor: pointer;
+    width: 12px;
+}
+.banner-code {
+    position: relative;
+    top: 20%;
+}
+.banner-url {
+    box-sizing: border-box;
+    width: 100%;
+    height: 89px;
+    border: 1px solid #B8B8B8;
+    border-radius: 8px;
+    margin: 20px 0px;
+    padding: 20px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.banner-url p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: 0.045em;
+    color: #5385D1;
+    margin: 0px;
+    word-break: break-all;
+}
+button.btn-waalet {
+    background: none;
+    height: 42px;
+    border: 1px solid #FFFFFF;
+    border-radius: 8px;
+    color: #fff;
+    padding: 0px 25px;
+    font-size: 14px;
+    font-weight: 500;
+}
+button.btn-waalet img {
+    margin-left: 15px;
+}
+@media only screen and (max-width: 1024px) and (min-width: 768px) {
+.banner_Box_card .banner-image-border {
+    width: 85%;
+}
+.banner-url p {
+   
+    font-size: 10px;
+    line-height: 15px;
+}
+.banner-url{
+    height: 100px;
+    margin: 10px 0px;
+    padding: 10px 10px;
+
+}
+}
+
+@media only screen and (max-width: 667px) and (min-width: 320px) {
+    .pl-30{
+        padding-left: 25px;
+    }
+    button.btn-waalet{
+        margin-bottom: 20px;
+       width: 100%;
+    }
+    .banner-cam .banner-action {
+        padding-left: 0%;
+    }
+    .banner_Box_card .banner-image-border {
+        width: 85%;
+    }
+    .banner-url {
+        height: 100px;
+        margin: 10px 0px;
+        padding: 10px 10px;
+        margin-bottom: 20px;
+   
+    }
+    .banner-url p{
+
+    font-size: 10px;
+    line-height: 15px;
+
+    }
+    .header {
+		padding: 0px;
+	}
+    .row.top-card {
+        background: #000;
+        height: 100vh;
+        padding: 20px 0px;
+        margin-top: 30px;
+        border-radius: 40px 40px 0px 0px;
+        display: block;
+    }
+    .row.top-card .col-md-12{
+        border-bottom: 1.5px solid #252424;
+    }
+    .card.alloc-card {
+        padding-right: 0px;
+    }
+    .card.alloc-card h4 {
+        margin-bottom: 15px;
+        line-height: 35px;
+    }
+    .banner-name {
+        margin-bottom: 5px;
+        margin-top: 8px;
+        margin-left: 30px;
+    }
+    .banner_Box_card {
+        padding: 10px 0px;
+        border: 0px solid #ccc;
+        text-align: center;
+        border-radius: 0px;
+    }
+    .info-banner {
+        display: none;
+    }
+    .banner-code h6 {
+        margin-left: 32px;
+        color: rgba(255, 255, 255, 0.58);
+    }
+    .banner-code {
+        float: left;
+        width: 100%;
+        padding: 0px 15px;
+    
+    }
+    .borline {
+        width: 100%;
+        height: 2px;
+        background: #F5F5F5;
+        float: left;
+        opacity: 0.20999999344348907;
+        margin-bottom: 25px;
+        display: block;
+        margin-top: 5px;
+    }
+    .mob-pa{
+        padding: 0px;
+    }
+    .mob-view{
+        padding: 0px !important;
+
+    }
+    .mob-view img{
+        width: 100%;
+    }
+}

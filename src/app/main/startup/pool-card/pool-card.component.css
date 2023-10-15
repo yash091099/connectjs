@@ -1,0 +1,130 @@
+#pool_details .progress-bar{ margin-top: 15px !important; margin: auto !important;}
+#pool_details .pool-card-main{width: 175px; padding-top: 15px;}
+
+.pool-card-main {
+  text-align: center;
+  width: 185px;
+  height: 190px;
+margin-right: 20px;
+  background: linear-gradient(174.03deg, #323233 -3.79%, #1a1a1b 95.27%);
+  box-shadow: 0px 14px 20px rgba(16, 16, 18, 0.75), 13px 7px 30px #000000;
+  border-radius: 24px;
+  padding-top: 15px;
+}
+.pool-card-main h6 {
+  font-size: 16px;
+  margin-top: 10px;
+  color: #868686;
+  margin-bottom: 5px;
+}
+.pool-card-main p {
+  font-size: 14px;
+  color: #868686;
+
+
+}
+.bg_grediant {
+  
+ background: url('../../../../assets/images/Rectangle-1.svg') no-repeat;
+  padding: 5px;
+  width: 103px;
+  height: 103px;
+  border-radius: 50%;
+  margin: auto;
+  display: flex;
+  margin: auto;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.bg_grediant-2{
+  background: url('../../../../assets/images/Rectangle-4.png') no-repeat;
+  padding: 5px;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  margin: auto;
+  display: flex;
+  margin: auto;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+}
+.pool-card-main {
+  position: relative;
+}
+.pool-card-main img {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+}
+
+.progress-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  /* background: radial-gradient(closest-side, #43484e 79%, transparent 80% 100%),
+    conic-gradient(#ffbd52 25%, #fff0 0);
+    transform: rotate(90deg); */
+}
+.progress-bar span {
+  font-size: 12px;
+}
+.progress-bar .bg_grediant-2 {
+  /* content: "75%"; */
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.coming_soon{ text-align: center; margin-top: 10px;background: linear-gradient(152.03deg, #FFCF81 -19.27%, #A36500 109.91%);
+  -webkit-background-clip: text;
+  font-size: 18px;
+  -webkit-text-fill-color: transparent;
+  font-weight: 400;
+
+}
+
+.closed_text{
+  text-align: center; margin-top: 10px;   background: linear-gradient(90deg, #ff0000 -19.27%, #ffffff 109.91%);
+  -webkit-background-clip: text;
+  font-size: 18px;
+  -webkit-text-fill-color: transparent;
+  font-weight: 400;
+}
+  
+@media only screen and (max-width:500px) {
+  .pool-card-main{ 
+    background: linear-gradient(180deg, #323233 0%, #1A1A1B 100%);
+    box-shadow: 13px 7px 30px 0px #000, 0px 14px 20px 0px rgba(16, 16, 18, 0.75);
+    width: 100%; 
+    padding: 12px 12px;
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+.pool-card-main h6{ 
+    font-family: "Montserrat"; 
+    font-weight: 500;
+    margin-bottom: 0;
+}
+.pool-card-main p{
+    font-family: "Montserrat";  
+    color: #727272;
+    font-weight: 500;
+}
+}
+@media only screen and (max-width:500px) {
+   
+.pool-card-main p{
+   font-size: 12px;
+}
+}

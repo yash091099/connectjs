@@ -1,0 +1,121 @@
+.tab {
+    overflow: hidden;
+  }
+  .tab button {
+    background-color: inherit;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 6px 12px;
+    transition: 0.3s;
+    color: #BBBBBB;
+    margin-right: 15px;
+    position: relative;
+    letter-spacing: 0.02em;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+  }
+  
+  .tab button.active {
+    font-weight: 400;
+    font-size: 16px;
+    color: #fff;
+  }
+  .tab button:hover {
+    font-weight: 400;
+    font-size: 16px;
+    color: #fff;
+  }
+  .tab button:hover:before {
+    content: "";
+    position: absolute;
+    width: 40%;
+    top: 0;
+    height: 100%;
+    border-radius: 0px;
+    left: 10%;
+    border-bottom: 1.5px solid #FBFBFB;
+  }
+  .tab button.tablinks.back:hover::before{
+    border-bottom: 0px !important;
+  }
+  .tab button.btn.total-earning:hover::before{
+    border-bottom: 0px !important;
+
+  }
+  .tab button.active::before {
+    content: "";
+    position: absolute;
+    width: 40%;
+    top: 0;
+    height: 100%;
+    border-radius: 0px;
+    left: 10%;
+    border-bottom: 1.5px solid #FBFBFB;
+  }
+  .total-earning{
+    margin-right: 0px !important;
+    cursor: inherit !important;
+    color: #ffffff !important;
+    font-weight: 400 !important;
+    font-size: 12px !important;
+    white-space: nowrap;
+    width: 50%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: right;
+  }
+
+  @media only screen and (max-width: 1024px) and (min-width: 768px) {
+  .tab button{
+    margin-right: 20px;
+  }
+
+  span.tabs-center{
+    margin-left: 0%;
+}
+
+  }
+  @media only screen and (max-width: 667px) and (min-width: 320px) {
+    button.btn.total-earning{
+      position: relative;
+      top: 8px;
+    }
+    .ipad-pd-left {
+      margin-top: 28px !important;
+    }
+    button.tablinks.back img{
+      width: 18px;
+
+    }
+    span.tabs-center{
+      margin-left: 0%;
+  }
+    .tab button {
+      padding: 6px 6px;
+      font-size:13px !important;
+      color: #cbcbcb;
+      margin-right: 0px;
+    }
+    .pl-0 {
+      padding-left: 15px !important;
+    }
+    .tab button.active {
+      color: #ffad2f !important;
+  }
+  .tab button.active::before {
+    left: 25%;
+    border-bottom: 1.5px solid #ffad2f;
+}
+.tab{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
+}
+
+
+  }
+  

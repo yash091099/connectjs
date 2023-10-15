@@ -1,0 +1,230 @@
+.overflow-no-deposit {
+    height: 55vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ipad-pd-left {
+
+    padding: 0px 0px;
+}
+
+
+.create-new-fau {
+    word-break: break-all;
+    color: black;
+}
+
+.rejected {
+    color: red !important;
+}
+
+.accepted {
+    color: green !important;
+}
+
+button.close {
+    padding: 0;
+    border: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+    color: #ffffff !important;
+    cursor: pointer !important;
+    z-index: 999;
+    position: absolute;
+    right: 7px;
+    font-size: 25px;
+    text-shadow: none !important;
+    top: 3px;
+}
+
+.card {
+    padding-top: 8px;
+}
+
+
+.table-br h6 {
+    font-size: 14px;
+    border-bottom: 1px #ffad2f57 solid;
+    padding: 11px;
+    margin-bottom: 0px;
+    font-weight: 600;
+}
+
+.table {
+    color: #ffffff;
+}
+
+
+.table th {
+    text-align: left;
+    padding: 5px 5px;
+    color: #ffad2f;
+    vertical-align: top;
+    font-size: 12px;
+
+}
+
+.peg-middle {
+    margin-top: 0px;
+    height: 50px;
+    width: 140px;
+}
+
+.table thead th {
+    border-bottom: 0px #f18221 solid;
+    border-top: 0px #f18221 solid;
+}
+
+.table td {
+    text-align: left;
+    padding: 10px 5px;
+    vertical-align: middle;
+    font-size: 11px;
+    border-top: 1px solid #ff9a0042;
+}
+
+.text-mannge {
+    width: 215px !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 15px;
+    display: inline-block;
+}
+
+.table img {
+    width: 20px;
+    margin-left: 10px;
+}
+
+.table a {
+    color: green;
+    font-size: 12px;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.52) !important;
+}
+
+.wallet-card {
+    background: none !important;
+    border: 1px #e6963e solid;
+    padding: 0 !important;
+    margin-top: 15px;
+    padding-bottom: 15px;
+}
+
+.wallet-header {
+    border-bottom: 1px #e6963e solid !important;
+    padding: 7px 15px;
+}
+
+.wallet-inner {
+    padding: 20px 15px;
+}
+
+.wallet-header h6 {
+    margin-bottom: 0;
+    font-size: 14px;
+}
+
+.table {
+    margin-bottom: 0px;
+}
+
+.date-time {
+    margin: 0px;
+    padding: 6px 5px;
+    color: #ecc076;
+    font-size: 13px;
+    ;
+}
+
+.table-bg {
+    background-color: #1a1611;
+    padding: 5px 10px;
+    ;
+    box-sizing: border-box;
+}
+
+
+
+.no-found {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.table a {
+    color: green;
+    font-size: 14px;
+}
+
+
+
+
+@media (min-width:768px) and (max-width:1024px) {
+    .no-found {
+        padding-top: 4% !important;
+    }
+
+    .wallet-inner {
+        padding: 20px 0px;
+    }
+
+    .date-time {
+        width: 600px;
+    }
+
+    .card {
+        padding: 0px !important;
+    }
+
+    .no-found {
+        padding-top: 5%;
+    }
+
+    .text-mannge {
+        width: 200px !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-right: 8px;
+    }
+}
+
+
+
+@media (min-width:320px) and (max-width:667px) {
+    .create-new-fau p {
+        font-size: 11px !important;
+
+    }
+
+    .ipad-pd-left {
+        margin-top: 0px !important;
+    }
+
+    .date-time {
+        width: auto !important;
+    }
+
+    .text-mannge {
+        width: 160px !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-right: 8px;
+    }
+
+    table {
+        width: 600px;
+    }
+
+    .ipad-pd-left {
+        padding-top: 0px !important;
+        margin-top: 0px !important;
+    }
+}

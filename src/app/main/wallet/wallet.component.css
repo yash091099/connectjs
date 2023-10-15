@@ -1,0 +1,165 @@
+.wallet-card {
+	background: none !important;
+	border: 1px #e6963e solid;
+	padding: 0 !important;
+	margin-bottom: 15px;
+	;
+}
+
+.wallet-header {
+	border-bottom: 1px #e6963e solid !important;
+	padding: 7px 15px;
+}
+
+.wallet-inner {
+	padding: 20px 15px;
+}
+
+.wallet-header h6 {
+	margin-bottom: 0;
+	font-size: 14px;
+}
+
+.wallet-btn {
+	background: radial-gradient(circle, rgb(247, 183, 96) 27%, rgb(217, 123, 35) 100%) !important;
+	height: 26px;
+	color: #fff;
+	line-height: 16px !important;
+	margin-left: 10px;
+	border-radius: 20px;
+	font-size: 13px;
+	padding: 4px 10px;
+	cursor: pointer;
+
+}
+
+.coupon-header {
+	height: 50px;
+	background: #f90;
+	padding: 17px;
+	border-radius: 15px 15px 0px 0px;
+}
+
+.balance {
+	font-size: 14px !important;
+	font-weight: bold;
+}
+
+input[type=checkbox],
+input[type=radio] {
+	box-sizing: border-box;
+	padding: 0;
+	height: 23px;
+	width: 20px;
+}
+
+.modal-body {
+	padding: 0px;
+}
+
+.seminor-login-modal-body .close {
+	position: relative;
+	top: 0;
+	left: 0px;
+	color: #ffffff;
+	opacity: 0.9 !important;
+	padding: 0px !important;
+	margin: 0px !important;
+}
+
+.seminor-login-modal-body .close {
+	opacity: 0.75;
+}
+
+.input-group-append {
+	margin-left: 0px;
+}
+
+.btn-cupon {
+	border: 1px #f18221 solid;
+	border-radius: 20px;
+	font-size: 13px;
+	background: none;
+	padding: 5px 10px;
+	color: #f18221;
+	outline: none;
+}
+
+.fa-close {
+	color: #fff;
+}
+
+.bor-btm {
+	border-bottom: 1px #ccc solid;
+	margin-bottom: 30px;
+}
+
+.checkbox img {
+	height: 30px;
+	margin: 15px 10px;
+	margin-top: -6px;
+}
+
+.form-group,
+.form-control {
+	margin-bottom: 0;
+	border: 0px;
+}
+
+.create-new-fau {
+	padding: 15px;
+}
+
+.btn-default {
+	border: 1px #f18221 solid;
+	border-radius: 20px;
+	padding: 5px 20px;
+	font-size: 13px;
+}
+
+.create-new-fau {
+	color: #504c4c;
+}
+
+.create-new-fau p {
+	font-size: 12px;
+}
+
+.qr-code p {
+	margin-bottom: 0px;
+}
+
+.coupon {
+	font-size: 12px;
+	color: #f18221;
+	text-decoration: none;
+}
+
+.no-margin {
+	padding: 0px;
+}
+
+.btn {
+	border-radius: 25px;
+}
+
+.modal-header h6 {
+	margin-bottom: 0;
+	line-height: 20px;
+}
+
+@media (max-width:768px) {
+	.wallet-inner h6 {
+		font-size: 13px;
+	}
+
+	.wallet-inner {
+		padding: 20px 15px;
+	}
+
+	.no-margin {
+		padding: 0px 15px;
+	}
+
+
+}

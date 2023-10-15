@@ -1,0 +1,785 @@
+<ng-template #projectDetailsModal let-modal>
+	<div class="modal-header">
+		<h2 class="modal-title text-center" >TDX Social Shoutout !!!</h2>
+		<button type="button" class="btn-close" aria-label="Close" (click)="goBackToDashboard()">X</button>
+	</div>
+	<div class="modal-body" style="padding-top:15px !important;">
+		<div class="project-image row">
+			<div class="project-banner col col-xs-4 col-sm-3">
+				<img [src]="projectDetails?.projectData?.bannerImage" >
+			</div>
+			<div class="project-tittle col col-xs-8 col-sm-9">
+				<h3 >{{projectDetails?.projectData?.name}}</h3>
+				<p *ngIf="projectDetails?.projectData?.description?.length > 53" class="cursor-pointer" [ngbTooltip]="projectDetails?.projectData?.description" container="body">{{projectDetails?.projectData?.description|truncate:53}}</p>
+
+				<p *ngIf="projectDetails?.projectData?.description?.length <= 53">{{projectDetails?.projectData?.description}}</p>
+				<span>Tasks Completed</span>
+
+				<div class="project-prog">
+
+					<circle-progress [percent]="completedTaskPercent" [radius]="17" [outerStrokeWidth]="2"
+						[showTitle]="false" [showSubtitle]="false" [showUnits]="false" [showInnerStroke]="true"
+						[space]="-2" [innerStrokeColor]="'#474747'" [innerStrokeWidth]="2" [backgroundOpacity]="1"
+						[outerStrokeColor]="'#FFBD52'" [animation]="true" [animationDuration]="300"></circle-progress>
+
+					<h6> {{projectDetails?.allCompletedTask}} <span style="color:#ffb43e;"> / <small
+								style="font-size: 95%;">{{projectDetails?.allAvailableTasks}}</small></span></h6>
+				</div>
+
+
+			</div>
+			<div class="card pd-0" id="table_ui">
+				<div class="table-responsive">
+				  <table class="table">
+					<thead>
+					  <tr>
+						<th scope="col" style="width: 170px;" class="text-center header pl-2">Social Required</th>
+						<th scope="col" style="width: 350px;" class="text-left px-4 header">Task</th>
+						<th scope="col" class="header">Earnings</th>
+						<th scope="col" class="header">Status</th>
+					  </tr>
+					</thead>
+					<tbody>
+					  <tr *ngFor="let task of campaignsArray,let i=index">
+						<td scope="row" class="text-center">
+					        <a class="cursor-default" href="javascript:void(0)" *ngIf="task?.type?.category == SOCIAL_CONNECTIONS.TWITTER">
+								<img src="../../../../assets/images/twitter-s.svg" width="46"
+							/></a>
+							<a class="cursor-default" href="javascript:void(0)" *ngIf="task?.type?.category == SOCIAL_CONNECTIONS.YOUTUBE">
+								<img src="../../../../assets/images/youtube.svg" width="46"
+							/></a>
+							<a class="cursor-default" href="javascript:void(0)" *ngIf="task?.type?.category == SOCIAL_CONNECTIONS.TELEGRAM">
+								<img src="../../../../assets/images/telegram_icon.png" width="46"
+							/></a>
+							<a  class="cursor-default" href="javascript:void(0)" *ngIf="task.type.category == SOCIAL_CONNECTIONS.WEBSITE||task.type.category == SOCIAL_CONNECTIONS.OTHER">
+								<img  src="../../../../assets/images/website_logo.png" width="46"
+							  /></a>
+							  <a  class="cursor-default" href="javascript:void(0)" *ngIf="task.type.category == SOCIAL_CONNECTIONS.DISCORD">
+								<img  src="../../../../assets/images/discord.png" width="50"
+							  /></a>
+						</td>
+						<td class="text-left px-4" style="max-width: 200px;">
+							<p class="text-truncate" [ngbTooltip]="task?.title" placement="bottom"  *ngIf="task?.title?.length <= 35">
+								<a style=" margin-right: 10px; cursor:pointer;color: orange;" *ngIf="task?.isPrimary">
+									<i class="fa fa-star"></i>
+								</a>
+								{{ task?.title }}
+							</p>
+							<p class="text-truncate" [ngbTooltip]="task?.title" *ngIf="task?.title?.length >35">
+								<a style=" margin-right: 10px; cursor:pointer;color: orange;" *ngIf="task?.isPrimary">
+									<i class="fa fa-star"></i>
+								</a>
+								{{ task?.title | truncate:35 }}
+							</p>
+						</td>
+						<td class="earnings text-center">
+							<ng-container *ngIf="task?.projectId?.symbol == 'USD'">$ {{task?.reward?.$numberDecimal}}</ng-container>
+							<ng-container *ngIf="task?.projectId?.symbol != 'USD'">{{task?.reward?.$numberDecimal}} {{task?.projectId?.symbol}}</ng-container>
+						</td>
+						<td class="text-center">
+							<p *ngIf="task?.isTaskCompleted" class="text-success">
+								<i class="fa fa-check" aria-hidden="true"></i> 
+								<span class="ml-1" *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.LIKE">{{ SOCIAL_CONNECTIONS.LIKE + 'd' }}</span>
+								<span class="ml-1" *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.COMMENT">{{ SOCIAL_CONNECTIONS.COMMENT + 'ed' }}</span>
+								<span class="ml-1" *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.WATCH">{{ SOCIAL_CONNECTIONS.WATCH + 'ed' }}</span>
+								<span class="ml-1" *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.SUBSCRIBE">{{ SOCIAL_CONNECTIONS.SUBSCRIBE + 'd' }}</span>
+								<span class="ml-1" *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.TWEET"> {{ SOCIAL_CONNECTIONS.TWEET + 'ed' }}</span>
+								<span class="ml-1" *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.RETWEET">{{ SOCIAL_CONNECTIONS.RETWEET + 'ed' }}</span>
+								<span class="ml-1" *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.FOLLOW">{{ SOCIAL_CONNECTIONS.FOLLOW + 'ed' }}</span>
+								<span class="ml-1" *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.QUOTE">{{ SOCIAL_CONNECTIONS.QUOTE + 'd' }}</span>
+								<span class="ml-1" *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.MENTION">{{ SOCIAL_CONNECTIONS.MENTION + 'ed' }}</span>
+								<span class="ml-1" *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.GROUP || task?.type?.type == SOCIAL_CONNECTIONS.JOIN_CHAT">Joined</span>
+								<span class="ml-1" *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.VISIT">Visited</span>
+								<span class="ml-1" *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.ENGAGEMENT">Engaged</span>
+								<span class="ml-1" *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.SIGNUP">Completed</span>
+
+							</p>
+							<button *ngIf="!task?.isTaskCompleted && task?.transactionStatus != 'ONGOING' && task?.transactionStatus != 'UNDER_REVIEW'" type="button" class="btn btn-warning"
+							(click)="startEarning(
+								task?._id,
+								task?.type?.category,
+								task?.url,
+								task?.type?.type,
+								task?.urlArray,
+								task?.reward?.$numberDecimal,
+								task?.videosDuration,
+								task?.mentionHandles,
+								task
+							  )">
+								<img src="../../../../assets/images/next-a.svg" style="margin-right: 7px;" width="18"/> 
+								<span *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.LIKE">{{ SOCIAL_CONNECTIONS.LIKE }}</span>
+								<span *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.COMMENT">{{ SOCIAL_CONNECTIONS.COMMENT }}</span>
+								<span *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.WATCH">{{ SOCIAL_CONNECTIONS.WATCH }}</span>
+								<span *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.SUBSCRIBE">{{ SOCIAL_CONNECTIONS.SUBSCRIBE }}</span>
+								<span *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.TWEET"> {{ SOCIAL_CONNECTIONS.TWEET }}</span>
+								<span *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.RETWEET">{{ SOCIAL_CONNECTIONS.RETWEET }}</span>
+								<span *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.FOLLOW">{{ SOCIAL_CONNECTIONS.FOLLOW }}</span>
+								<span *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.QUOTE">{{ SOCIAL_CONNECTIONS.QUOTE }}</span>
+								<span *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.MENTION">{{ SOCIAL_CONNECTIONS.MENTION }}</span>
+								<span *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.GROUP">{{ 'Join ' + SOCIAL_CONNECTIONS.GROUP }}</span>
+								<span *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.JOIN_CHAT">{{ SOCIAL_CONNECTIONS.JOIN_CHAT }}</span>
+								<span *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.VISIT">{{ SOCIAL_CONNECTIONS.VISIT }}</span>
+					            <span *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.ENGAGEMENT">Proceed</span>
+					            <span *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.SIGNUP">Proceed</span>
+							</button>
+							<button type="button" class="btn btn-warning" *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.ENGAGEMENT && task?.transactionStatus == 'ONGOING'"
+							(click)="OpenModalFormentionHandles(task)" >
+							<img src="../../../../assets/images/next-a.svg" style="margin-right: 7px;" width="18"
+							/> 
+							<span>Ongoing</span>
+						   </button>
+						   <button type="button" class="btn btn-warning" *ngIf="task?.type?.type == SOCIAL_CONNECTIONS.ENGAGEMENT && task?.transactionStatus == 'UNDER_REVIEW'">
+							   <span>Engaged</span>
+						   </button>
+						</td>
+					  </tr>
+					</tbody>
+				  </table>
+				</div>
+			  </div>
+			  <button
+			  id="openModalForDiscord"
+			  type="button"
+			  [hidden]="true"
+			  (click)="open(modalDiscord)"
+			></button>
+			<button
+			id="OpenModalForMentionHandlesDiscord"
+			type="button"
+			[hidden]="true"
+			(click)="open(mentionHandlesDiscord)"
+		  ></button>
+			<button id="OpenModalForSocialConnect" type="button" [hidden]="true" (click)="open(modalSocial)"></button>
+			<button id="OpenModalForCampaignForProjectDetails" type="button" [hidden]="true"
+				(click)="open(modalCampaign)"></button>
+			<button id="openModalForTelegramForProjectDetails" type="button" [hidden]="true"
+				(click)="open(modalTelegram)"></button>
+			<button id="OpenModalForMentionHandlesForProjectDetails" type="button" [hidden]="true"
+				(click)="open(mentionHandles)"></button>
+			<button id="reverifyModalForProjectDetails" type="button" [hidden]="true"
+				(click)="open(reverifModal)"></button>
+				<a
+				id="youtubeWatch"
+				target="_blank"
+				[hidden]="true"
+				[href]="['shout-out/youtube-watch/' + '?id=' + YoutubeWatchDataToSend]"
+			  ></a>
+				<button
+				id="OpenModalForTwitterTask"
+				type="button"
+				[hidden]="true"
+				(click)="openTwitterTask(twitterTaskModal)"
+			  ></button>
+			<a id="youtubeWatchForProjectDetails" target="_blank" [hidden]="true"
+				[href]="['shout-out/youtube-watch/'+'?id='+YoutubeWatchDataToSend]"></a>
+		</div>
+	</div>
+
+</ng-template>
+
+
+
+<ng-template #modalSocial let-modal>
+	<div class="modal-header">
+		<h6> </h6>
+		<button type="button" class="btn-close" aria-label="Close" (click)="closeModal('modalSocial')">X</button>
+	</div>
+	<div class="modal-body text-center">
+		<h5>Add your social account to continue</h5>
+	  </div>
+	  <div class="modal-footer" style="justify-content: center;">
+		<button
+		  class="btn btn-warning btn-padding"
+		  (click)="addSocialConnection()"
+		>
+		  Ok
+		</button>
+	  </div>
+</ng-template>
+
+
+<ng-template #mentionHandlesDiscord let-modal>
+	<div class="modal-header">
+	  <h6
+		*ngIf="
+		  campaignType != SOCIAL_CONNECTIONS.TWEET &&
+		  campaignType != 'Join & Chat' &&
+		  campaignType != SOCIAL_CONNECTIONS.ENGAGEMENT
+		"
+	  >
+		You have to mention these handles on your {{ campaignType }}
+	  </h6>
+
+	  <h6 *ngIf="campaignType == 'Join & Chat'">
+		{{ shoutoutCampaign?.title }}
+	  </h6>
+
+	  <h6 *ngIf="campaignType == SOCIAL_CONNECTIONS.TWEET"> Tweet On Twitter</h6>
+
+	  <h6 *ngIf="campaignType == SOCIAL_CONNECTIONS.ENGAGEMENT && shoutoutCampaign?.transactionStatus != 'ONGOING'">
+		  Join Group and Engage Yourself
+	  </h6>
+	  <h6 *ngIf="shoutoutCampaign?.type?.type == SOCIAL_CONNECTIONS.ENGAGEMENT && shoutoutCampaign?.transactionStatus == 'ONGOING'">
+		  Mark Task as Completed
+	  </h6>
+
+	  <button
+		type="button"
+		class="btn-close"
+		aria-label="Close"
+		(click)="closeModal()"
+	  >
+		X
+	  </button>
+	</div>
+	<div class="modal-body task-popup">
+	  <div *ngIf="campaignType == SOCIAL_CONNECTIONS.TWEET" class="mt-1">
+		<form [formGroup]="twitterContentForm">
+		  <div class="form-group">
+		   
+
+			<select
+			  class="form-control mb-3"
+			  formControlName="twitterContent"
+			  style="line-height: 0px; height: auto"
+			>
+			  <option value="null" selected disabled>
+				Select Tweet Content
+			  </option>
+			  <option *ngFor="let tweet of tweetContent" [value]="tweet">
+				{{ (tweet | truncate : 60) || "--" }}
+			  </option>
+			</select>
+			<app-show-errors [control]="twitterContent"></app-show-errors>
+		  </div>
+		</form>
+		<div class="twe-content">
+		  <img *ngIf="tweetImage" [src]="tweetImage" alt="img" />
+		</div>
+	  
+		<p class="break-word text-dark text_p" *ngIf="twitterContent">
+		  {{ twitterContent.value }}
+		</p>
+	  </div>
+
+	  <div *ngIf="campaignType == 'Join & Chat'" class="mt-1">  
+		<p class="break-word">{{ shoutoutCampaign?.description }}</p>
+		<!-- Note -->
+		<p *ngIf="shoutoutCampaign?.telegramContent?.length" class="note-text">
+		  Note: You can select any content from below
+		</p>
+		<div
+		  *ngIf="shoutoutCampaign?.telegramContent?.length"
+		  class="twe-content"
+		>
+		  <div *ngFor="let telegram of shoutoutCampaign?.telegramContent">
+			<p class="break-word">
+			  {{ telegram }}
+			  <i
+				(click)="copyToClipboard(telegram)"
+				class="fa fa-copy cursor-pointer"
+			  ></i>
+			</p>
+		  </div>
+		</div>
+	  </div>
+	  <div *ngIf="campaignType == SOCIAL_CONNECTIONS.ENGAGEMENT" class="mt-1 text-head">  
+		<div *ngIf="shoutoutCampaign?.telegramMessagesDetails?.isContinuation">
+			<h6>
+				Send messages for {{ shoutoutCampaign?.telegramMessagesDetails?.duration }} days on continuation 
+				( minimum {{getCielValue(shoutoutCampaign?.telegramMessagesDetails?.messagesCount,shoutoutCampaign?.telegramMessagesDetails?.duration)}} messages is required )
+				<!-- ( minimum {{ shoutoutCampaign?.telegramMessagesDetails?.messagesCount }} messages is required ) -->
+			</h6>
+		</div>
+		<div *ngIf="!shoutoutCampaign?.telegramMessagesDetails?.isContinuation" class="text-head">
+
+   
+	<h6>
+	  Send {{ shoutoutCampaign?.telegramMessagesDetails?.messagesCount }} messages in {{shoutoutCampaign?.telegramMessagesDetails?.duration }} {{shoutoutCampaign?.telegramMessagesDetails?.duration > 1 ?'days':'day'}}  {{(shoutoutCampaign?.telegramMessagesDetails?.duration > 1) ?'(send atleast '+ shoutoutCampaign?.telegramMessagesDetails?.messagesCount +' messages per day)':' '}}
+	</h6>
+		</div>
+		
+		<div
+		  *ngIf="shoutoutCampaign?.telegramContent?.length"
+		  class="twe-content"
+		>
+		  <div *ngFor="let telegram of shoutoutCampaign?.telegramContent">
+			<p class="break-word">
+			  <label class="text-bold">Sample Messages :</label>
+			 <span class="text-eplips">{{ telegram | truncate: '50' }}  <img src="../../../../assets/images/copy.png" (click)="copyToClipboard(telegram)"  style="cursor: pointer;width:20px !important; min-height:25px !important;"></span> 
+			 
+			 
+		
+			</p>
+		  </div>
+		</div>
+		<p *ngIf="shoutoutCampaign?.telegramContent?.length && shoutoutCampaign?.transactionStatus == 'ONGOING'" class="note-text">
+			Note : Are you sure you have completed the task, otherwise this request will be rejected and you have to restart the task again.
+		</p>
+	  </div>
+	</div>
+	<div class="modal-footer" style="justify-content: center; align-items: center;">
+	  <button 
+		*ngIf="
+		  campaignType === SOCIAL_CONNECTIONS.TWEET &&
+		  campaignType != 'Join & Chat'
+		"
+		class="btn btn-warning btn-padding"
+		(click)="onProceedClick()"
+	  >
+	  <i class="fa fa-upload" aria-hidden="true"></i>
+		Post
+	  </button>
+	  <button
+		*ngIf="campaignType == 'Join & Chat'"
+		class="btn btn-warning btn-padding"
+		(click)="onProceedClick()"
+	  >
+		Proceed
+	  </button>
+	  <button  *ngIf="campaignType == 'Join & Chat'" class="btn btn-danger btn-padding" (click)="closeModal()">
+		Cancel
+	  </button>
+	  <button  *ngIf="
+	  campaignType === SOCIAL_CONNECTIONS.TWEET &&
+	  campaignType != 'Join & Chat'
+	" class="btn btn-secondary btn-padding" (click)="closeModal()">
+		  Perform Later
+	  </button>
+	  <button
+		*ngIf="campaignType == SOCIAL_CONNECTIONS.ENGAGEMENT && shoutoutCampaign?.transactionStatus != 'ONGOING'"
+		class="btn btn-warning btn-padding"
+		(click)="insertActionLog()"
+	  >
+		Start Now
+	  </button>
+	  <button  
+	  *ngIf="campaignType ===  SOCIAL_CONNECTIONS.ENGAGEMENT && shoutoutCampaign?.transactionStatus != 'ONGOING'" 
+	  class="btn btn-secondary btn-padding" (click)="closeModal()">
+		  Start Later
+	  </button>
+	  <button
+	  *ngIf="campaignType == SOCIAL_CONNECTIONS.ENGAGEMENT && shoutoutCampaign?.transactionStatus == 'ONGOING'"
+	  class="btn btn-warning btn-padding"
+	  (click)="waitingModalForEngagement()"
+	>
+	  Mark as Completed
+	</button>
+	<button  
+	*ngIf="campaignType ===  SOCIAL_CONNECTIONS.ENGAGEMENT && shoutoutCampaign?.transactionStatus == 'ONGOING'" 
+	class="btn btn-secondary btn-padding" (click)="closeModal()">
+		Cancel
+	</button>
+	</div>
+  </ng-template>
+
+<ng-template #modalDiscord let-modal>
+	<div class="modal-header">
+	  <h4></h4>
+	  <button
+		type="button"
+		class="close"
+		aria-label="Close"
+		(click)="closeModal()"
+	  >
+		<span aria-hidden="true">×</span>
+	  </button>
+	</div>
+	<div class="modal-body">
+	  <h5 class="text-center" style="font-weight: 300; margin-top: 20px;">
+		Please connect your Discord in profile section
+	  </h5>
+	</div>
+	<div class="modal-footer" style="justify-content: center;">
+	  <button class="btn btn-warning btn-padding" (click)="redirectToProfile()">
+		OK
+	  </button>
+	</div>
+  </ng-template>
+
+
+
+<ng-template #modalCampaign let-modal>
+	<div class="modal-header" *ngIf="!startVerifyTask">
+		<h6></h6>
+		<button type="button" class="btn-close" aria-label="Close" (click)="closeModal()">X</button>
+	</div>
+	<div class="modal-body">
+		<h6 *ngIf="!startVerifyTask && !showErrorMessage.length">{{taskPerformContent[category][campaignType]}}? </h6>
+		<h6 *ngIf="showErrorMessage.length && !startVerifyTask" class="text-danger">It seems that you have not performed
+			the task, Please perform the task to claim reward</h6>
+	</div>
+	<div class="modal-footer" *ngIf="showErrorMessage.length && !startVerifyTask" style="justify-content: center;">
+		<button class="btn btn-primary btn-padding"
+			(click)="startEarning(campaignId,category,campaignUrl,campaignType,urlArray,reward,videosDuration,mentionHandlesArr,tweetContent,tweetImage,null,true, symbol)">Proceed</button>
+	</div>
+	<div class="modal-footer" *ngIf="!startVerifyTask && !showErrorMessage.length" style="justify-content: center;">
+		<button class="btn btn-primary btn-padding" (click)="OpenWaitingModalForCampaign()">Yes</button>
+		<button class="btn btn-danger btn-padding" (click)="closeModal()">No</button>
+	</div>
+</ng-template>
+
+
+<ng-template #mentionHandles let-modal>
+	<div class="modal-header">
+	  <h6
+		*ngIf="
+		  campaignType != SOCIAL_CONNECTIONS.TWEET &&
+		  campaignType != 'Join & Chat' &&
+		  campaignType != SOCIAL_CONNECTIONS.ENGAGEMENT
+		"
+	  >
+		You have to mention these handles on your {{ campaignType }}
+	  </h6>
+
+	  <h6 *ngIf="campaignType == 'Join & Chat'">
+		{{ shoutoutCampaign?.title }}
+	  </h6>
+
+	  <h6 *ngIf="campaignType == SOCIAL_CONNECTIONS.TWEET"> Tweet On Twitter</h6>
+
+	  <h6 *ngIf="campaignType == SOCIAL_CONNECTIONS.ENGAGEMENT && shoutoutCampaign?.transactionStatus != 'ONGOING'">
+		  Join Group and Engage Yourself
+	  </h6>
+	  <h6 *ngIf="shoutoutCampaign?.type?.type == SOCIAL_CONNECTIONS.ENGAGEMENT && shoutoutCampaign?.transactionStatus == 'ONGOING'">
+		  Mark Task as Completed
+	  </h6>
+
+	  <button
+		type="button"
+		class="btn-close"
+		aria-label="Close"
+		(click)="closeModal()"
+	  >
+		X
+	  </button>
+	</div>
+	<div class="modal-body task-popup">
+	  <div *ngIf="campaignType == SOCIAL_CONNECTIONS.TWEET" class="mt-1">
+		<form [formGroup]="twitterContentForm">
+		  <div class="form-group">
+		   
+
+			<select
+			  class="form-control mb-3"
+			  formControlName="twitterContent"
+			  style="line-height: 0px; height: auto"
+			>
+			  <option value="null" selected disabled>
+				Select Tweet Content
+			  </option>
+			  <option *ngFor="let tweet of tweetContent" [value]="tweet">
+				{{ (tweet | truncate : 60) || "--" }}
+			  </option>
+			</select>
+			<app-show-errors [control]="twitterContent"></app-show-errors>
+		  </div>
+		</form>
+		<div class="twe-content">
+		  <img *ngIf="tweetImage" [src]="tweetImage" alt="img" />
+		</div>
+	  
+		<p class="break-word text-dark text_p" *ngIf="twitterContent">
+		  {{ twitterContent.value }}
+		</p>
+	  </div>
+
+	  <div *ngIf="campaignType == 'Join & Chat'" class="mt-1">  
+		<p class="break-word">{{ shoutoutCampaign?.description }}</p>
+		<!-- Note -->
+		<p *ngIf="shoutoutCampaign?.telegramContent?.length" class="note-text">
+		  Note: You can select any content from below
+		</p>
+		<div
+		  *ngIf="shoutoutCampaign?.telegramContent?.length"
+		  class="twe-content"
+		>
+		  <div *ngFor="let telegram of shoutoutCampaign?.telegramContent">
+			<p class="break-word">
+			  {{ telegram }}
+			  <i
+				(click)="copyToClipboard(telegram)"
+				class="fa fa-copy cursor-pointer"
+			  ></i>
+			</p>
+		  </div>
+		</div>
+	  </div>
+	  <div *ngIf="campaignType == SOCIAL_CONNECTIONS.ENGAGEMENT" class="mt-1 text-head">  
+		<div *ngIf="shoutoutCampaign?.telegramMessagesDetails?.isContinuation">
+			<h6>
+				Send messages for {{ shoutoutCampaign?.telegramMessagesDetails?.duration }} days on continuation 
+				( minimum {{getCielValue(shoutoutCampaign?.telegramMessagesDetails?.messagesCount,shoutoutCampaign?.telegramMessagesDetails?.duration)}} messages is required )
+				<!-- ( minimum {{ shoutoutCampaign?.telegramMessagesDetails?.messagesCount }} messages is required ) -->
+			</h6>
+		</div>
+		<div *ngIf="!shoutoutCampaign?.telegramMessagesDetails?.isContinuation" class="text-head">
+
+   
+	<h6>
+	  Send {{ shoutoutCampaign?.telegramMessagesDetails?.messagesCount }} messages in {{shoutoutCampaign?.telegramMessagesDetails?.duration }} {{shoutoutCampaign?.telegramMessagesDetails?.duration > 1 ?'days':'day'}}  {{(shoutoutCampaign?.telegramMessagesDetails?.duration > 1) ?'(send atleast '+ shoutoutCampaign?.telegramMessagesDetails?.messagesCount +' messages per day)':' '}}
+	</h6>
+		</div>
+		
+		<div
+		  *ngIf="shoutoutCampaign?.telegramContent?.length"
+		  class="twe-content"
+		>
+		  <div *ngFor="let telegram of shoutoutCampaign?.telegramContent">
+			<p class="break-word">
+			  <label class="text-bold">Sample Messages :</label>
+			 <span class="text-eplips">{{ telegram | truncate: '50' }}  <img src="../../../../assets/images/copy.png" (click)="copyToClipboard(telegram)"  style="cursor: pointer;width:20px !important; min-height:25px !important;"></span> 
+			 
+			 
+		
+			</p>
+		  </div>
+		</div>
+		<p *ngIf="shoutoutCampaign?.telegramContent?.length && shoutoutCampaign?.transactionStatus == 'ONGOING'" class="note-text">
+			Note : Are you sure you have completed the task, otherwise this request will be rejected and you have to restart the task again.
+		</p>
+	  </div>
+	</div>
+	<div class="modal-footer" style="justify-content: center; align-items: center;">
+	  <button 
+		*ngIf="
+		  campaignType === SOCIAL_CONNECTIONS.TWEET &&
+		  campaignType != 'Join & Chat'
+		"
+		class="btn btn-warning btn-padding"
+		(click)="onProceedClick()"
+	  >
+	  <i class="fa fa-upload" aria-hidden="true"></i>
+		Post
+	  </button>
+	  <button
+		*ngIf="campaignType == 'Join & Chat'"
+		class="btn btn-warning btn-padding"
+		(click)="onProceedClick()"
+	  >
+		Proceed
+	  </button>
+	  <button  *ngIf="campaignType == 'Join & Chat'" class="btn btn-danger btn-padding" (click)="closeModal()">
+		Cancel
+	  </button>
+	  <button  *ngIf="
+	  campaignType === SOCIAL_CONNECTIONS.TWEET &&
+	  campaignType != 'Join & Chat'
+	" class="btn btn-secondary btn-padding" (click)="closeModal()">
+		  Perform Later
+	  </button>
+	  <button
+		*ngIf="campaignType == SOCIAL_CONNECTIONS.ENGAGEMENT && shoutoutCampaign?.transactionStatus != 'ONGOING'"
+		class="btn btn-warning btn-padding"
+		(click)="insertActionLog()"
+	  >
+		Start Now
+	  </button>
+	  <button  
+	  *ngIf="campaignType ===  SOCIAL_CONNECTIONS.ENGAGEMENT && shoutoutCampaign?.transactionStatus != 'ONGOING'" 
+	  class="btn btn-secondary btn-padding" (click)="closeModal()">
+		  Start Later
+	  </button>
+	  <button
+	  *ngIf="campaignType == SOCIAL_CONNECTIONS.ENGAGEMENT && shoutoutCampaign?.transactionStatus == 'ONGOING'"
+	  class="btn btn-warning btn-padding"
+	  (click)="waitingModalForEngagement()"
+	>
+	  Mark as Completed
+	</button>
+	<button  
+	*ngIf="campaignType ===  SOCIAL_CONNECTIONS.ENGAGEMENT && shoutoutCampaign?.transactionStatus == 'ONGOING'" 
+	class="btn btn-secondary btn-padding" (click)="closeModal()">
+		Cancel
+	</button>
+	</div>
+  </ng-template>
+
+<ng-template #modalTelegram let-modal>
+	<div class="modal-header">
+		<h4> </h4>
+		<button type="button" class="close" aria-label="Close" (click)="closeModal()">
+			<span aria-hidden="true">×</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<h6>Please connect your telegram in profile section</h6>
+	</div>
+	<div class="modal-footer" style="justify-content: center;">
+		<button class="btn btn-danger btn-padding" (click)="redirectToProfile()">OK</button>
+	</div>
+</ng-template>
+
+<ng-template #reverifModal let-modal>
+	<div class="modal-header">
+		<h6>Enter your {{campaignType}} Link to verify </h6>
+		<button type="button" class="btn-close" aria-label="Close" (click)="closeModal()">X</button>
+	</div>
+	<div class="modal-body">
+		<p class="mb-0" style="color: red"><strong>Something Unusual happens !</strong></p>
+		<p style="color: #3a1d1d">We could not verify your task, please enter your {{campaignType}} link here, so that
+			we can verify.</p>
+		<form [formGroup]="reverifyForm">
+			<div class="form-group log-pwd">
+				<input type="text" class="form-control" placeholder="Enter {{campaignType}} Link"
+					formControlName="verificationUrl">
+
+				<app-show-errors [control]="verificationUrl" [fname]="'URL'"></app-show-errors>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer" style="justify-content: center;">
+		<button id="reverifyOkBtn" class="btn btn-primary" (click)="reverifyModalSubmit()">Ok</button>
+		<button class="btn btn-danger" (click)="closeModal()">Cancel</button>
+	</div>
+</ng-template>
+
+
+<ng-template #infoModal let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title"></h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="closeModalsEng()">
+			<span aria-hidden="true">×</span>
+		</button>
+	</div>
+	<div class="modal-body text-center pt-0">
+	  <img *ngIf="selectedModalType == modalType.CLAIMED " src="../../../../assets/images/congrats.png">
+	  <img *ngIf="selectedModalType == modalType.NOT_CLAIMED "  src="../../../../assets/images/reward_cancel.png">
+	  <img
+	  *ngIf="selectedModalType == modalType.ERROR"
+	  src="../../../../assets/images/connection-error.png"
+	/>
+	<img
+	  *ngIf="selectedModalType == modalType.SUCCESS"
+	  src="../../../../assets/images/connection-successfull.png"
+	/>
+	  <h3 [ngStyle]="{color:  selectedModalType == modalType.CLAIMED ? '#000000': '#54595E'}">{{ (selectedModalType == modalType.CLAIMED||(campaignType == SOCIAL_CONNECTIONS.ENGAGEMENT && shoutoutCampaign?.transactionStatus == 'ONGOING')) ?  'Congratulations!' : selectedModalType == modalType.SUCCESS
+		? "Success" : 'Error'  }}</h3>
+	  <p *ngIf="(reward &&  selectedModalType == modalType.CLAIMED ||(campaignType == SOCIAL_CONNECTIONS.ENGAGEMENT && shoutoutCampaign?.transactionStatus == 'ONGOING'))">You’ve earned <span style="color:#FDAF2F; font-size: 16px;font-weight: 500;">{{reward}}</span> {{symbol}}</p>
+	  <p *ngIf="selectedModalType != modalType.CLAIMED">{{taskErrorMessage}}</p>
+	  <!-- <p *ngIf="campaignType == SOCIAL_CONNECTIONS.ENGAGEMENT && shoutoutCampaign?.transactionStatus == 'ONGOING'">
+		Your task is under review, please check your shoutout transaction after few days.
+	</p> -->
+	</div>
+	
+</ng-template>
+
+
+<ng-template #waitingModal let-modal>
+	
+	<div class="modal-body text-center">
+	  <img src="../../../../assets/images/wating.png">
+	  <h3>Please wait !!!</h3>
+	  <p>We’re verifying it only in <span style="color:#000;font-size: 16px;" id="seconds">{{timeLeftSecond}} </span> seconds</p>
+	  <p style="font-size:11px; margin-bottom: 0px;">Do not press back or exit button </p>
+	</div>
+
+</ng-template>
+<ng-template #twitterTaskModal let-modal>
+	<div class="modal-header">
+		<h4 *ngIf="campaignType != SOCIAL_CONNECTIONS.FOLLOW">Tweet Preview</h4>
+		<button
+		  type="button"
+		  class="close"
+		  aria-label="Close"
+		  (click)="closeModal()"
+		>
+		  <span aria-hidden="true">×</span>
+		</button>
+	  </div>
+	<div class="modal-body text-center" style="padding-bottom: 0px;">
+		<div *ngIf="campaignType != SOCIAL_CONNECTIONS.FOLLOW" style="height: 320px; overflow-y: auto;">
+			<ngx-tweet style="width: 100%; height: 100%;cursor: not-allowed !important; border: 0px;
+			pointer-events: none;" [tweetId]="twitterLink"> </ngx-tweet>
+			
+		</div>
+		<div *ngIf="campaignType == SOCIAL_CONNECTIONS.QUOTE || campaignType == SOCIAL_CONNECTIONS.COMMENT">
+			<form [formGroup]="twitterTaskContentForm">
+					  <div class="mt-2">
+						  <div class="input-group">
+							  <textarea type="text"   formControlName="comment" (input)="checkHandles($event)"
+								  placeholder="Add Comment" aria-describedby="button-addon1" class="form-control text-ui"></textarea>
+								 
+						  </div>
+						  <app-show-errors [control]="comment" [fname]="'Comment'"></app-show-errors>
+						  <p class="text-left"  style="font-size: 12px;color: #f10808" *ngIf="handlesError && comment?.value">{{handlesError}}</p>
+						  
+					  </div>
+				  </form>
+		</div>
+		<div *ngIf="campaignType == SOCIAL_CONNECTIONS.FOLLOW && twitterFollowContent">
+			<fieldset class="scheduler-border">
+				<legend class="scheduler-border"><img style="width: 35px;" src="../../../../assets/images/twitercon.png"></legend>
+				<div class="twiiter_logo"><img [src]="twitterFollowContent?.profile "/></div> 
+				<h4 class="mt-1 mb-3">@{{twitterFollowContent?.username}}</h4>
+			</fieldset>
+			<button
+			(click)="performTask()"
+		  class="btn btn-warning btn-padding"
+		>
+		<i class="fa fa-thumbs-up" aria-hidden="true"></i>
+		  Follow
+		</button>
+		<button
+           
+              class="btn btn-secondary ml-2"
+              (click)="closeModal()"
+            >
+              Perform Later
+            </button>
+		</div>
+
+	</div>
+	<div class="modal-footer" style="justify-content: center;">
+		<button
+		*ngIf="campaignType != SOCIAL_CONNECTIONS.FOLLOW"
+		  class="btn btn-warning btn-padding"
+		  (click)="performTwitterTask()"
+		>
+		<i class="fa fa-heart" *ngIf="campaignType == SOCIAL_CONNECTIONS.LIKE" aria-hidden="true"></i>
+		<i class="fa fa-retweet" *ngIf="campaignType == SOCIAL_CONNECTIONS.RETWEET" aria-hidden="true"></i>
+		<i class="fa fa-pencil-square-o" *ngIf="campaignType == SOCIAL_CONNECTIONS.QUOTE" aria-hidden="true"></i>
+		<i class="fa fa-comment-o" *ngIf="campaignType == SOCIAL_CONNECTIONS.COMMENT" aria-hidden="true"></i>
+		  {{campaignType}}
+		</button>
+		<button
+            *ngIf="campaignType != SOCIAL_CONNECTIONS.FOLLOW"
+              class="btn btn-secondary ml-2"
+              (click)="closeModal()"
+            >
+              Perform Later
+            </button>
+	  </div>
+  </ng-template>
+
+  <ng-template #twitterReconnectModal let-modal>
+	<div class="modal-header">
+		<button
+		  type="button"
+		  class="close"
+		  aria-label="Close"
+		  (click)="closeModal()"
+		>
+		  <span aria-hidden="true">×</span>
+		</button>
+	  </div>
+	<div class="modal-body text-center mt-2">
+	  <p>
+		Whoops! Seems like Twitter's a bit busy with all the traffic. Give it another shot after reconnecting your Twitter account.
+	  </p>
+	</div>
+	<div class="modal-footer" style="justify-content: center;">
+		<button
+		  class="btn btn-warning btn-padding"
+		  (click)="connectUserToSecondApp()"
+		>
+		  Proceed
+		</button>
+		<button
+		  class="btn btn-secondary ml-2"
+		  (click)="closeModal()"
+		>
+		  Cancel
+		</button>
+	  </div>
+  </ng-template>

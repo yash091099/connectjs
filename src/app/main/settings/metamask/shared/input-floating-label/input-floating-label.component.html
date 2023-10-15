@@ -1,0 +1,52 @@
+<div class="floating-label" [ngClass]="{'float': float, 'disabled': disabled}">
+	<div *ngIf="prepend && prepend !== 'btn'" class="prepend" [ngClass]="{'disabled': disabled}">
+		<icon [icon]="prepend" (click)="onPrependClick()" role="button" [attr.aria-label]="prepend" tabindex="0"></icon>
+	</div>
+
+	<button *ngIf="prepend === 'btn'" type="button" class="btn__blue prepend" (click)="onPrependClick()" [disabled]="disabled">{{name}}</button>
+
+	<div *ngIf="append && append !== 'btn'" class="append" [ngClass]="{'disabled': disabled}">
+		<icon [icon]="append" (click)="onAppendClick()" role="button" [attr.aria-label]="append" tabindex="0"></icon>
+	</div>
+
+	<button *ngIf="append === 'btn'" type="button" class="btn__blue append" (click)="onAppendClick()" [disabled]="disabled">{{name}}</button>
+
+	<input *ngIf="type !== 'textarea'"
+        class="floating-label__input"
+        [type]="type"
+        [name]="name"
+        [attr.inputmode]="inputmode"
+        placeholder=" "
+        [value]="value"
+        [required]="required"
+        [autocomplete]="autocomplete"
+        [disabled]="disabled"
+        [maxLength]="maxLength"
+        (input)="onInput($event)"
+        (paste)="onInput($event)"
+        (focus)="onFocus()"
+        (blur)="onBlurred()"
+        tabindex="0"/>
+
+	<textarea *ngIf="type === 'textarea'"
+        class="floating-label__input"
+        [name]="name" placeholder=" "
+        [value]="value"
+        [required]="required"
+        [disabled]="disabled"
+        [maxLength]="maxLength"
+        (input)="onInput($event)"
+        (paste)="onInput($event)"
+        (focus)="onFocus()"
+        (blur)="onBlurred()"
+        tabindex="0">
+    </textarea>
+
+	<div class="floating-label__outline">
+		<div class="floating-label__leading"></div>
+		<div class="floating-label__notch">
+			<label class="floating-label__label" for="{{label}}">{{label}}</label>
+		</div>
+		<div class="floating-label__trailing"></div>
+	</div>
+</div>

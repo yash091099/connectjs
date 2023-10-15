@@ -1,0 +1,28 @@
+<div id="wrapper" class="animate margin-left-250">
+	<app-header [isLoggedIn]="isLoggedIn"></app-header>
+  <app-sidebar></app-sidebar>
+	<router-outlet></router-outlet>
+  
+	<app-footer></app-footer>
+	<div class="sticky-social">
+		<ul class="social">
+			<li class="teleg">
+				<a href="https://t.me/tdxlaunch" target="_blank">
+					<img src="../../assets/images/telegram.png" alt="TDX Telegram Logo">
+				</a>
+			</li>
+
+			<li class="twitter">
+				<a href="https://twitter.com/TDXLaunchpad" target="_blank">
+					<img alt="TDX Twitter" src="../../assets/images/twitter-logo.png">
+				</a>
+			</li>
+			<li class="fb">
+				<a href="mailto:ask@tdx.biz" target="_blank">
+					<img src="../../assets/images/gmail-icon.png" alt="TDX Mail Icon">
+				</a>
+			</li>
+
+		</ul>
+	</div>
+</div>

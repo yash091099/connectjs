@@ -1,0 +1,51 @@
+
+.tab {
+    overflow: hidden;
+  }
+  .tablinks.back {
+    font-size: 18px !important;
+  }
+  .tablinks.back i {
+    margin-right: 10px;
+  }
+  .tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 6px 12px;
+    transition: 0.3s;
+    font-size: 14px;
+    color: #cbcbcb;
+    margin-right: 45px;
+  }
+  
+  .tab button.active {
+    border-bottom: 2px solid #FDAF2F;
+    font-size: 14px;
+    color: #fff;
+  }
+
+  @media only screen and (max-width: 1024px) and (min-width: 768px) {
+  .tab button{
+    margin-right: 25px;
+  }
+
+  }
+  @media only screen and (max-width: 667px) and (min-width: 320px) {
+    .ipad-pd-left {
+      margin-top: 28px !important;
+      margin-bottom: 30px !important;
+    }
+    .tab button {
+      padding: 6px 6px;
+      font-size: 13px !important;
+      color: #cbcbcb;
+      margin-right: 0px;
+    }
+    .pl-0 {
+      padding-left: 15px !important;
+    }
+  }
+  

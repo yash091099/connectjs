@@ -1,0 +1,219 @@
+<div class="header">
+	<div class="row top-card">
+	  <div class="col-md-12 pr-0">
+		<div class="card alloc-card">
+		  <div class="row">
+			<div class="col-sm-12 table-top">
+			  <div class="table-new-referl">
+				<div class="row">
+				  <div class="col-sm-8 btn-group-custom">
+					<a *ngIf="campaignId?.campdata[0]?.name" class="btn-waalet active allData activeTab"> {{campaignId?.campdata[0]?.name}}
+					</a>
+					<span *ngIf="! campaignId?.campdata[0]?.name" class="user-data d-none d-md-block">
+					  <b>Campaign Statistics</b>
+					</span>
+					<a *ngIf="campaignId?.campdata[0]?.name" [ngClass]="{'activeTab': selectedTab == constants.DEFAULT}" (click)="goBackToPrevPage()" class="btn-waalet allData">
+					  <img src="../../../../assets/images/less-icon.png"> Less Details </a>
+				  </div>
+				  <div class="col-sm-4 text-end  d-flex  align-items-center">
+					<span *ngIf="! campaignId?.campdata[0]?.name" class="user-data mobile-dat-res">
+						<b>Analytics</b>
+					  </span>
+					<span class="mr-3 user-counts">Users Count : {{totalCount||0}}</span>
+					<a (click)="exportData()" class="export"> Export data </a>
+				  </div>
+				</div>
+				<div class="myrestable">
+					<div class="outer">
+						<div class="inner" (scroll)="onScroll($event)">
+							<div class="">
+								<table class="fold-table scroller" *ngIf="!loadingAnalyticsData">
+								  <thead>
+									<tr [ngClass]="{'resp-tr':!analyticsDataArray?.length}">
+									  <th class="user-name-th fixed-pos-mobile wthMobRes">User Name</th>
+									  <th>Source</th>
+									  <th>Invited on</th>
+									  <th>Earning</th>
+									  <th>Status <br>
+									  </th>
+									</tr>
+								  </thead>
+								  <tbody>
+									<tr class="view" *ngFor="let user of analyticsDataArray">
+									  <td class="fixed-pos-mobile">
+										<span class="user-name" [ngbTooltip]="user?.joinedUsersDetails?.firstname  +' '+ user?.joinedUsersDetails?.lastname|titlecase">
+										  {{user?.joinedUsersDetails?.firstname |titlecase}}
+										  {{user?.joinedUsersDetails?.lastname|titlecase}}
+										</span>
+									  </td>
+									  <td>
+										<span class="refer-link">{{user?.linkName}}</span>
+									  </td>
+									  <td>{{user?.joinedUsersDetails?.createdAt | date: 'd MMM, y'}}</td>
+									  <td>${{user?.earning}}</td>
+									  <td>
+										<div class="md-stepper-horizontal green">
+										  <div class="md-step " [ngClass]="{'active done': user?.joinedUsersDetails?.signup}">
+											<div class="md-step-circle"></div>
+											<div class="md-step-bar-left"></div>
+											<div class="md-step-bar-right" [ngStyle]="{'top': user?.allocatedToken &&
+																		user?.joinedUsersDetails?.KYCStatus == constants.APPROVED && user?.joinedUsersDetails?.signup ? '30px' : '36px'}" [ngClass]="{'active-line' : user?.joinedUsersDetails?.KYCStatus == constants.APPROVED}"></div>
+										  </div>
+										  <div class="md-step " [ngClass]="{'active done': user?.joinedUsersDetails?.KYCStatus == constants.APPROVED}">
+											<div class="md-step-circle"></div>
+											<div class="md-step-bar-left" [ngStyle]="{'top': user?.allocatedToken &&
+																		user?.joinedUsersDetails?.KYCStatus == constants.APPROVED && user?.joinedUsersDetails?.signup ? '30px' : '36px'}" [ngClass]="{'active-line' : user?.joinedUsersDetails?.KYCStatus == constants.APPROVED}"></div>
+											<div class="md-step-bar-right" [ngStyle]="{'top': user?.allocatedToken &&
+																		user?.joinedUsersDetails?.KYCStatus == constants.APPROVED && user?.joinedUsersDetails?.signup ? '30px' : '36px'}" [ngClass]="{'active-line' : user?.allocatedToken}"></div>
+										  </div>
+										  <div class="md-step" [ngClass]="{'active done': user?.allocatedToken}">
+											<div class="md-step-circle"></div>
+											<div class="md-step-bar-left" [ngClass]="{'active-line' : user?.allocatedToken}" [ngStyle]="{'top': user?.allocatedToken &&
+																			user?.joinedUsersDetails?.KYCStatus == constants.APPROVED && user?.joinedUsersDetails?.signup ? '30px' : '36px'}"></div>
+											<div class="md-step-bar-right"></div>
+										  </div>
+										</div>
+										<span class="statusSpan" style="margin-left:-10px;">SignUp</span>
+										<span class="statusSpan" style="margin-right:-10px;">KYC</span>
+										<span class=" statusSpan" style="position:relative; left:58px;">Allocated</span>
+									  </td>
+									</tr>
+								  </tbody>
+								</table>
+								
+								  <table class="tg" *ngIf="loadingAnalyticsData">
+									<tr>
+									  <th class="tg-cly1">  
+										  <div class="line"></div>
+									  </th>
+									  <th class="tg-cly1">
+										<div class="line"></div>
+									  </th>
+									  <th class="tg-cly1">
+										<div class="line"></div>
+									  </th>
+									  <th class="tg-cly1">
+										<div class="line"></div>
+									  </th>
+									  <th class="tg-cly1">
+										<div class="line"></div>
+									  </th>
+									
+									</tr>
+									<tr>
+									  <td class="tg-cly1">
+										<div class="line"></div>
+									  </td>
+									  <td class="tg-cly1">
+										<div class="line"></div>
+									  </td>
+									  <td class="tg-cly1">
+										<div class="line"></div>
+									  </td>
+									  <td class="tg-cly1">
+										<div class="line"></div>
+									  </td>
+									  <td class="tg-cly1">
+										<div class="line"></div>
+									  </td>
+									 
+									</tr>
+									<tr>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+									   
+									</tr>
+									<tr>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+									   
+									</tr>
+									<tr>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+									   
+									</tr>
+									<tr>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+										<td class="tg-cly1">
+										  <div class="line"></div>
+										</td>
+									   
+									</tr>
+							 
+								  </table>
+							  </div>
+						</div>
+						</div>
+					</div>		
+					<div class="myrestable arow-fiex" >
+						<button (click)="handleLeftClick()" *ngIf="!showRightSlider"  id="left-button"><img src="../../../../assets/images/prev.png" /></button>
+					   <button (click)="handleRightClick()" *ngIf="showRightSlider"  id="right-button"><img src="../../../../assets/images/next.png" /></button>
+				
+						</div>
+				<div class="no-data" *ngIf="!analyticsDataArray?.length"> No Data Found </div>
+				<div class="col-sm-12" [ngClass]="{'light-pagination': analyticsDataArray?.length%2!==0, 'dark-pagination': analyticsDataArray?.length%2==0}">
+				  <div class="pagination-clume">
+					<ngb-pagination *ngIf="analyticsDataArray?.length && totalCount > rowsPerPage" [(page)]="currentPage" [collectionSize]="totalCount" [ellipses]="false" [maxSize]="3" (pageChange)="pageChanged($event)">
+					  <ng-template ngbPaginationPrevious>Previous</ng-template>
+					  <ng-template ngbPaginationNext>Next</ng-template>
+					</ngb-pagination>
+				  </div>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+  </div>
