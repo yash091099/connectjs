@@ -1,16 +1,18 @@
 {
-  "name": "yash",
-  "version": "1.0.0",
-  "description": "",
-  "main": "main.js",
+  "name": "web3modal-wagmi-html",
+  "private": true,
+  "version": "2.7.1",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "@wagmi/core": "^1.4.3",
-    "@web3modal/wagmi": "^3.1.0",
-    "viem": "^1.16.5"
+    "@wagmi/core": "1.3.3",
+    "@web3modal/ethereum": "2.7.1",
+    "@web3modal/html": "2.7.1",
+    "viem": "1.2.5"
+  },
+  "devDependencies": {
+    "vite": "4.3.9"
   }
 }

@@ -1,20 +1,36 @@
-import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi'
-
-import { mainnet, arbitrum } from '@wagmi/core/chains'
+import { configureChains, createConfig } from "./node_modules/@wagmi/core";
+import { arbitrum, avalanche, mainnet, polygon } from "./node_modules/@wagmi/core/chains";
+import {
+  EthereumClient,
+  w3mConnectors,
+  w3mProvider,
+} from "./node_modules/@web3modal/ethereum";
+import { Web3Modal } from "./node_modules/@web3modal/html";
 
 // 1. Define constants
-const projectId = '987a98f5b177b9da5611b4ba45b89dd7'
-
-// 2. Create wagmiConfig
-const metadata = {
-  name: 'Web3Modal',
-  description: 'Web3Modal Example',
-  url: 'https://web3modal.com',
-  icons: ['https://avatars.githubusercontent.com/u/37784886']
+const projectId = import.meta.env.VITE_PROJECT_ID;
+if (!projectId) {
+  throw new Error("You need to provide VITE_PROJECT_ID env variable");
 }
 
-const chains = [mainnet, arbitrum]
-const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
+const chains = [mainnet, polygon, avalanche, arbitrum];
 
-// 3. Create modal
-const modal = createWeb3Modal({ wagmiConfig, projectId, chains })
+// 2. Configure wagmi client
+const { publicClient } = configureChains(chains, [w3mProvider({ projectId })]);
+const wagmiConfig = createConfig({
+  autoConnect: true,
+  connectors: w3mConnectors({ chains, version: 1, projectId }),
+  publicClient,
+});
+
+// 3. Create ethereum and modal clients
+const ethereumClient = new EthereumClient(wagmiConfig, chains);
+export const web3Modal = new Web3Modal(
+  {
+    projectId,
+    walletImages: {
+      safe: "https://pbs.twimg.com/profile_images/1566773491764023297/IvmCdGnM_400x400.jpg",
+    },
+  },
+  ethereumClient
+);

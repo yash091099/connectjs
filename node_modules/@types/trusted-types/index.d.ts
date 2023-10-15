@@ -8,7 +8,7 @@
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 // TypeScript Version: 3.1
 
-import * as lib from "./lib";
+import * as lib from './lib';
 
 // Re-export the type definitions globally.
 declare global {
@@ -60,4 +60,4 @@ declare class TrustedTypeConfig {
     );
 }
 
-export { TrustedTypeConfig, TrustedTypePolicy, TrustedTypePolicyFactory, trustedTypes, TrustedTypesEnforcer };
+export { trustedTypes, TrustedTypesEnforcer, TrustedTypeConfig, TrustedTypePolicy, TrustedTypePolicyFactory };
